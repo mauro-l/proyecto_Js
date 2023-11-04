@@ -1,5 +1,5 @@
 /* let cartelera = ' ';
-let horario = ' '; */
+let horario = ' ';
 let e = false;
 let menuPrincipal = false;
 
@@ -18,8 +18,8 @@ const textoEleccion = (alerta, op1, op2, op3, e) =>
     alert (alerta);
     let opcion = parseInt(prompt(`1- ${op1} 2- ${op2} 3- ${op3}`));
 
-    /* if (op2 === 'Volver al menú principal' && opcion === 2)
-    return menuPrincipal = true; */
+    // no va if (op2 === 'Volver al menú principal' && opcion === 2)
+    return menuPrincipal = true; 
 
     if ((op3 === 'Salir' && opcion == 3)|| opcion == 0)
     return e = true;
@@ -75,7 +75,7 @@ while (exit === false)
         
     } while (menuPrincipal === false);
     
-}
+} */
 
 
 
