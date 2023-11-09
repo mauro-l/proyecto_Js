@@ -40,6 +40,8 @@ const usuario1 = new Usuario ('Mauro', 'Admin', 'Admin');
 const usuario2 = new Usuario ('Nicolas', 'Nicolas', 'Usuario');
 const usuario3 = new Usuario ('Maxi', 'Maxi', 'Usuario');
 
+const usuarios = [usuario1, usuario2, usuario3];
+
 //funciones 
 
 const cartelera = (objeto) => {
@@ -105,18 +107,47 @@ const cartelera = (objeto) => {
     }while(salir != true)
         
 }
-const verificacion = (user) => {
+const verificacion = () => {
+    
+    const SESION_INICIADA = false;            
 
-    if (user.inicioSesion == true){
-        console.log('hola');
-    } 
-
+    for (const user of usuarios){
+        if (user.inicioSesion === true)
+            SESION_INICIADA = true;
+    }
+    
+    return SESION_INICIADA;
 }
-/* const iniciarSesion = () => {
-    const nombreUsuario = prompt('Nombre de usuario:').toLowerCase;
-    for ( conts)
 
-} */
+const iniciarSesion = () => {
+        
+    let indice = null;
+    userOk = false;
+
+    const nombreUsuario = prompt('Nombre de usuario:').toLowerCase();
+    
+    for (const usuarioLista of usuarios){
+        if(nombreUsuario === usuarioLista.nombre){
+            userOk = true;
+            indice = usuarios.indexOf(usuarioLista);
+            console.log(usuarioLista);
+            console.log(indice);
+        }
+    }
+
+    if (userOk === false)
+        alert("Usuario no encontrado");
+    
+    if (userOk == true){
+        const claveUsuario = prompt('Ingrese su clave:').toLowerCase();
+        
+        if (claveUsuario !== usuarios[indice].clave)
+            alert('Está mal la clave mi rey...');
+        else 
+            usuarios[indice].login();
+    } 
+    
+}
 
 //while para salir completamente con bandera exit
 while (e === false) 
@@ -131,7 +162,8 @@ while (e === false)
     {
         case 1:
             cartelera(ticket);
-            console.log(ticket);
+            const RESPUESTA = verificacion();
+            
             break;
         case 2:
             console.log('opcion 2');

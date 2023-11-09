@@ -37,39 +37,17 @@ const iniciarSesion = () => {
     if (userOk === false)
         alert("Usuario no encontrado");
         
-    //const password = usuarios[indice];
-    //console.log(password);
-    console.log(userOk);
-
+   
+    
     if (userOk == true){
         const claveUsuario = prompt('Ingrese su clave:').toLowerCase();
         
         if (claveUsuario !== usuarios[indice].clave)
             alert('Está mal la clave mi rey...');
-
-        /* for (const usuarioLista of usuarios){
-            if(claveUsuario !== usuarioLista.clave){
-                alert("Contraseña incorrecta");
-            }
-        } */
-
+        else 
+            usuarios[indice].login();
     } 
-
     
-    /* if (claveUsuario !== usuario1.clave && claveUsuario !== usuario2.clave && claveUsuario !== usuario3.clave){
-      alert("contraseña incorrecta")
-    } */
 }
 
 iniciarSesion(); 
-
-/* if (nombreUsuario != usuario2.nombre){
-    alert("usuario incorrecto")
- }
-if (nombreUsuario != usuario3.nombre){
-    alert("usuario incorrecto")
- } */
-/* const claveUsuario = prompt('Ingrese su clave:').toLowerCase;
-if (claveUsuario != usuario1.clave || claveUsuario != usuario2.clave || claveUsuario != usuario3.clave){
-  alert("contraseña incorrecta")
-} */
