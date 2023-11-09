@@ -1,82 +1,73 @@
-/* let cartelera = ' ';
-let horario = ' ';
-let e = false;
-let menuPrincipal = false;
+class Usuario {
+    constructor(nombre, rol, clave,){
+        this.nombre = nombre.toLowerCase();
+        this.rol = rol.toLowerCase();
+        this.clave = clave.toLowerCase();
+        this.inicioSesion = false;
+    }
 
-
-const CHUCK = 'Chucky';
-const SIREN = 'La sirenita';
-const SOMBR = '50 Sombras de Gray'; 
-const HMANANA= '15:00hs';
-const HTARDE= '18:00hs';
-const HNOCHE= '22.30hs';
-
-//funciones 
-
-const textoEleccion = (alerta, op1, op2, op3, e) => 
-{
-    alert (alerta);
-    let opcion = parseInt(prompt(`1- ${op1} 2- ${op2} 3- ${op3}`));
-
-    // no va if (op2 === 'Volver al menú principal' && opcion === 2)
-    return menuPrincipal = true; 
-
-    if ((op3 === 'Salir' && opcion == 3)|| opcion == 0)
-    return e = true;
-
-    if (opcion > 3 || opcion < 0)
-        alert('error, INGRESE OPCION VALIDA!');
-    else
-        return opcion;
-}
-
-const volverMenu = (n, menuP) =>{
-    if (n == 2)
-        menuP = true;
-    return menuP;
-}
-
-//while para salir completamente con bandera exit
-while (exit === false) 
-{
-    menuPrincipal = false;
-    alert ('Bienvenido a Cine Fasto');
-    let opcion = parseInt(prompt('Que desea realizar? 1- Ver Cartelera. 2- Comprar. 3- Login'));
-    console.log (opcion);
-    do {
-        switch (opcion) 
-        {
-            case 1:
-                textoEleccion('Las peliculas disponibles son', CHUCK, SIREN, SOMBR, e);
-                //do while
-                
-                    let eleccion = textoEleccion('Desea', 'Ver horarios', 'Volver Menu Principal', 'Salir', e);
-                    volverMenu(eleccion, menuPrincipal);
-
-                    if (eleccion === 1)
-                    {
-                        textoEleccion('Los horarios disponibles son', HMANANA, HTARDE, HNOCHE, e);
-                        textoEleccion('A continuación desea', 'Comprar', 'Volver al menú principal', 'Salir', e);
-                        volverMenu(eleccion, menuPrincipal);
-                    }
-                        
-                
-                break;
-            case 2:
-                console.log('opcion 2');
-                break;  
-            case 3:
-                console.log('opcion 3');
-                break; 
-            default:
-                console.log('error');
-                break;
-        }
-        
-    } while (menuPrincipal === false);
+    login(){
+        this.inicioSesion = true;
+    }
     
+}
+
+const usuario1 = new Usuario ('Mauro', 'Admin', 'Admin');
+const usuario2 = new Usuario ('Nicolas', 'Usuario', 'Nicolas');
+const usuario3 = new Usuario ('Maxi', 'Usuario', 'Maxi');
+
+const usuarios = [usuario1, usuario2, usuario3];
+
+const iniciarSesion = () => {
+    
+    let indice = null;
+    userOk = false;
+
+    const nombreUsuario = prompt('Nombre de usuario:').toLowerCase();
+    
+    for (const usuarioLista of usuarios){
+        if(nombreUsuario === usuarioLista.nombre){
+            userOk = true;
+            indice = usuarios.indexOf(usuarioLista);
+            console.log(usuarioLista);
+            console.log(indice);
+            alert('el indice es ' + indice);
+        }
+    }
+
+    if (userOk === false){
+        alert("Usuario no encontrado");
+        
+    }
+    
+    console.log(userOk);
+
+    if (userOk == true){
+        const claveUsuario = prompt('Ingrese su clave:').toLowerCase();
+        
+        for (const usuarioLista of usuarios){
+            if(claveUsuario !== usuarioLista.clave){
+                alert("Contraseña incorrecta");
+            }
+        }
+
+    } 
+
+    
+    /* if (claveUsuario !== usuario1.clave && claveUsuario !== usuario2.clave && claveUsuario !== usuario3.clave){
+      alert("contraseña incorrecta")
+    } */
+}
+
+iniciarSesion(); 
+
+/* if (nombreUsuario != usuario2.nombre){
+    alert("usuario incorrecto")
+ }
+if (nombreUsuario != usuario3.nombre){
+    alert("usuario incorrecto")
+ } */
+/* const claveUsuario = prompt('Ingrese su clave:').toLowerCase;
+if (claveUsuario != usuario1.clave || claveUsuario != usuario2.clave || claveUsuario != usuario3.clave){
+  alert("contraseña incorrecta")
 } */
-
-
-
-
