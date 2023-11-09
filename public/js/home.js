@@ -1,8 +1,22 @@
 let e = false;
-let inicioSesion = false;
+const sesionActiva = {
+    estado: false,
+    indiceUsuario: null,
+    
+    login: function(indice){
+        this.estado = true;
+        this.indiceUsuario = indice;
+    },
+
+    logout: function(){
+        this.estado = false; 
+        this.indiceUsuario= null;
+    }
+}
 
 // Constantes declaradas con peliculas y horarios.
 
+// !! CREAR ARREGLO DE PELICULAS Y HORARIOS !!
 const CHUCK = 'Chucky';
 const SIREN = 'La sirenita';
 const SOMBR = '50 Sombras de Gray'; 
@@ -30,7 +44,7 @@ class Usuario {
         this.inicioSesion = false;
     }
 
-    login(){
+    iniciarSesion(){
         this.inicioSesion = true;
     }
     
@@ -44,6 +58,7 @@ const usuarios = [usuario1, usuario2, usuario3];
 
 //funciones 
 
+// !! MEJORAR CARTELERA AGREGANDO ARRAYS !! 
 const cartelera = (objeto) => {
     // Esta funcion muestra las peliculas disponibles y sus horarios, 
     let peliculaEleccion ='';
@@ -108,45 +123,47 @@ const cartelera = (objeto) => {
         
 }
 const verificacion = () => {
+    let indice = null;
     
-    const SESION_INICIADA = false;            
-
     for (const user of usuarios){
-        if (user.inicioSesion === true)
-            SESION_INICIADA = true;
+        if (user.inicioSesion === true){
+            indice = usuarios.indexOf(user);
+        }
     }
     
-    return SESION_INICIADA;
+    if(indice !== null)
+        sesionActiva.login(indice);
 }
 
 const iniciarSesion = () => {
-        
-    let indice = null;
-    userOk = false;
-
-    const nombreUsuario = prompt('Nombre de usuario:').toLowerCase();
     
-    for (const usuarioLista of usuarios){
-        if(nombreUsuario === usuarioLista.nombre){
-            userOk = true;
-            indice = usuarios.indexOf(usuarioLista);
-            console.log(usuarioLista);
-            console.log(indice);
+    if(sesionActiva.estado === true) //Si hay una sesion activa, muestra por pantalla cual es el usuario activo.
+        alert(`Ya existe una sesion activa con el usuario ${sesionActiva.indiceUsuario}`)
+        // !! PERMITIR AL USUARIO CERRAR SESION !! (completar seccion login)
+    else{
+        let indice = null;
+        userOk = false;
+        const nombreUsuario = prompt('Nombre de usuario:').toLowerCase();
+        for (const usuarioLista of usuarios){
+            if(nombreUsuario === usuarioLista.nombre){
+                userOk = true;
+                indice = usuarios.indexOf(usuarioLista);
+            }
         }
-    }
-
-    if (userOk === false)
-        alert("Usuario no encontrado");
     
-    if (userOk == true){
-        const claveUsuario = prompt('Ingrese su clave:').toLowerCase();
-        
-        if (claveUsuario !== usuarios[indice].clave)
-            alert('Está mal la clave mi rey...');
-        else 
-            usuarios[indice].login();
+        if (userOk === false)
+            alert("Usuario no encontrado");
+    
+        if (userOk == true){
+            const claveUsuario = prompt('Ingrese su clave:').toLowerCase();
+            if (claveUsuario !== usuarios[indice].clave)
+                alert('Está mal la clave mi rey...');
+            else{
+                usuarios[indice].login();
+                sesionActiva.login(indice);
+            } 
+        } 
     } 
-    
 }
 
 //while para salir completamente con bandera exit
@@ -161,12 +178,13 @@ while (e === false)
     switch (opcion) 
     {
         case 1:
-            cartelera(ticket);
-            const RESPUESTA = verificacion();
-            
+            verificacion();
+            cartelera(ticket);            
             break;
         case 2:
-            console.log('opcion 2');
+            verificacion();
+            // !! Si existe una sesion activa crear apartado USUARIO con menu para ver compras, cerrar sesion, salir.
+            iniciarSesion();
             break;  
         case 3:
             console.log('opcion 3');
@@ -178,7 +196,4 @@ while (e === false)
             console.log('error');
             break;
     }
-        
-    
-    
 }
