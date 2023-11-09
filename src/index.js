@@ -31,15 +31,12 @@ const iniciarSesion = () => {
             indice = usuarios.indexOf(usuarioLista);
             console.log(usuarioLista);
             console.log(indice);
-            alert('el indice es ' + indice);
         }
     }
 
-    if (userOk === false){
+    if (userOk === false)
         alert("Usuario no encontrado");
         
-    }
-    
     console.log(userOk);
 
     if (userOk == true){
