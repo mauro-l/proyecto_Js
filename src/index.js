@@ -37,16 +37,21 @@ const iniciarSesion = () => {
     if (userOk === false)
         alert("Usuario no encontrado");
         
+    //const password = usuarios[indice];
+    //console.log(password);
     console.log(userOk);
 
     if (userOk == true){
         const claveUsuario = prompt('Ingrese su clave:').toLowerCase();
         
-        for (const usuarioLista of usuarios){
+        if (claveUsuario !== usuarios[indice].clave)
+            alert('Está mal la clave mi rey...');
+
+        /* for (const usuarioLista of usuarios){
             if(claveUsuario !== usuarioLista.clave){
                 alert("Contraseña incorrecta");
             }
-        }
+        } */
 
     } 
 
