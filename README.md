@@ -1,4 +1,2 @@
-Proyecto en Javascript para el curso CoderHouse
-
-GitHub Pages
-https://mauro-l.github.io/proyecto_Js/
+# proyecto_Js
+Proyecto en Javascrip para el curso CoderHouse
