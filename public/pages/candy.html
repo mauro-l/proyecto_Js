@@ -7,25 +7,24 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/public/css/output.css">
+    <link rel="stylesheet" href="../css/output.css">
 </head>
 <body class="bg-navy-900">
-    <header class="">
-        <nav class="bg-black/0 h-30 w-full py-5 flex justify-around lg:justify-evenly items-center text-white border-b border-navy-50/10 fixed">
+    <header class="relative">
+        <nav class="bg-black/0 h-30 w-full py-5 flex justify-around lg:justify-evenly items-center text-white border-b border-navy-50/10 absolute top-0">
             <div class="flex">
-                <h1 class="text-3xl font-semibold">LOGO</h1>
+                <a href="../index.html"></a><img src="../asset/icon/isologo31.svg" alt=""></a>
             </div>
             <div class="lg:flex hidden justify-evenly items-center">
                 <ul class="flex gap-6">
                     <li><a href="../index.html">Home</a></li>
                     <li><a href="#">Entradas</a></li>
-                    <li><a href="#">Candy</a></li>
+                    <li><a href="./candy.html">Candy</a></li>
                     <li><a href="#">Contacto</a></li>
                 </ul>
             </div>
             <div class="lg:flex gap-3 hidden">
-                <h2><a href="./sign-in.html">Login</a></h2>
+                <h2><a href="./login.html">Login</a></h2>
                 <span class="material-symbols-outlined">
                     account_circle
                 </span>
@@ -47,13 +46,15 @@
     </section>
     <section class="p-10 border-solid border-y border-navy-100 bg-navy-300">
         <article class="container">
-            <div class="text-white flex justify-between items-center">
-                <div>
-                    <button>back</button>
+            <div class="text-white flex flex-wrap flex-col md:flex-row justify-between gap-5 md:gap-0 items-center">
+                <div class="">
+                    <button class="boton boton-grad flex"><span class="material-symbols-outlined">
+                        keyboard_double_arrow_left
+                        </span>back</button>
                 </div>
                 <div class="flex items-center gap-4">
                     <h2>MON, NOV 4 2023</h2>
-                    <select class="text-navy-500 py-1 pr-8 border" name="" id="">
+                    <select class="text-white py-1 pr-8 border rounded-full bg-violet-700 ring-1 ring-violet-300 mx-2" name="" id="">
                         <option value="">15:00</option>
                         <option value="">19:30</option>
                         <option value="">22:00</option>
@@ -67,7 +68,7 @@
         </article>
     </section>
     <main class="w-11/12 mx-auto container p-4 lg:p-8">
-        <div class="grid gap-4 grid-cols-1 grid-rows-4 lg:grid-cols-5 mx-auto">
+        <div class="grid gap-4 grid-cols-1 grid-rows-4 lg:grid-rows-3 lg:grid-cols-5 mx-auto">
             <!-- ASIDE RESUMEN CART -->
             <section class="lg:col-[4/6] lg:flex lg:flex-col lg:grow hidden lg:sticky lg:top-0 lg:w-[350px] mx-auto">
                 <!-- ASIDE TITLE RESUMEN CART -->
@@ -117,18 +118,14 @@
                             <label for="snacks">
                                 <input type="radio" class="mr-2 text-sky-700 bg-navy-300 border-navy-100" name="categoria" id="snacks">Snacks
                             </label>
-                            <br>
-                            <label for="movieShop">
-                                <input type="radio" class="mr-2 text-sky-700 bg-navy-300 border-navy-100" name="categoria" id="movieShop">Movie Shop
-                            </label>
                         </form>
                     </div>
                 </article>
                 <!-- ASIDE BODY RESUMEN CART -->
                 <article class="border-solid border-x border-navy-100">
-                    <div class="text-white bg-navy-300 border-y border-dashed border-navy-100 py-10 px-4 relative">
+                    <div class="text-white bg-navy-300 border-y border-dashed border-navy-100 py-10 px-4 relative z-">
                         <span class="before:block before:absolute before:-inset-8 before:rounded-full before:bg-navy-900 absolute top-0 left-0 inline-block"></span>
-                        <h2 class="text-lg font-semibold">CART</h2>
+                        <h2 class="text-lg font-semibold">PRODUCTOS</h2>
                             <div class="flex items-center m-1 justify-between gap-4">
                                 <div class="flex gap-8">
                                     <button>X</button>
@@ -140,20 +137,6 @@
                                 <div class="flex">
                                     <button class="border-navy-100 border-solid border rounded-l-full px-2">-</button>
                                     <span class="border-navy-100 border-solid border-y px-2">04</span>
-                                    <button class="border-navy-100 border-solid border rounded-r-full px-2">+</button>
-                                </div>
-                            </div>
-                            <div class="flex items-center m-1 justify-between gap-4">
-                                <div class="flex gap-8">
-                                    <button>X</button>                                
-                                </div>
-                                <div class="flex justify-between w-full">
-                                    <h2>Combo 1</h2>   
-                                    <h3>US$ 3.00</h3>                            
-                                </div>
-                                <div class="flex">                                
-                                    <button class="border-navy-100 border-solid border rounded-l-full px-2">-</button>
-                                    <span class="border-navy-100 border-solid border-y px-2">01</span>
                                     <button class="border-navy-100 border-solid border rounded-r-full px-2">+</button>
                                 </div>
                             </div>
@@ -174,43 +157,51 @@
                     </div>
                 </article>
                 <!-- ASIDE TOTAL RESUMEN CART TICKET -->
-                <article class="text-white text-3xl font-semibold p-4 flex justify-around bg-navy-500 border-solid border-b border-x border-navy-100">
-                    <h3>TOTAL</h3>
-                    <h4>US$ 8.00</h4>
+                <article class="text-white p-4 flex flex-col gap-3 bg-navy-500 border-solid border-b border-x border-navy-100">
+                    <div class="text-3xl font-semibold flex justify-around">
+                        <h3>TOTAL</h3>
+                        <h4>US$ 8.00</h4>
+                    </div>
+                    <div class="text-center">
+                        <button class="boton boton-grad">COMPRAR</button>
+                    </div>
                 </article>
             </section>
             <!-- BODY SHOP -->
-            <section class="lg:col-span-3 lg:row-start-1 row-span-full">
+            <section class="lg:col-span-3 lg:row-start-1 row-span-full lg:relative lg:z-20 xl:static">
+                <!-- BANNER PROMO -->
                 <article class="mb-3 flex justify-center">
-                    <img src="../../asset/img/banner-promo.jpg" alt="">
+                    <img src="../asset/img/banner-promo.jpg" alt="">
                 </article>
                 <!-- MOBILE SEARCH FILTER -->
-                <article class="mb-3 flex p-2 bg-white lg:hidden">
-                    <form action="">
-                        <input type="search" name="" id="" placeholder="Buscar">
-                    </form>
+                <article class="mb-3 flex justify-center p-2 bg-navy-900 lg:hidden">
+                    <div class="text-white w-full">
+                        <form action="">
+                            <input type="search" class="bg-navy-900 border-b border-navy-100 w-full p-1" name="" id="" placeholder="Buscar">
+                        </form>
+                    </div>
                 </article>
                 <!-- MOBILE FILTER -->
-                <article class="mb-3 flex justify-around p-2 bg-white lg:hidden">
-                    <select name="ordenar" id="ordenar">
+                <article class="mb-3 flex justify-around p-2 bg-navy-900 text-white lg:hidden">
+                    <select name="ordenar" id="ordenar" class="bg-violet-700 ring-1 ring-violet-300 rounded-full">
                         <option disabled selected>Ordenar por</option>
                         <option value="">Más relevantes</option>
                         <option value="">Menor precio</option>
                         <option value="">Mayor precio</option>
                     </select>
-                    <select name="categorias" id="categorias">
+                    <select name="categorias" id="categorias" class="bg-violet-700 ring-1 ring-violet-300 rounded-full">
                         <option disabled selected>Categoría</option>
                         <option value="">Comidas</option>
                         <option value="">Popcorn</option>
                         <option value="">Bebidas</option>
                         <option value="">Golosinas</option>
                         <option value="">Snacks</option>
-                        <option value="">Movie Shop</option>
                     </select>
                 </article>
+
                 <!-- BUTTONS FILTER -->
-                <article class="flex flex-wrap gap-3 m-3 justify-evenly lg:justify-center text-white">
-                    <button type="button" class="border-navy-100 hover:bg-sky-400 border rounded-full py-1 px-4 lg:py-2 lg:px-8">
+                <article class="flex flex-wrap gap-3 my-5 justify-evenly lg:justify-center text-white">
+                    <button class="border-navy-100 focus:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300  transition-shadow hover:shadow-[#3B37BC] hover:shadow-lg border rounded-full py-1 px-4 lg:py-2 lg:px-8">
                         <h2>VER TODOS</h2>
                     </button>
                     <button type="button" class="border-navy-100 hover:bg-sky-400 border rounded-full py-1 px-4 lg:py-2 lg:px-8">
@@ -228,7 +219,30 @@
                     <div class="max-w-[320px] w-[250px] lg:basis-1/3 grow ">
                         <div class="h-52 bg-navy-700 border-4 border-navy-300 rounded-t-xl relative">
                             <h2 class="bg-red-800 rounded-b-lg absolute p-3 text-white font-bold ml-4">Promo <br> Socios</h2>
-                            <img src="../../asset/img/balde-cine.png" alt="" class="m-auto w-48">
+                            <img src="../asset/img/balde-cine.png" alt="" class="m-auto w-48">
+                        </div>
+                        <div class="h-52 bg-navy-300 p-3 border-4 border-navy-300 rounded-b-xl text-white">
+                            <div class="h-1/2 mx-auto mt-2 px-4">
+                                <h2 class="text-2xl font-bold ">Combo 1</h2>
+                                <p>1 Balde palomitas de maiz + bebida mediana</p>
+                            </div>
+                            <!-- <div class="tracking-widest text-base xl:text-xl text-center text-white/30 m-2">
+                                <h2 class="lg:hidden block">-  -  -  -  -  -  -  -  -  -  -  -  -  -  - </h2>
+                                <h2 class="hidden lg:block">- - - - - - - - - - - - -</h2>
+                            </div> -->
+                            <div class="w-full flex justify-around items-center mt-1 border-dashed border-navy-150 border-t-2 pt-3">
+                                <!-- <div class="text-xl">
+                                    <p>3.00 US$</p>
+                                </div> -->
+                                <p class="text-xl">3.00 US$</p>
+                                <button class="boton boton-grad">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="max-w-[320px] w-[250px] lg:basis-1/3 grow ">
+                        <div class="h-52 bg-navy-700 border-4 border-navy-300 rounded-t-xl relative">
+                            <h2 class="bg-red-800 rounded-b-lg absolute p-3 text-white font-bold ml-4">Promo <br> Socios</h2>
+                            <img src="../asset/img/balde-cine.png" alt="" class="m-auto w-48">
                         </div>
                         <div class="h-52 bg-navy-300 p-3 border-4 border-navy-300 rounded-b-xl text-white">
                             <div class="h-1/2 mx-auto mt-2 px-4">
@@ -236,7 +250,8 @@
                                 <p>1 Balde palomitas de maiz + bebida mediana</p>
                             </div>
                             <div class="tracking-widest text-base xl:text-xl text-center text-white/30 m-2">
-                                <h2>-  -  -  -  -  -  -  -  -  -  -  -  -  -  - </h2>
+                                <h2 class="lg:hidden block">-  -  -  -  -  -  -  -  -  -  -  -  -  -  - </h2>
+                                <h2 class="hidden lg:block">- - - - - - - - - - - - -</h2>
                             </div>
                             <div class="w-full flex justify-around items-center">
                                 <div class="text-xl">
@@ -251,7 +266,7 @@
                     <div class="max-w-[320px] w-[250px] lg:basis-1/3 grow ">
                         <div class="h-52 bg-navy-700 border-4 border-navy-300 rounded-t-xl relative">
                             <h2 class="bg-red-800 rounded-b-lg absolute p-3 text-white font-bold ml-4">Promo <br> Socios</h2>
-                            <img src="../../asset/img/balde-cine.png" alt="" class="m-auto w-48">
+                            <img src="../asset/img/balde-cine.png" alt="" class="m-auto w-48">
                         </div>
                         <div class="h-52 bg-navy-300 p-3 border-4 border-navy-300 rounded-b-xl text-white">
                             <div class="h-1/2 mx-auto mt-2 px-4">
@@ -259,7 +274,8 @@
                                 <p>1 Balde palomitas de maiz + bebida mediana</p>
                             </div>
                             <div class="tracking-widest text-base xl:text-xl text-center text-white/30 m-2">
-                                <h2>-  -  -  -  -  -  -  -  -  -  -  -  -  -  - </h2>
+                                <h2 class="lg:hidden block">-  -  -  -  -  -  -  -  -  -  -  -  -  -  - </h2>
+                                <h2 class="hidden lg:block">- - - - - - - - - - - - -</h2>
                             </div>
                             <div class="w-full flex justify-around items-center">
                                 <div class="text-xl">
@@ -274,7 +290,7 @@
                     <div class="max-w-[320px] w-[250px] lg:basis-1/3 grow ">
                         <div class="h-52 bg-navy-700 border-4 border-navy-300 rounded-t-xl relative">
                             <h2 class="bg-red-800 rounded-b-lg absolute p-3 text-white font-bold ml-4">Promo <br> Socios</h2>
-                            <img src="../../asset/img/balde-cine.png" alt="" class="m-auto w-48">
+                            <img src="../asset/img/balde-cine.png" alt="" class="m-auto w-48">
                         </div>
                         <div class="h-52 bg-navy-300 p-3 border-4 border-navy-300 rounded-b-xl text-white">
                             <div class="h-1/2 mx-auto mt-2 px-4">
@@ -282,7 +298,8 @@
                                 <p>1 Balde palomitas de maiz + bebida mediana</p>
                             </div>
                             <div class="tracking-widest text-base xl:text-xl text-center text-white/30 m-2">
-                                <h2>-  -  -  -  -  -  -  -  -  -  -  -  -  -  - </h2>
+                                <h2 class="lg:hidden block">-  -  -  -  -  -  -  -  -  -  -  -  -  -  - </h2>
+                                <h2 class="hidden lg:block">- - - - - - - - - - - - -</h2>
                             </div>
                             <div class="w-full flex justify-around items-center">
                                 <div class="text-xl">
@@ -297,7 +314,7 @@
                     <div class="max-w-[320px] w-[250px] lg:basis-1/3 grow ">
                         <div class="h-52 bg-navy-700 border-4 border-navy-300 rounded-t-xl relative">
                             <h2 class="bg-red-800 rounded-b-lg absolute p-3 text-white font-bold ml-4">Promo <br> Socios</h2>
-                            <img src="../../asset/img/balde-cine.png" alt="" class="m-auto w-48">
+                            <img src="../asset/img/balde-cine.png" alt="" class="m-auto w-48">
                         </div>
                         <div class="h-52 bg-navy-300 p-3 border-4 border-navy-300 rounded-b-xl text-white">
                             <div class="h-1/2 mx-auto mt-2 px-4">
@@ -305,7 +322,8 @@
                                 <p>1 Balde palomitas de maiz + bebida mediana</p>
                             </div>
                             <div class="tracking-widest text-base xl:text-xl text-center text-white/30 m-2">
-                                <h2>-  -  -  -  -  -  -  -  -  -  -  -  -  -  - </h2>
+                                <h2 class="lg:hidden block">-  -  -  -  -  -  -  -  -  -  -  -  -  -  - </h2>
+                                <h2 class="hidden lg:block">- - - - - - - - - - - - -</h2>
                             </div>
                             <div class="w-full flex justify-around items-center">
                                 <div class="text-xl">
@@ -320,7 +338,7 @@
                     <div class="max-w-[320px] w-[250px] lg:basis-1/3 grow ">
                         <div class="h-52 bg-navy-700 border-4 border-navy-300 rounded-t-xl relative">
                             <h2 class="bg-red-800 rounded-b-lg absolute p-3 text-white font-bold ml-4">Promo <br> Socios</h2>
-                            <img src="../../asset/img/balde-cine.png" alt="" class="m-auto w-48">
+                            <img src="../asset/img/balde-cine.png" alt="" class="m-auto w-48">
                         </div>
                         <div class="h-52 bg-navy-300 p-3 border-4 border-navy-300 rounded-b-xl text-white">
                             <div class="h-1/2 mx-auto mt-2 px-4">
@@ -328,7 +346,8 @@
                                 <p>1 Balde palomitas de maiz + bebida mediana</p>
                             </div>
                             <div class="tracking-widest text-base xl:text-xl text-center text-white/30 m-2">
-                                <h2>-  -  -  -  -  -  -  -  -  -  -  -  -  -  - </h2>
+                                <h2 class="lg:hidden block">-  -  -  -  -  -  -  -  -  -  -  -  -  -  - </h2>
+                                <h2 class="hidden lg:block">- - - - - - - - - - - - -</h2>
                             </div>
                             <div class="w-full flex justify-around items-center">
                                 <div class="text-xl">
@@ -343,7 +362,7 @@
                     <div class="max-w-[320px] w-[250px] lg:basis-1/3 grow ">
                         <div class="h-52 bg-navy-700 border-4 border-navy-300 rounded-t-xl relative">
                             <h2 class="bg-red-800 rounded-b-lg absolute p-3 text-white font-bold ml-4">Promo <br> Socios</h2>
-                            <img src="../../asset/img/balde-cine.png" alt="" class="m-auto w-48">
+                            <img src="../asset/img/balde-cine.png" alt="" class="m-auto w-48">
                         </div>
                         <div class="h-52 bg-navy-300 p-3 border-4 border-navy-300 rounded-b-xl text-white">
                             <div class="h-1/2 mx-auto mt-2 px-4">
@@ -351,7 +370,32 @@
                                 <p>1 Balde palomitas de maiz + bebida mediana</p>
                             </div>
                             <div class="tracking-widest text-base xl:text-xl text-center text-white/30 m-2">
-                                <h2>-  -  -  -  -  -  -  -  -  -  -  -  -  -  - </h2>
+                                <h2 class="lg:hidden block">-  -  -  -  -  -  -  -  -  -  -  -  -  -  - </h2>
+                                <h2 class="hidden lg:block">- - - - - - - - - - - - -</h2>
+                            </div>
+                            <div class="w-full flex justify-around items-center">
+                                <div class="text-xl">
+                                    <p>3.00 US$</p>
+                                </div>
+                                <button class="">
+                                        <h1 class="bg-sky-600 py-2 px-8 rounded-full">add</h1>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="max-w-[320px] w-[250px] lg:basis-1/3 grow ">
+                        <div class="h-52 bg-navy-700 border-4 border-navy-300 rounded-t-xl relative">
+                            <h2 class="bg-red-800 rounded-b-lg absolute p-3 text-white font-bold ml-4">Promo <br> Socios</h2>
+                            <img src="../asset/img/balde-cine.png" alt="" class="m-auto w-48">
+                        </div>
+                        <div class="h-52 bg-navy-300 p-3 border-4 border-navy-300 rounded-b-xl text-white">
+                            <div class="h-1/2 mx-auto mt-2 px-4">
+                                <h2 class="text-2xl font-bold ">Combo 1</h2>
+                                <p>1 Balde palomitas de maiz + bebida mediana</p>
+                            </div>
+                            <div class="tracking-widest text-base xl:text-xl text-center text-white/30 m-2">
+                                <h2 class="lg:hidden block">-  -  -  -  -  -  -  -  -  -  -  -  -  -  - </h2>
+                                <h2 class="hidden lg:block">- - - - - - - - - - - - -</h2>
                             </div>
                             <div class="w-full flex justify-around items-center">
                                 <div class="text-xl">
@@ -365,12 +409,44 @@
                     </div>
                 </article>
             </section>
+            <!-- MOBILE CART -->
+            <section class="lg:hidden flex justify-center">
+                <article class="fixed bottom-0 w-full bg-navy-300 ">
+                    <div class="container flex flex-col">
+                        <!-- ASIDE SUBTOTAL RESUMEN CART -->
+                        
+                        <!-- <div class="text-white bg-navy-300 border-y border-dashed border-navy-100 p-4 ">
+                            <div class="text-white font-semibold p-1 flex justify-between">
+                                <h3>SUBTOTAL</h3>
+                                <h4>US$ 7.00</h4>
+                            </div>
+                            <div class="text-white font-semibold p-1 flex justify-between">
+                                <h3>CARGO POR SERVICIO</h3>
+                                <h4>US$ 1.00</h4>
+                            </div>
+                        </div> -->
+                        
+                        <!-- ASIDE TOTAL RESUMEN CART TICKET -->
+                    
+                        <div class="flex justify-between items-center text-white w-full p-4">
+                            <div class="text-xl w-1/2 font-semibold flex flex-wrap justify-around">
+                                <h3>TOTAL</h3>
+                                <h4>US$ 8.00</h4>
+                            </div>
+                            <div class="text-center w-1/2">
+                                <button class="boton boton-grad">COMPRAR</button>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </article>
+            </section>
         </div>
     </main>
     <footer class="bg-black text-white">
         <section class="p-16 mx-16 flex flex-col items-center border-b-[0.5px] border-white/20">
-            <p>POWERED BY</p>
-            <h1 class="text-3xl font-bold">LOGO</h1>
+            <p class="text-center font-semibold text-xl mb-3">POWERED BY</p>
+            <img src="../asset/icon/imagotipo.svg" alt="logo empresa">
         </section>
         <section class="flex justify-around items-center w-full p-16">
             <article>
@@ -378,15 +454,16 @@
                     <li><a href="#">Cartelera</a></li>
                     <li><a href="#">Entradas</a></li>
                     <li><a href="#">Contacto</a></li>
-                    <li><a href="#">Login</a></li>
+                    <li><a href="./login.html">Login</a></li>
+                    <li><a href="./register.html">Registrarse</a></li>
                 </ul>
             </article>
             <article class="flex flex-col items-center">
                 <figure>
-                    <h1 class="text-3xl font-semibold p-3 text-center">LOGO</h1>
-                    <ul class="flex flex-row gap-1">
-                        <li><a href=""></a><img src="../asset/icon/footer-fb.png" alt=""></li>
-                        <li><a href=""></a><img src="../asset/icon/footer-ins.png" alt=""></li>
+                    <a href="../index.html"><img src="../asset/icon/isologo31.svg" alt=""></a>
+                    <ul class="flex flex-row justify-center m-3 gap-1">
+                        <li><a href=""><img src="../asset/icon/footer-fb.png" alt=""></a></li>
+                        <li><a href=""><img src="../asset/icon/footer-ins.png" alt=""></a></li>
                         <li><a href=""><img src="../asset/icon/footer-tw.png" alt=""></a></li>
                         <li><a href=""><img src="../asset/icon/footer-tkt.png" alt=""></a></li>
                         <li><a href=""><img src="../asset/icon/footer-lnk.png" alt=""></a></li>
@@ -402,6 +479,5 @@
             <p class="border-t-[0.5px] border-stone-50/20 mx-16 w-full text-center p-3 text-xs">&copy Copyright &copy 2023 Mauro Laime.</p>
         </section>
     </footer>
-    <script src="../src/js/index.js"></script>
 </body>
 </html>

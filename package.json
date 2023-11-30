@@ -1,11 +1,15 @@
 {
+  "type": "module",
   "name": "proyecto-parcial",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "twInit": "npx tailwindcss -i ./src/css/tailwind.css -o ./src/css/output.css --watch"
+    "start": "live-server public",
+    "tailwindInit": "npx tailwindcss -i ./public/css/tailwind.css -o ./public/css/output.css --watch",
+    "buildStyles": "postcss ./public/css/output.css -o ./public/css/final.css",
+    "desk": "npm run tailwindInit & npm run buildStyles"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +18,8 @@
     "tailwindcss": "^3.3.5"
   },
   "dependencies": {
-    "@tailwindcss/forms": "^0.5.7"
+    "@tailwindcss/forms": "^0.5.7",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31"
   }
 }

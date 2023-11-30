@@ -9,9 +9,10 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'banner-candy': "url('/asset/bg-img/banner04.jpg')",
-        'sign-up': "url('/asset/bg-img/banner02.jpg')",
-        'login': "url('/asset/bg-img/account-bg.jpg')",
+        'banner-movie': "url('/asset/img/movie_poster.jpg')",
+        'banner-candy': "url('../asset/bg-img/banner04.jpg')",
+        'sign-up': "url('../asset/bg-img/banner02.jpg')",
+        'login': "url('../asset/bg-img/account-bg.jpg')",
       },
       colors:{
         navy:{
@@ -30,6 +31,12 @@ module.exports = {
       },
       boxShadow: {
         'total': '0px 0px 29.4px 0.6px rgba(0, 0, 0, 0.5)',
+      },
+      width: {
+        '177': '177px',
+      },
+      height: {
+        '48': '48px',
       },
     },
   },

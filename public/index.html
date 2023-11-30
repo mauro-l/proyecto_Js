@@ -8,13 +8,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="./css/output.css">
+    <link rel="stylesheet" href="./css/swipes.css">
 </head>
 <body class="">
-    <header class="">
+    <header class="flex justify-center">
         <nav class="bg-slate-800/40 z-10 fixed h-30 w-full p-5 flex justify-around lg:justify-evenly items-center text-white">
             <div class="flex">
-                <h1 class="text-3xl font-semibold">LOGO</h1>
+                <img src="./asset/icon/imagotipo.svg" alt="logo empresa">
             </div>
             <div class="lg:flex hidden justify-evenly items-center">
                 <ul class="flex gap-6">
@@ -25,7 +28,7 @@
                 </ul>
             </div>
             <div class="lg:flex gap-3 hidden">
-                <h2><a href="./pages/sign-in.html">Login</a></h2>
+                <h2><a href="./pages/login.html">Login</a></h2>
                 <span class="material-symbols-outlined">
                     account_circle
                 </span>
@@ -38,19 +41,58 @@
         </nav>
     </header>
 
-    <section class="max-h-screen max-w-screen sticky -top-10 -z-10">
-        <div class="h-screen bg-cover relative" style="background-image: url('../asset/img/movie_poster.jpg') ;">
-            <div class="absolute flex flex-col gap-3 p-6 text-white top-1/3 left-28 w-4/5 bg-[#1702026b]">
-                <h5 class="text-white/80 text-sm font-bold ">AVENTURA, ACCIÓN</h5>
-                <h2 class="text-6xl font-semibold">LOS JUEGOS DEL HAMBRE: BALADA DE PAJAROS CANTORES Y SERPIENTES</h2>
-                <div class="text-sm border w-max inline-flex"><p class="inline w-max px-3">CALIFICACION</p> <p class=" inline w-max bg-white text-black font-bold px-3">SAM 13</p></div>
-                <p class="text-base">THE HUNGER GAMES: THE BALLAD OF SONGBIRDS AND SNAKES</p>
-                <div>
-                    <a href="" class="boton">COMPRAR ENTRADAS</a>
-                    <a href="">+</a>
+    <section class="hidden lg:block">
+        <article class="max-h-screen max-w-screen sticky -top-10 -z-10">
+            <div class="h-screen bg-cover relative bg-banner-movie">
+                <div class="absolute flex flex-col gap-3 p-6 text-white top-1/3 left-28 w-4/5 bg-[#1702026b]">
+                    <h5 class="text-white/80 text-sm font-bold ">AVENTURA, ACCIÓN</h5>
+                    <h2 class="text-6xl font-semibold">LOS JUEGOS DEL HAMBRE: BALADA DE PAJAROS CANTORES Y SERPIENTES</h2>
+                    <div class="text-sm border w-max inline-flex"><p class="inline w-max px-3">CALIFICACION</p> <p class=" inline w-max bg-white text-black font-bold px-3">SAM 13</p></div>
+                    <p class="text-base">THE HUNGER GAMES: THE BALLAD OF SONGBIRDS AND SNAKES</p>
+                    <div>
+                        <a href="" class="boton">COMPRAR ENTRADAS</a>
+                        <a href="">+</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        </article>
+    </section>
+
+    <section class="lg:hidden">
+        <div class="swiper mySwiper2">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img src="./asset/img/napoleon-poster.jpg" alt="poster-promocional">
+              </div>
+              <div class="swiper-slide">
+                <img src="./asset/img/digimon-poster.jpg" alt="poster promocional">
+              </div>
+              <div class="swiper-slide">
+                <img src="./asset/img/muchachos-poster.jpg" alt="poster-promocional">
+              </div>
+              <div class="swiper-slide">
+                <img src="./asset/img/movie_poster.jpg" alt="poster-promocional">
+              </div>
+              <div class="swiper-slide">
+                <img src="./asset/img/spider-poster.jpg" alt="poster-promocional">
+              </div>
+              <div class="swiper-slide">
+                <img src="./asset/img/navidad-poster.jpg" alt="poster-promocional">
+              </div>
+              <div class="swiper-slide">
+                <img src="./asset/img/vuelven-los-autocines.jpg" alt="poster-promocional">
+              </div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+            <div class="autoplay-progress">
+              <svg viewBox="0 0 48 48">
+                <circle cx="24" cy="24" r="20"></circle>
+              </svg>
+              <span></span>
+            </div>
+          </div>
     </section>
 
     <main class="bg-slate-800">
@@ -58,7 +100,7 @@
             <h2 class="text-white text-3xl font-bold text-center pb-10">Cartelera</h2>
             <article class= "grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                 <div class="w-60 relative mx-auto">
-                    <img src="../asset/img/walle.jpg" class="object-cover w-full h-full " alt="">
+                    <img src="./asset/img/walle.jpg" class="object-cover w-full h-full " alt="">
                     <p class="text-white text-xl p-3 font-bold absolute inset-0 flex justify-start items-end bg-gradient-to-b from-gray-700/10 via-gray-900/40 to-black">
                         <span class="material-symbols-outlined px-3">
                         play_circle
@@ -66,45 +108,46 @@
                     </p>
                 </div>
                 <div class="w-60 relative mx-auto">
-                    <img src="../asset/img/walle.jpg" class="object-cover w-full h-full " alt="">
+                    <img src="./asset/img/walle.jpg" class="object-cover w-full h-full " alt="">
                     <p class="text-white text-xl p-3 font-bold absolute inset-0 flex justify-start items-end bg-gradient-to-b from-gray-700/10 via-gray-900/40 to-black">
                         <span class="material-symbols-outlined px-3">
                         play_circle
-                        </span>WALLE- E
+                        </span>WALL- E
                     </p>
                 </div>
                 <div class="w-60 relative mx-auto">
-                    <img src="../asset/img/walle.jpg" class="object-cover w-full h-full " alt="">
+                    <img src="./asset/img/walle.jpg" class="object-cover w-full h-full " alt="">
                     <p class="text-white text-xl p-3 font-bold absolute inset-0 flex justify-start items-end bg-gradient-to-b from-gray-700/10 via-gray-900/40 to-black">
                         <span class="material-symbols-outlined px-3">
                         play_circle
-                        </span>WALLE- E
+                        </span>WALL- E
                     </p>
                 </div>
                 <div class="w-60 relative mx-auto">
-                    <img src="../asset/img/walle.jpg" class="object-cover w-full h-full " alt="">
+                    <img src="./asset/img/walle.jpg" class="object-cover w-full h-full " alt="">
                     <p class="text-white text-xl p-3 font-bold absolute inset-0 flex justify-start items-end bg-gradient-to-b from-gray-700/10 via-gray-900/40 to-black">
                         <span class="material-symbols-outlined px-3">
                         play_circle
-                        </span>WALLE- E
+                        </span>WALL- E
                     </p>
                 </div>
                 <div class="w-60 relative mx-auto">
-                    <img src="../asset/img/walle.jpg" class="object-cover w-full h-full " alt="">
+                    <img src="./asset/img/walle.jpg" class="object-cover w-full h-full " alt="">
                     <p class="text-white text-xl p-3 font-bold absolute inset-0 flex justify-start items-end bg-gradient-to-b from-gray-700/10 via-gray-900/40 to-black">
                         <span class="material-symbols-outlined px-3">
                         play_circle
-                        </span>WALLE- E
+                        </span>WALL- E
                     </p>
                 </div>
+                
                 
             </article>
         </section>
     </main>
     <footer class="bg-black text-white">
         <section class="p-16 mx-16 flex flex-col items-center border-b-[0.5px] border-white/20">
-            <p>POWERED BY</p>
-            <h1 class="text-3xl font-bold">LOGO</h1>
+            <p class="mb-3 font-semibold text-xl">POWERED BY</p>
+            <img src="./asset/icon/imagotipo.svg" alt="logo empresa">
         </section>
         <section class="flex justify-around items-center w-full p-16">
             <article>
@@ -112,22 +155,23 @@
                     <li><a href="#">Cartelera</a></li>
                     <li><a href="#">Entradas</a></li>
                     <li><a href="#">Contacto</a></li>
-                    <li><a href="#">Login</a></li>
+                    <li><a href="./pages/login.html">Login</a></li>
+                    <li><a href="./pages/register.html">Registrarse</a></li>
                 </ul>
             </article>
             <article class="flex flex-col items-center">
                 <figure>
-                    <h1 class="text-3xl font-semibold p-3 text-center">LOGO</h1>
-                    <ul class="flex flex-row gap-1">
-                        <li><a href=""></a><img src="../asset/icon/footer-fb.png" alt=""></li>
-                        <li><a href=""></a><img src="../asset/icon/footer-ins.png" alt=""></li>
-                        <li><a href=""><img src="../asset/icon/footer-tw.png" alt=""></a></li>
-                        <li><a href=""><img src="../asset/icon/footer-tkt.png" alt=""></a></li>
-                        <li><a href=""><img src="../asset/icon/footer-lnk.png" alt=""></a></li>
+                    <img src="./asset/icon/imagotipo.svg" alt="">
+                    <ul class="flex flex-row justify-center m-3 gap-1">
+                        <li><a href=""></a><img src="./asset/icon/footer-fb.png" alt=""></li>
+                        <li><a href=""></a><img src="./asset/icon/footer-ins.png" alt=""></li>
+                        <li><a href=""><img src="./asset/icon/footer-tw.png" alt=""></a></li>
+                        <li><a href=""><img src="./asset/icon/footer-tkt.png" alt=""></a></li>
+                        <li><a href=""><img src="./asset/icon/footer-lnk.png" alt=""></a></li>
                     </ul>
                 </figure>
                 <picture class="p-3">
-                    <img src="../asset/img/data-fiscal.png" alt="">
+                    <img src="./asset/img/data-fiscal.png" alt="">
                 </picture>
             </article>
 
@@ -136,6 +180,8 @@
             <p class="border-t-[0.5px] border-stone-50/20 mx-16 w-full text-center p-3 text-xs">&copy Copyright &copy 2023 Mauro Laime.</p>
         </section>
     </footer>
-    <script src="../src/js/index.js"></script>
+    <!-- <script src="../src/js/index.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.js"></script>
+    <script type="module" src="./src/sliders.js"></script>
 </body>
 </html>
