@@ -1,38 +1,28 @@
-import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
 
 const progressCircle = document.querySelector(".autoplay-progress svg");
 const progressContent = document.querySelector(".autoplay-progress span");
   
-/* const swiper = new Swiper('.swiper', {
-  // Optional parameters
-  direction: 'vertical',
-  loop: true,
 
-  // If we need pagination
-  pagination: {
-    el: '.swiper-pagination',
-  },
+  // Inicializa el carrusel
 
-  // Navigation arrows
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-
-  // And if we need scrollbar
-  scrollbar: {
-    el: '.swiper-scrollbar',
-  },
-}); */
-
-  // Inicializa el carrusel (directamente en el HTML)
-/* var swiper1 = initSwiper(".mySwiper1", {
+var swiper1 = new Swiper(".mySwiper1", {
   direction: "vertical",
+  loop: true,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false
+  },
   pagination: {
     el: ".swiper-pagination",
     clickable: true,
   },
-}); */
+  on: {
+    autoplayTimeLeft(s, time, progress) {
+      progressCircle.style.setProperty("--progress", 1 - progress);
+      progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+    }
+  }
+});
 
 
 
@@ -43,7 +33,7 @@ const swiper = new Swiper(".mySwiper2", {
   loop: true,
   centeredSlides: true,
   autoplay: {
-    delay: 2500,
+    delay: 5000,
     disableOnInteraction: false
   },
   pagination: {
@@ -56,6 +46,8 @@ const swiper = new Swiper(".mySwiper2", {
   },
   on: {
     autoplayTimeLeft(s, time, progress) {
+      var progressCircle = document.getElementById("autoplay-progress-2").querySelector("circle");
+      var progressContent = document.getElementById("autoplay-progress-2").querySelector("span");
       progressCircle.style.setProperty("--progress", 1 - progress);
       progressContent.textContent = `${Math.ceil(time / 1000)}s`;
     }
