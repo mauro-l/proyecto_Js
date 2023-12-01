@@ -11,6 +11,7 @@ module.exports = {
       backgroundImage: {
         'banner-movie': "url('/asset/img/movie_poster.jpg')",
         'banner-candy': "url('../asset/bg-img/banner04.jpg')",
+        'nav':"url('../asset/bg-img/transparentNav.png')",
         'sign-up': "url('../asset/bg-img/banner02.jpg')",
         'login': "url('../asset/bg-img/account-bg.jpg')",
       },
