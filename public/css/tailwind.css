@@ -21,6 +21,9 @@
     .grad{
         @apply bg-gradient-to-r from-[#5560ff] from-15% via-[#aa52a1] via-65% to-[#ff4343] to-100%;
     }
+    .troquel{
+        @apply border-dashed border-navy-100;
+    }
     .tooltip-t{
         @apply before:content-[attr(data-tip)] before:absolute before:px-3 before:py-2 before:left-1/2 before:-top-3 before:w-max before:max-w-xs before:-translate-x-1/2 before:-translate-y-full before:bg-navy-100 before:text-navy-50 before:rounded-md before:opacity-0 before:transition-all after:absolute after:left-1/2 after:-top-3 after:h-0 after:w-0 after:-translate-x-1/2 after:border-8 after:border-t-navy-100 after:border-l-transparent after:border-b-transparent after:border-r-transparent after:opacity-0 after:transition-all;
     }
