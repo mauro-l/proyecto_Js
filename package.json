@@ -9,7 +9,7 @@
     "start": "live-server public",
     "tailwindInit": "npx tailwindcss -i ./public/css/tailwind.css -o ./public/css/output.css --watch",
     "buildStyles": "postcss ./public/css/output.css -o ./public/css/final.css",
-    "desk": "npm run tailwindInit & npm run buildStyles"
+    "dev": "npm run tailwindInit & npm run buildStyles"
   },
   "keywords": [],
   "author": "",

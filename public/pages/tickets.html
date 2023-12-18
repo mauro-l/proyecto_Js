@@ -28,13 +28,22 @@
                 <span class="material-symbols-outlined">
                     account_circle
                 </span>
-            </div>
-            <div class="flex lg:hidden">
-                <span class="material-symbols-outlined">
-                    menu
-                </span>
-            </div>
+                <button onclick="menuHamburguesas()" class="flex lg:hidden">
+                    <span class="material-symbols-outlined">
+                        menu
+                    </span>
+                </button>
         </nav>
+            <div id="mobileMenu" class="md:hidden fixed top-0 right-0 w-4/5 h-full z-30 text-navy-50 bg-navy-300">
+                <button onclick="menuHamburguesas()" class="flex justify-center w-full p-5 md:hidden"><span class="material-symbols-outlined">close</span></button>
+                <ul class="flex flex-col items-center mt-12">
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="./tickets.html">Entradas</a></li>
+                    <li><a href="./candy.html">Candy</a></li>
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="./login.html">Login</a></li>
+                </ul>
+            </div>
     </header>
 
     <section class="">    
@@ -371,5 +380,6 @@
         </section>
     </footer>
     <script src=" "></script>
+    <script src="../src/navbar.js"></script>
 </body>
 </html>

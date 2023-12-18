@@ -13,7 +13,7 @@
     <header class="relative">
         <nav class="bg-black/0 h-30 w-full py-5 flex justify-around lg:justify-evenly items-center text-white border-b border-navy-50/10 absolute top-0">
             <div class="flex">
-                <a href="../index.html"></a><img src="../asset/icon/isologo31.svg" alt=""></a>
+                <a href="../index.html"><img src="../asset/icon/isologo31.svg" alt="logo cinemacar"></a>
             </div>
             <div class="lg:flex hidden justify-evenly items-center">
                 <ul class="flex gap-6">
@@ -29,12 +29,22 @@
                     account_circle
                 </span>
             </div>
-            <div class="flex lg:hidden">
+            <button onclick="menuHamburguesas()" class="flex lg:hidden">
                 <span class="material-symbols-outlined">
                     menu
                 </span>
-            </div>
+            </button>
         </nav>
+        <div id="mobileMenu" class="md:hidden fixed top-0 right-0 w-4/5 h-full z-30 text-navy-50 bg-navy-300">
+            <button onclick="menuHamburguesas()" class="flex justify-center w-full p-5 md:hidden"><span class="material-symbols-outlined">close</span></button>
+            <ul class="flex flex-col items-center mt-12">
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="./tickets.html">Entradas</a></li>
+                <li><a href="./candy.html">Candy</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="./login.html">Login</a></li>
+            </ul>
+        </div>
     </header>
 
     <section class="">    
@@ -44,10 +54,12 @@
             </div>
         </article>
     </section>
+
+    <!-- BANNER MINS LEFT -->
     <section class="p-10 border-solid border-y border-navy-100 bg-navy-300">
         <article class="container">
-            <div class="text-white flex flex-wrap flex-col md:flex-row justify-between gap-5 md:gap-0 items-center">
-                <div class="">
+            <div class="text-white flex flex-wrap flex-col md:flex-row justify-around gap-5 md:gap-0 items-center">
+                <div class="hidden lg:block">
                     <button class="boton boton-grad flex"><span class="material-symbols-outlined">
                         keyboard_double_arrow_left
                         </span>back</button>
@@ -61,9 +73,51 @@
                     </select>
                 </div>
                 <div class="flex flex-col items-center">
-                    <h2 class="text-2xl font-semibold">05:00</h2>
+                    <h2 class="text-2xl font-semibold">-- : --</h2>
                     <h3 class="text-xl">Mins Left</h3>
                 </div>
+            </div>
+        </article>
+    </section>
+    <!-- MOBILE DETAILS PRODUCTS -->
+    <section class="lg:hidden sticky top-0 flex z-20 justify-center">
+        <article class="w-full bg-navy-300 ">
+            <div class="text-navy-50 text-sm bg-navy-300 border-b border-dashed border-navy-100 p-4 flex justify-between items-center">
+                <div class="ml-1">
+                    <h3 class="flex">TUS PRODUCTOS: <span class="font-bold" id="cantidad-producto-mobile"></span></h3>                                
+                </div>
+                <button id="mostrar-carrito-mobile" class="mr-2 text-center cursor-pointer">
+                    <h3>VER RESUMEN<br> DE COMPRA</h3>
+                </button>
+            </div>
+            <div id="contenedor-productos-mobile" class="text-white bg-navy-300 border-y border-dashed border-navy-100 p-4 hidden">
+                <!-- <div class="flex items-center m-1 justify-between gap-4">
+                    <div class="flex gap-8">
+                        <button>X</button>
+                    </div>
+
+
+                    <div id="listaProductos" class="flex justify-between w-full">
+                        <h2>Pancho</h2>
+                        <h3>US$ 4.00</h3>
+                    </div>
+
+
+                    <div class="flex">
+                        <button class="border-navy-100 border-solid border rounded-l-full px-2">-</button>
+                        <span class="border-navy-100 border-solid border-y px-2">04</span>
+                        <button class="border-navy-100 border-solid border rounded-r-full px-2">+</button>
+                    </div>
+                </div> -->
+                
+                <!-- <div class="text-white font-semibold p-1 flex justify-between">
+                    <h3>SUBTOTAL</h3>
+                    <h4>US$ 7.00</h4>
+                </div>
+                <div class="text-white font-semibold p-1 flex justify-between">
+                    <h3>CARGO POR SERVICIO</h3>
+                    <h4>US$ 1.00</h4>
+                </div> -->
             </div>
         </article>
     </section>
@@ -126,41 +180,29 @@
                     <div class="text-white bg-navy-300 border-y border-dashed border-navy-100 py-10 px-4 relative z-">
                         <span class="before:block before:absolute before:-inset-8 before:rounded-full before:bg-navy-900 absolute top-0 left-0 inline-block"></span>
                         <h2 class="text-lg font-semibold">PRODUCTOS</h2>
-                            <div class="flex items-center m-1 justify-between gap-4">
-                                <div class="flex gap-8">
-                                    <button>X</button>
-                                </div>
-                                <div class="flex justify-between w-full">
-                                    <h2>Pancho</h2>   
-                                    <h3>US$ 4.00</h3>                            
-                                </div>
-                                <div class="flex">
-                                    <button class="border-navy-100 border-solid border rounded-l-full px-2">-</button>
-                                    <span class="border-navy-100 border-solid border-y px-2">04</span>
-                                    <button class="border-navy-100 border-solid border rounded-r-full px-2">+</button>
-                                </div>
-                            </div>
+                        <div id="contenedor-productos-desktop"></div>
+                            <!-- se agregan productos mediante js -->
                         <span class="after:block after:absolute after:-inset-8 after:rounded-full after:bg-navy-900 absolute top-0 right-0 inline-block"></span>
                     </div>
                 </article>
                 <!-- ASIDE SUBTOTAL RESUMEN CART -->
                 <article class="border-solid border-x border-navy-100">
-                    <div class="text-white bg-navy-300 border-y border-dashed border-navy-100 p-4 ">
-                        <div class="text-white font-semibold p-1 flex justify-between">
+                    <div id="contenedor-precios-desktop" class="">
+                        <!-- <div class="text-white font-semibold p-1 flex justify-between">
                             <h3>SUBTOTAL</h3>
                             <h4>US$ 7.00</h4>
                         </div>
                         <div class="text-white font-semibold p-1 flex justify-between">
                             <h3>CARGO POR SERVICIO</h3>
                             <h4>US$ 1.00</h4>
-                        </div>
+                        </div> -->
                     </div>
                 </article>
                 <!-- ASIDE TOTAL RESUMEN CART TICKET -->
                 <article class="text-white p-4 flex flex-col gap-3 bg-navy-500 border-solid border-b border-x border-navy-100">
-                    <div class="text-3xl font-semibold flex justify-around">
-                        <h3>TOTAL</h3>
-                        <h4>US$ 8.00</h4>
+                    <div id="contenedor-total-desktop" class="">
+                        <!-- <h3>TOTAL</h3>
+                        <h4>US$ 8.00</h4> -->
                     </div>
                     <div class="text-center">
                         <button class="boton boton-grad">COMPRAR</button>
@@ -215,38 +257,30 @@
                     </button>
                 </article>
                 <!-- PRODUCTS CARDS -->
-                <article id="productos" class="flex flex-row flex-wrap gap-5 justify-center">
-                    
+                <article id="productos" class="flex flex-row flex-wrap gap-5 justify-center">                    
                     
                 </article>
             </section>
-            <!-- MOBILE CART -->
+
+
+            <!-- MOBILE CART -->          
+            
             <section class="lg:hidden flex justify-center">
-                <article class="fixed bottom-0 w-full bg-navy-300 ">
+                <article class="fixed bottom-0 w-full bg-navy-300">
                     <div class="container flex flex-col">
                         <!-- ASIDE SUBTOTAL RESUMEN CART -->
                         
-                        <!-- <div class="text-white bg-navy-300 border-y border-dashed border-navy-100 p-4 ">
-                            <div class="text-white font-semibold p-1 flex justify-between">
-                                <h3>SUBTOTAL</h3>
-                                <h4>US$ 7.00</h4>
-                            </div>
-                            <div class="text-white font-semibold p-1 flex justify-between">
-                                <h3>CARGO POR SERVICIO</h3>
-                                <h4>US$ 1.00</h4>
-                            </div>
-                        </div> -->
+                        <div id="contenedor-precios-mobile" class="hidden">
+                            <!-- Carga de precios dinamico -->
+                        </div>                        
                         
                         <!-- ASIDE TOTAL RESUMEN CART TICKET -->
                     
-                        <div class="flex justify-between items-center text-white w-full p-4">
-                            <div class="text-xl w-1/2 font-semibold flex flex-wrap justify-around">
-                                <h3>TOTAL</h3>
-                                <h4>US$ 8.00</h4>
-                            </div>
-                            <div class="text-center w-1/2">
-                                <button class="boton boton-grad">COMPRAR</button>
-                            </div>
+                        <div class="flex justify-center items-center flex-wrap text-navy-50">
+                            <button id="boton-precios-mobile" class="flex justify-center items-center flex-wrap"></button>
+                        </div>
+                        <div id="contenedor-total-mobile" class="">
+                            <!-- carga de precio total js -->
                         </div>
                     
                     </div>
@@ -291,5 +325,6 @@
         </section>
     </footer>
     <script src="../js/candy.js"></script>
+    <script src="../src/navbar.js"></script>
 </body>
 </html>

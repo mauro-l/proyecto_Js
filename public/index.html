@@ -32,12 +32,22 @@
                     account_circle
                 </span>
             </div>
-            <div class="flex md:hidden">
+            <button onclick="menuHamburguesas()" class="flex md:hidden">
                 <span class="material-symbols-outlined">
                     menu
                 </span>
-            </div>
+            </button>
         </nav>
+        <div id="mobileMenu" class="md:hidden fixed top-0 right-0 w-4/5 h-full z-30 text-navy-50 bg-navy-300">
+            <button onclick="menuHamburguesas()" class="flex justify-center w-full p-5 md:hidden"><span class="material-symbols-outlined">close</span></button>
+            <ul class="flex flex-col items-center mt-12">
+                <li><a href="#">Inicio</a></li>
+                <li><a href="./pages/tickets.html">Entradas</a></li>
+                <li><a href="./pages/candy.html">Candy</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="./pages/login.html">Login</a></li>
+            </ul>
+        </div>
     </header>
 
     <section class="hidden lg:block relative">
@@ -208,6 +218,7 @@
     <!-- <script src="../src/js/index.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script type="module" src="./src/sliders.js"></script>
+    <script src="./src/navbar.js"></script>
+    <script type="module" src="./src/sliders.js"></script>    
 </body>
 </html>
