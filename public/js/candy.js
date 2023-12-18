@@ -224,7 +224,7 @@ function sumarProductos (id){
 }
 
 function actualizarCantidadProductos() {
-    const carrito = JSON.parse(localStorage.getItem('carrito'));    
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];  
     
     CANTIDAD_PRODUCTO_MOBILE.innerHTML = '';
     let div = document.createElement("div");
