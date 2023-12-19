@@ -1,15 +1,25 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "public/**/*",
-        "use": "@now/static-build",
-        "config": { "distDir": "public" }
-      }
-    ],
-    "routes": [
-      { "src": "/(.*)", 
-      "dest": "/$1" }
-    ]
-  }
-  
+  "version": 2,
+  "builds": [
+    {
+      "src": "public/**/*",
+      "use": "@now/static-build",
+      "config": { "distDir": "public" }
+    }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/$1" }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ],
+      "destination": "/$1"
+    }
+  ]
+}

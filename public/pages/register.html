@@ -48,13 +48,19 @@
                             <input id="createPassword" name="createPassword1" type="password" class="bg-transparent border-t-transparent border-x-transparent border-b-navy-100 border-b-solid mb-2 h-8 w-2/3 text-sm" aria-autocomplete="none" autocomplete="off" required>
                         </div>
                     </div>
-                    <p class="text-sm text-navy-150/50 my-1">Debe contener más de 6 caracteres, una mayuscula y un numero.</p>
+                    <div>
+                        <p id="verificarPass" class="text-sm text-navy-150/50 my-1 before:content-[attr(data-tip)]" data-tip="Debe contener">
+                            <span id="passLength" class="before:content-[attr(data-tip)]" data-tip="">  más de 6 caracteres</span>, 
+                            <span id="passMayus" class="before:content-[attr(data-tip)]" data-tip="">una mayuscula</span> y 
+                            <span id="passNum" class="before:content-[attr(data-tip)]" data-tip="">un numero.</span>
+                        </p>
+                    </div>
                     <div id="errorMsg" class="text-red-600 text-center m-2 hidden transition-opacity"></div>
                     <div class="flex flex-col gap-5 justify-between w-full px-4 text-navy-150">
-                        <label for="newcaster" class=" " >
-                            <input type="checkbox" class="bg-navy-150/20 mr-2 rounded-md" name="newcaster1" id="newcaster">Deseo recibir mails de estrenos y promociones
+                        <label for="newlaster">
+                            <input id="newlaster" name="newlaster1" type="checkbox" class="bg-navy-150/20 mr-2 rounded-md">Deseo recibir mails de estrenos y promociones
                         </label>
-                        <label for="terms" class=" " >
+                        <label for="terms">
                             <input type="checkbox" class="bg-navy-150/20 mr-2 rounded-md" name="terms1" id="terms" required>Acepto los <span class="text-green-400 font-semibold cursor-pointer">Términos, la Política de Privacidad </span> y <span class="text-green-400 font-semibold cursor-pointer">las Tarifas</span> 
                         </label>
                     </div>

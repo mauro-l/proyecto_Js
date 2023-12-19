@@ -83,13 +83,50 @@ const CONTENEDOR_TOTAL_MOBILE = document.getElementById('contenedor-total-mobile
 const CONTENEDOR_PRECIO_DESKTOP = document.getElementById('contenedor-precios-desktop');
 const CONTENEDOR_TOTAL_DESKTOP = document.getElementById('contenedor-total-desktop');
 const BOTON_PRECIOS_MOBILE = document.getElementById('boton-precios-mobile');
+const BOTON_ASIDE_DESKTOP = document.getElementById('aside-carrito-desktop');
 
-MOSTRAR_CARRITO_MOBILE.addEventListener('click', (e)=>{
-    e.preventDefault();
 
-    CONTENEDOR_CARRITO_MOBILE.classList.toggle('hidden');
 
-})
+/* funcion para mostrar todos los productos en la pantalla */
+
+function cargarProductos() {
+
+    PRODUCTOS.forEach(producto =>{
+
+        let precioConDescuento = producto.precio;
+
+        if (producto.descuento) 
+        {
+            let descuentos = (100 - producto.porcentajeDescuento) / 100; 
+            precioConDescuento = producto.precio * descuentos;
+        }
+
+        let div = document.createElement("div");
+        div.className = `max-w-[320px] w-[250px] lg:basis-1/3 grow relative ${producto.promoSocios ? `order-first` : 'order-last'}`;
+
+        div.innerHTML = `
+        <h4 class="grad rounded-b-lg p-3 w-20 text-center text-white font-bold ml-4 ${producto.descuento ? 'absolute' : 'hidden'} ">${producto.promo}</h4>
+        <div class="h-52 bg-navy-700 border-4 border-navy-300 rounded-t-xl flex">
+            <img src=${producto.img} alt="imagen productos ${producto.nombre}" class="m-auto w-48">
+        </div>
+        <div class="h-52 bg-navy-300 p-3 border-4 border-navy-300 rounded-b-xl text-white">
+            <div class="h-2/3 mx-auto mt-2 px-4">
+                <h2 class="text-2xl font-bold">${producto.nombre}</h2>
+                <p>${producto.descripcion}</p>
+            </div>
+            <div class="h1/3 w-full flex justify-around items-center mt-1 border-dashed border-navy-150/50 border-t-2 pt-3">
+                ${producto.descuento ? `<del class="text-base text-white/70">${producto.precio} US$</del> <h3 class="text-xl">${precioConDescuento.toFixed(2)} US$</h3> ` : `<h3 class="text-xl">${producto.precio.toFixed(2)} US$</h3>`}
+                <button onclick="agregarAlCarrito('${producto.id}', '${producto.nombre}', ${producto.descuento? precioConDescuento.toFixed(2) : producto.precio})" id="boton${producto.id}" class="boton boton-grad AGREGAR-PRODUCTO">Add</button>
+            </div>
+        </div>`;
+
+        CONTENEDOR_PRODUCTOS.appendChild(div);
+
+        
+    })
+    
+}
+
 
 // agregar productos al localStorage
 function agregarAlCarrito (id , nombre, precio) {
@@ -185,11 +222,12 @@ function mostrarCarrito(){
         CONTENEDOR_CARRITO_DESKTOP.appendChild(div);
     }
 
-    console.log(carrito.length);
     mostrarPreciosMobile();
     mostrarPreciosDesktop();
     actualizarCantidadProductos();
 }
+
+/* funciones para sumar restar y eliminar productos en el carrito */
 
 function restarProductos (id){
     let carrito = JSON.parse(localStorage.getItem('carrito'));
@@ -197,7 +235,6 @@ function restarProductos (id){
     if (carrito && carrito.length > 0){
 
         let productoIndex = carrito.findIndex(producto => producto.id == id);
-        console.log('carrito.index' + carrito[productoIndex]);
         if (productoIndex !==-1 && carrito[productoIndex].cantidad > 0) {
 
             carrito[productoIndex].cantidad--;
@@ -233,43 +270,6 @@ function actualizarCantidadProductos() {
     
 }
 
-function cargarProductos() {
-
-    PRODUCTOS.forEach(producto =>{
-
-        let precioConDescuento = producto.precio;
-
-        if (producto.descuento) 
-        {
-            let descuentos = (100 - producto.porcentajeDescuento) / 100; 
-            precioConDescuento = producto.precio * descuentos;
-        }
-
-        let div = document.createElement("div");
-        div.className = `max-w-[320px] w-[250px] lg:basis-1/3 grow relative ${producto.promoSocios ? `order-first` : 'order-last'}`;
-
-        div.innerHTML = `
-        <h4 class="grad rounded-b-lg p-3 w-20 text-center text-white font-bold ml-4 ${producto.descuento ? 'absolute' : 'hidden'} ">${producto.promo}</h4>
-        <div class="h-52 bg-navy-700 border-4 border-navy-300 rounded-t-xl flex">
-            <img src=${producto.img} alt="imagen productos" class="m-auto w-48">
-        </div>
-        <div class="h-52 bg-navy-300 p-3 border-4 border-navy-300 rounded-b-xl text-white">
-            <div class="h-2/3 mx-auto mt-2 px-4">
-                <h2 class="text-2xl font-bold">${producto.nombre}</h2>
-                <p>${producto.descripcion}</p>
-            </div>
-            <div class="h1/3 w-full flex justify-around items-center mt-1 border-dashed border-navy-150/50 border-t-2 pt-3">
-                ${producto.descuento ? `<del class="text-base text-white/70">${producto.precio} US$</del> <h3 class="text-xl">${precioConDescuento.toFixed(2)} US$</h3> ` : `<h3 class="text-xl">${producto.precio.toFixed(2)} US$</h3>`}
-                <button onclick="agregarAlCarrito('${producto.id}', '${producto.nombre}', ${producto.descuento? precioConDescuento.toFixed(2) : producto.precio})" id="boton${producto.id}" class="boton boton-grad AGREGAR-PRODUCTO">Add</button>
-            </div>
-        </div>`;
-
-        CONTENEDOR_PRODUCTOS.appendChild(div);
-
-        
-    })
-    
-}
 
 function eliminarProducto(id){
     let carrito = JSON.parse(localStorage.getItem('carrito'));
@@ -353,6 +353,8 @@ function mostrarPreciosDesktop(){
 
 }
 
+/* funciones para mostrar y ocultar cuando se hace click en algun boton */
+
 BOTON_PRECIOS_MOBILE.addEventListener('click',(e)=>{
     e.preventDefault();
 
@@ -360,14 +362,30 @@ BOTON_PRECIOS_MOBILE.addEventListener('click',(e)=>{
     botonPrecioMobile();
 })
 
+MOSTRAR_CARRITO_MOBILE.addEventListener('click', (e)=>{
+    e.preventDefault();
+
+    CONTENEDOR_CARRITO_MOBILE.classList.toggle('hidden');
+
+})
+
 function botonPrecioMobile(){
 
     if(CONTENEDOR_PRECIO_MOBILE.classList.contains('hidden')){
         BOTON_PRECIOS_MOBILE.innerHTML= `<span class="material-symbols-outlined">keyboard_double_arrow_up</span>`;
-        console.log('contiene hidden')
     }else{
         BOTON_PRECIOS_MOBILE.innerHTML=`<span class="material-symbols-outlined">keyboard_double_arrow_down</span>`;
-        console.log('no contiene hidden')
+    }
+}
+
+function desplegarCarrito(){
+    CONTENEDOR_CARRITO_DESKTOP.classList.toggle('max-h-[100px]');
+    CONTENEDOR_CARRITO_DESKTOP.classList.toggle('overflow-hidden');
+    
+    if(CONTENEDOR_CARRITO_DESKTOP.classList.contains('max-h-[100px]' && 'overflow-hidden')){
+        BOTON_ASIDE_DESKTOP.innerHTML= `<span class="material-symbols-outlined">keyboard_double_arrow_down</span>`;        
+    }else{
+        BOTON_ASIDE_DESKTOP.innerHTML=`<span class="material-symbols-outlined">keyboard_double_arrow_up</span>`;        
     }
 }
 

@@ -35,7 +35,7 @@
                 </span>
             </button>
         </nav>
-        <div id="mobileMenu" class="md:hidden fixed top-0 right-0 w-4/5 h-full z-30 text-navy-50 bg-navy-300">
+        <div id="mobileMenu" class="md:hidden fixed top-0 right-0 w-4/5 h-full z-30 text-navy-50 bg-navy-300 hidden">
             <button onclick="menuHamburguesas()" class="flex justify-center w-full p-5 md:hidden"><span class="material-symbols-outlined">close</span></button>
             <ul class="flex flex-col items-center mt-12">
                 <li><a href="../index.html">Inicio</a></li>
@@ -91,33 +91,7 @@
                 </button>
             </div>
             <div id="contenedor-productos-mobile" class="text-white bg-navy-300 border-y border-dashed border-navy-100 p-4 hidden">
-                <!-- <div class="flex items-center m-1 justify-between gap-4">
-                    <div class="flex gap-8">
-                        <button>X</button>
-                    </div>
-
-
-                    <div id="listaProductos" class="flex justify-between w-full">
-                        <h2>Pancho</h2>
-                        <h3>US$ 4.00</h3>
-                    </div>
-
-
-                    <div class="flex">
-                        <button class="border-navy-100 border-solid border rounded-l-full px-2">-</button>
-                        <span class="border-navy-100 border-solid border-y px-2">04</span>
-                        <button class="border-navy-100 border-solid border rounded-r-full px-2">+</button>
-                    </div>
-                </div> -->
-                
-                <!-- <div class="text-white font-semibold p-1 flex justify-between">
-                    <h3>SUBTOTAL</h3>
-                    <h4>US$ 7.00</h4>
-                </div>
-                <div class="text-white font-semibold p-1 flex justify-between">
-                    <h3>CARGO POR SERVICIO</h3>
-                    <h4>US$ 1.00</h4>
-                </div> -->
+                <!-- se completa mediante js -->
             </div>
         </article>
     </section>
@@ -177,32 +151,28 @@
                 </article>
                 <!-- ASIDE BODY RESUMEN CART -->
                 <article class="border-solid border-x border-navy-100">
-                    <div class="text-white bg-navy-300 border-y border-dashed border-navy-100 py-10 px-4 relative z-">
+                    <div class="text-white bg-navy-300 border-y border-dashed border-navy-100 pt-10 pb-5 px-4 relative">
                         <span class="before:block before:absolute before:-inset-8 before:rounded-full before:bg-navy-900 absolute top-0 left-0 inline-block"></span>
                         <h2 class="text-lg font-semibold">PRODUCTOS</h2>
-                        <div id="contenedor-productos-desktop"></div>
+                        <div id="contenedor-productos-desktop" class="max-h-[100px] overflow-hidden">
                             <!-- se agregan productos mediante js -->
+                        </div>
+                        <div class="flex justify-center items-center flex-wrap text-navy-50">
+                            <button onclick="desplegarCarrito()" id="aside-carrito-desktop" class="flex justify-center items-center flex-wrap"><span class="material-symbols-outlined">keyboard_double_arrow_down</span></button>
+                        </div>
                         <span class="after:block after:absolute after:-inset-8 after:rounded-full after:bg-navy-900 absolute top-0 right-0 inline-block"></span>
                     </div>
                 </article>
                 <!-- ASIDE SUBTOTAL RESUMEN CART -->
                 <article class="border-solid border-x border-navy-100">
                     <div id="contenedor-precios-desktop" class="">
-                        <!-- <div class="text-white font-semibold p-1 flex justify-between">
-                            <h3>SUBTOTAL</h3>
-                            <h4>US$ 7.00</h4>
-                        </div>
-                        <div class="text-white font-semibold p-1 flex justify-between">
-                            <h3>CARGO POR SERVICIO</h3>
-                            <h4>US$ 1.00</h4>
-                        </div> -->
+                        <!-- se completa mediante js -->
                     </div>
                 </article>
                 <!-- ASIDE TOTAL RESUMEN CART TICKET -->
                 <article class="text-white p-4 flex flex-col gap-3 bg-navy-500 border-solid border-b border-x border-navy-100">
                     <div id="contenedor-total-desktop" class="">
-                        <!-- <h3>TOTAL</h3>
-                        <h4>US$ 8.00</h4> -->
+                        <!-- se completa mediante js -->
                     </div>
                     <div class="text-center">
                         <button class="boton boton-grad">COMPRAR</button>
