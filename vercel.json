@@ -8,18 +8,7 @@
     }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "/$1" }
-  ],
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        }
-      ],
-      "destination": "/$1"
-    }
+    { "src": "/(.*)", 
+    "dest": "/$1" }
   ]
 }
