@@ -1027,11 +1027,6 @@ html {
   margin-right: 4rem;
 }
 
-.mx-2{
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-}
-
 .mx-3{
   margin-left: 0.75rem;
   margin-right: 0.75rem;
@@ -1443,11 +1438,6 @@ html {
   border-top-color: transparent;
 }
 
-.\!border-b-red-900{
-  --tw-border-opacity: 1 !important;
-  border-bottom-color: rgb(127 29 29 / var(--tw-border-opacity)) !important;
-}
-
 .bg-\[\#1702026b\]{
   background-color: #1702026b;
 }
@@ -1692,10 +1682,6 @@ html {
   padding-right: 1.25rem;
 }
 
-.pr-8{
-  padding-right: 2rem;
-}
-
 .pt-10{
   padding-top: 2.5rem;
 }
@@ -1756,11 +1742,6 @@ html {
   line-height: 1rem;
 }
 
-.\!text-3xl{
-  font-size: 1.875rem !important;
-  line-height: 2.25rem !important;
-}
-
 .font-bold{
   font-weight: 700;
 }
@@ -1812,6 +1793,11 @@ html {
   color: rgb(220 38 38 / var(--tw-text-opacity));
 }
 
+.text-red-900{
+  --tw-text-opacity: 1;
+  color: rgb(127 29 29 / var(--tw-text-opacity));
+}
+
 .text-sky-700{
   --tw-text-opacity: 1;
   color: rgb(3 105 161 / var(--tw-text-opacity));
@@ -1832,21 +1818,6 @@ html {
 
 .text-white\/80{
   color: rgb(255 255 255 / 0.8);
-}
-
-.text-red-700{
-  --tw-text-opacity: 1;
-  color: rgb(185 28 28 / var(--tw-text-opacity));
-}
-
-.\!text-green-900{
-  --tw-text-opacity: 1 !important;
-  color: rgb(20 83 45 / var(--tw-text-opacity)) !important;
-}
-
-.\!text-red-900{
-  --tw-text-opacity: 1 !important;
-  color: rgb(127 29 29 / var(--tw-text-opacity)) !important;
 }
 
 .shadow-total{
@@ -1969,44 +1940,8 @@ html {
   line-height: 1.25rem;
 }
 
-.before\:text-3xl::before{
-  content: var(--tw-content);
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-
-.before\:content-\[\'Debe\'\]::before{
-  --tw-content: 'Debe';
-  content: var(--tw-content);
-}
-
-.before\:content-\[\$\{elemento\.emoji\}\]::before{
-  --tw-content: ${elemento.emoji};
-  content: var(--tw-content);
-}
-
-.before\:content-\[\'\'\]::before{
-  --tw-content: '';
-  content: var(--tw-content);
-}
-
-.before\:content-\[\'Debe\.contener\'\]::before{
-  --tw-content: 'Debe.contener';
-  content: var(--tw-content);
-}
-
 .before\:content-\[attr\(data-tip\)\]::before{
   --tw-content: attr(data-tip);
-  content: var(--tw-content);
-}
-
-.before\:content-\[\'\$\{elemento\.emoji\}\'\]::before{
-  --tw-content: '${elemento.emoji}';
-  content: var(--tw-content);
-}
-
-.before\:content-\[\]::before{
-  --tw-content: ;
   content: var(--tw-content);
 }
 
@@ -2067,12 +2002,6 @@ html {
   line-height: 2rem;
 }
 
-.after\:text-3xl::after{
-  content: var(--tw-content);
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-
 .after\:text-red-600::after{
   content: var(--tw-content);
   --tw-text-opacity: 1;
@@ -2089,8 +2018,8 @@ html {
   content: var(--tw-content);
 }
 
-.after\:content-\[\'Debe\'\]::after{
-  --tw-content: 'Debe';
+.after\:content-\[attr\(data-tip\)\]::after{
+  --tw-content: attr(data-tip);
   content: var(--tw-content);
 }
 

@@ -49,23 +49,20 @@
     <section class="">    
         <article class="bg-cover bg-center bg-no-repeat bg-banner-candy">
             <div class="pt-52 pb-28 text-white bg-[#1702026b]/30 bg-gradient-to-b from-[#001232]/10 from-0% to-[#001232] to-90%">
-                <h2 class="text-3xl text-center font-bold">Candy</h2>
+                <h2 class="text-3xl text-center font-bold">TICKETS</h2>
             </div>
         </article>
     </section>
+
+    <!-- BANNER MINS LEFT -->
     <section class="p-10 border-solid border-y border-navy-100 bg-navy-300">
         <article class="container">
-            <div class="text-white flex flex-wrap flex-col md:flex-row justify-between gap-5 md:gap-0 items-center">
-                <div class="">
-                    <button class="boton boton-grad flex"><span class="material-symbols-outlined">keyboard_double_arrow_left</span>back</button>
+            <div class="text-white flex flex-wrap flex-col md:flex-row justify-around gap-5 md:gap-0 items-center">
+                <div class="hidden lg:block">
+                    <a href="../index.html" class="boton boton-grad flex"><span class="material-symbols-outlined">keyboard_double_arrow_left</span>back</a>
                 </div>
                 <div class="flex items-center gap-4">
-                    <h2>MON, NOV 4 2023</h2>
-                    <select class="text-white py-1 pr-8 border rounded-full bg-violet-700 ring-1 ring-violet-300 mx-2" name="" id="">
-                        <option value="">15:00</option>
-                        <option value="">19:30</option>
-                        <option value="">22:00</option>
-                    </select>
+                    <h2>MON, NOV 4 2023</h2>                    
                 </div>
                 <div class="flex flex-col items-center">
                     <h2 class="text-2xl font-semibold">05:00</h2>
@@ -127,8 +124,8 @@
                         <h3>TOTAL</h3>
                         <h4>US$ 8.00</h4>
                     </div>
-                    <div class="text-center">
-                        <button class="boton boton-grad">SIGUIENTE</button>
+                    <div class="text-center my-2">
+                        <a href="./candy.html" class="boton boton-grad">SIGUIENTE</a>
                     </div>
                 </article>
             </section>
@@ -146,9 +143,9 @@
                 <article class="text-navy-50 bg-navy-500 flex flex-col justify-between items-center my-2">
                     <div class="flex justify-between w-full p-4">
                         <h3 class="font-semibold">Seleccion horarios</h3>
-                        <span class="material-symbols-outlined">add_circle</span>
+                        <button onclick="mostrarContenido(seccionHorario)"><span class="material-symbols-outlined">add_circle</span></button>
                     </div>
-                    <div class="text-navy-50 w-full bg-navy-300 p-4 hidden">
+                    <div id="seccionHorario" class="text-navy-50 w-full bg-navy-300 p-4 hidden BOTONES-MOSTRAR">
                         <h3 class="my-4"><strong>¿Cuándo quieres ir?</strong></h3>
                         <div class="flex flex-col w-2/3 gap-4">
                             <select name="fecha" id="fecha" class="bg-navy-300 border-navy-100">
@@ -170,9 +167,9 @@
                 <article class="text-navy-50 bg-navy-500 flex flex-col justify-between items-center my-2">
                     <div class="flex justify-between w-full p-4">
                         <h3 class="font-semibold">Seleccion lugar</h3>
-                        <span class="material-symbols-outlined">add_circle</span>
+                        <button onclick="mostrarContenido(seccionLugar)"><span class="material-symbols-outlined">add_circle</span></button>
                     </div>
-                    <div class="text-navy-50 w-full bg-navy-300 p-4 hidden">
+                    <div id="seccionLugar" class="text-navy-50 w-full bg-navy-300 p-4 hidden BOTONES-MOSTRAR">
                         <h3 class="my-4"><strong>¿Qué zona u opción quieres?</strong></h3>
                         <div class="flex justify-between">
                             <div>
@@ -204,9 +201,9 @@
                 <article class="text-navy-50 bg-navy-500 flex flex-col justify-between items-center my-2">
                     <div class="flex justify-between w-full p-4">
                         <h3 class="font-semibold">Seleccion precios</h3>
-                        <span class="material-symbols-outlined">add_circle</span>
+                        <button onclick="mostrarContenido(seccionPrecio)"><span class="material-symbols-outlined">add_circle</span></button>
                     </div>
-                    <div class="text-navy-50 w-full bg-navy-300 p-4">
+                    <div id="seccionPrecio" class="text-navy-50 w-full bg-navy-300 p-4 BOTONES-MOSTRAR">
                         <h3 class="my-4"><strong>¿Cuántas entradas quieres?</strong></h3>
                         <div class="flex items-center gap-4 justify-between border my-2 p-2 border-navy-100 rounded-md">
                             <div>
@@ -379,7 +376,7 @@
             <p class="border-t-[0.5px] border-stone-50/20 mx-16 w-full text-center p-3 text-xs">&copy Copyright &copy 2023 Mauro Laime.</p>
         </section>
     </footer>
-    <script src=" "></script>
+    <script src="../js/ticket.js"></script>
     <script src="../src/navbar.js"></script>
 </body>
 </html>

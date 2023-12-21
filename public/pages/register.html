@@ -31,10 +31,10 @@
                     <div class="flex flex-wrap w-full justify-between sm:flex-nowrap md:justify-around">
                         <div class="flex flex-wrap sm:flex-nowrap sm:justify-start justify-between w-full mb-3">
                             <label for="createMail" class="after:content-['*'] after:text-2xl after:text-red-600/70">EMAIL</label>
-                            <input id="createMail" name="createMail1" type="text" class="bg-transparent border-t-transparent border-x-transparent border-b-navy-100 border-b-solid mb-2 h-8 w-2/3" aria-autocomplete="none" autocomplete="off" required>
+                            <input id="createMail" name="createMail1" type="email" class="bg-transparent border-t-transparent border-x-transparent border-b-navy-100 border-b-solid mb-2 h-8 w-2/3" aria-autocomplete="none" autocomplete="off" required>
                         </div>
                         <div class="flex flex-wrap sm:flex-nowrap justify-between sm:justify-start w-full">
-                            <label for="createDate" class="after:content-['*'] after:text-2xl after:text-red-600/70">CUMPLEAÑOS</label>
+                            <label for="createDate" class="after:content-['*'] after:text-2xl after:text-red-600/70 text-xs">FECHA DE <br> NACIMNTO</label>
                             <input id="createDate" name="createDate1" type="date" class="bg-transparent border-t-transparent border-x-transparent border-b-navy-100 border-b-solid mb-2 h-8 w-2/3" aria-autocomplete="none" autocomplete="off" required>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                             <input id="createPass" name="createPass1" type="password" class="bg-transparent border-t-transparent border-x-transparent border-b-navy-100 border-b-solid mb-2 h-8 w-2/3 text-sm" aria-autocomplete="none" autocomplete="off" required>
                         </div>
                         <div class="text-sm sm:text-base leading-3 sm:leading-3 flex justify-between sm:justify-start w-full">
-                            <label for="createPassword" class="after:content-['*'] after:text-2xl after:text-red-600/70 text-xs">FECHA DE <br> NACIMNTO</label>
+                            <label for="createPassword" class="after:content-['*'] after:text-2xl after:text-red-600/70 text-sm">REPETIR <br> CONTRASEÑA</label>
                             <input id="createPassword" name="createPassword1" type="password" class="bg-transparent border-t-transparent border-x-transparent border-b-navy-100 border-b-solid mb-2 h-8 w-2/3 text-sm" aria-autocomplete="none" autocomplete="off" required>
                         </div>
                     </div>
@@ -52,7 +52,8 @@
                         <p id="verificarPass" class="text-sm text-navy-150/50 my-1 before:content-[attr(data-tip)]" data-tip="Debe contener">
                             <span id="passLength" class="before:content-[attr(data-tip)]" data-tip="">  más de 6 caracteres</span>, 
                             <span id="passMayus" class="before:content-[attr(data-tip)]" data-tip="">una mayuscula</span> y 
-                            <span id="passNum" class="before:content-[attr(data-tip)]" data-tip="">un numero.</span>
+                            <span id="passNum" class="before:content-[attr(data-tip)]" data-tip="">un numero.<br></span>
+                            <span id="passSimbols" class="after:content-[attr(data-tip)] before:content-[attr(data-tip)]" data-tip="🚨">Solo admite letras y numeros, No agregar simbolos ni espacios.</span>
                         </p>
                     </div>
                     <div id="errorMsg" class="text-red-600 text-center m-2 hidden transition-opacity"></div>
@@ -82,6 +83,7 @@
             </article>
         </section>        
     </main>
-    <script src="../js/register.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="../js/register.js"></script>
 </body>
 </html>
