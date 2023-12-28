@@ -17,7 +17,7 @@
             </div>
             <div class="lg:flex hidden justify-evenly items-center">
                 <ul class="flex gap-6">
-                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html">Inicio</a></li>
                     <li><a href="#">Entradas</a></li>
                     <li><a href="./candy.html">Candy</a></li>
                     <li><a href="#">Contacto</a></li>
@@ -28,11 +28,12 @@
                 <span class="material-symbols-outlined">
                     account_circle
                 </span>
-                <button onclick="menuHamburguesas()" class="flex lg:hidden">
-                    <span class="material-symbols-outlined">
-                        menu
-                    </span>
-                </button>
+            </div>
+            <button onclick="menuHamburguesas()" class="flex lg:hidden">
+                <span class="material-symbols-outlined">
+                    menu
+                </span>
+            </button>
         </nav>
             <div id="mobileMenu" class="md:hidden fixed top-0 right-0 w-4/5 h-full z-30 text-navy-50 bg-navy-300 hidden">
                 <button onclick="menuHamburguesas()" class="flex justify-center w-full p-5 md:hidden"><span class="material-symbols-outlined">close</span></button>
@@ -132,12 +133,8 @@
             <!-- BODY GRID SHOP -->
             <section class="lg:col-span-3 lg:row-start-1 row-span-full lg:relative lg:z-20 xl:static">
                 <!-- LOGIN SECCION -->
-                <article class="text-white bg-navy-500 flex flex-wrap md:flex-nowrap justify-between items-center my-2 p-8 gap-6">
-                    <div>
-                        <h3 class="text-2xl pb-4 font-bold">Ya eres miembro de CinemaCar?</h3>
-                        <p class="text-navy-150">Inicia sesion para hacer reservas y conseguir los mejores descuentos</p>
-                    </div>
-                    <div><a href="./login.html" class="flex flex-wrap justify-center items-center gap-2"><span class="material-symbols-outlined rounded-full p-1 grad text-navy-50 text-center">person</span><p>Inicia Sesion</p></a></div>
+                <article id="seccionLogin" class="text-white bg-navy-500 flex flex-wrap md:flex-nowrap justify-between items-center my-2 p-8 gap-6">
+                    <!-- Se completa dinamicamente mediante js -->
                 </article>
                 <!-- PESTAÑA SELECCION HORARIOS -->
                 <article class="text-navy-50 bg-navy-500 flex flex-col justify-between items-center my-2">
@@ -303,6 +300,17 @@
                             NO ESTÁ PERMITIDO INTRODUCIR ALIMENTOS AJENOS AL RECINTO.
                         </p>
                         <p class="text-navy-150"><strong>EL PARKING PREMIUM ASEGURA UBICACIÓN CON LA MEJOR VISIBILIDAD (COCHES SUV EN ADELANTE SE COLOCARÁN CENTRADOS ENTRE LAS FILAS 5, 6 Y 7).</strong></p>
+                    </div>
+                </article>
+                <article class="text-white bg-navy-500 flex flex-col p-4 gap-2 mt-2">
+                    <div class="flex items-center text-white w-full">
+                        <div class="text-xl font-semibold flex flex-wrap justify-around w-full">
+                            <h3>TOTAL</h3>
+                            <h4>US$ 8.00</h4>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button class="boton boton-grad">SIGUIENTE</button>
                     </div>
                 </article>
             </section>

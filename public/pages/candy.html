@@ -100,7 +100,7 @@
                 </article>
                 <!-- ASIDE FILTER RESUMEN CART -->
                 <article class="text-white bg-navy-300 border-x border-navy-100 flex flex-col p-4 pb-8 gap-4">
-                    <div class="pr-5">
+                    <!-- <div class="pr-5">
                         <form action="">
                             <input type="search" class="bg-navy-300 border-b border-navy-100 w-full p-1" name="" id="" placeholder="Buscar">
                         </form>
@@ -120,29 +120,29 @@
                                 <input type="radio" class="mr-2 text-sky-700 bg-navy-300 border-navy-100" name="Ordenar" id="mayorPrecio">Mayor precio
                             </label>
                         </form>
-                        <form action="">
+                        <form id="filtroAside"> 
                             <h2>Categoría</h2>
                             <label for="comidas">
-                                <input type="radio" class="mr-2 text-sky-700 bg-navy-300 border-navy-100" name="categoria" id="comidas">Comidas
+                                <input type="radio" class="mr-2 text-sky-700 bg-navy-300 border-navy-100" name="categoria" id="comidas" value="comidas">Comidas
                             </label>
                             <br>
                             <label for="popcorn">
-                                <input type="radio" class="mr-2 text-sky-700 bg-navy-300 border-navy-100" name="categoria" id="popcorn">Popcorn
+                                <input type="radio" class="mr-2 text-sky-700 bg-navy-300 border-navy-100" name="categoria" id="popcorn" value="pop">Popcorn
                             </label>
                             <br>
                             <label for="bebidas">
-                                <input type="radio" class="mr-2 text-sky-700 bg-navy-300 border-navy-100" name="categoria" id="bebidas">Bebidas
+                                <input type="radio" class="mr-2 text-sky-700 bg-navy-300 border-navy-100" name="categoria" id="bebidas" value="bebidas">Bebidas
                             </label>
                             <br>
                             <label for="golosinas">
-                                <input type="radio" class="mr-2 text-sky-700 bg-navy-300 border-navy-100" name="categoria" id="golosinas">Golosinas
+                                <input type="radio" class="mr-2 text-sky-700 bg-navy-300 border-navy-100" name="categoria" id="golosinas" value="golosinas">Golosinas
                             </label>
                             <br>
                             <label for="snacks">
-                                <input type="radio" class="mr-2 text-sky-700 bg-navy-300 border-navy-100" name="categoria" id="snacks">Snacks
+                                <input type="radio" class="mr-2 text-sky-700 bg-navy-300 border-navy-100" name="categoria" id="snacks" value="snacks">Snacks
                             </label>
                         </form>
-                    </div>
+                    </div> -->
                 </article>
                 <!-- ASIDE BODY RESUMEN CART -->
                 <article class="border-solid border-x border-navy-100">
@@ -181,57 +181,60 @@
                     <img src="../asset/img/banner-promo.jpg" alt="">
                 </article>
                 <!-- MOBILE SEARCH FILTER -->
-                <article class="mb-3 flex justify-center p-2 bg-navy-900 lg:hidden">
+                <!-- <article class="mb-3 flex justify-center p-2 bg-navy-900 lg:hidden">
                     <div class="text-white w-full">
                         <form action="">
                             <input type="search" class="bg-navy-900 border-b border-navy-100 w-full p-1" name="" id="" placeholder="Buscar">
                         </form>
                     </div>
-                </article>
+                </article> -->
                 <!-- MOBILE FILTER -->
-                <article class="mb-3 flex justify-around p-2 bg-navy-900 text-white lg:hidden">
-                    <select name="ordenar" id="ordenar" class="bg-violet-700 ring-1 ring-violet-300 rounded-full">
-                        <option disabled selected>Ordenar por</option>
-                        <option value="">Más relevantes</option>
-                        <option value="">Menor precio</option>
-                        <option value="">Mayor precio</option>
+                <article  class="mb-3 flex flex-wrap gap-3 justify-around p-2 bg-navy-900 text-white">
+                    <button id="botonReset" class="border-navy-100 boton-active transition-shadow hover:shadow-[#3B37BC] hover:shadow-lg border rounded-full py-1 px-4 lg:py-2 lg:px-8">
+                        <p>Ver todos</p>
+                    </button>
+                    <select name="categoria" id="categorias" class="bg-navy-900 ring-1 ring-violet-300 rounded-full">
+                        <option disabled selected>Categorías</option>
+                        <option value="comidas">Comidas</option>
+                        <option value="pop">Popcorn</option>
+                        <option value="bebidas">Bebidas</option>
+                        <option value="golosinas">Golosinas</option>
+                        <option value="snacks">Snacks</option>
                     </select>
-                    <select name="categorias" id="categorias" class="bg-violet-700 ring-1 ring-violet-300 rounded-full">
-                        <option disabled selected>Categoría</option>
-                        <option value="">Comidas</option>
-                        <option value="">Popcorn</option>
-                        <option value="">Bebidas</option>
-                        <option value="">Golosinas</option>
-                        <option value="">Snacks</option>
+                    <select name="ordenar" id="ordenar" class="bg-navy-900 ring-1 ring-violet-300 rounded-full">
+                        <option disabled selected>Ordenar por</option>
+                        <option value="relevante">Más relevantes</option>
+                        <option value="menor">Menor precio</option>
+                        <option value="mayor">Mayor precio</option>
                     </select>
                 </article>
 
                 <!-- BUTTONS FILTER -->
-                <article class="flex flex-wrap gap-3 my-5 justify-evenly lg:justify-center text-white">
+                <!-- <article class="flex flex-wrap gap-3 my-5 justify-evenly lg:justify-center text-white">
                     <button class="border-navy-100 focus:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300  transition-shadow hover:shadow-[#3B37BC] hover:shadow-lg border rounded-full py-1 px-4 lg:py-2 lg:px-8">
-                        <h2>VER TODOS</h2>
+                        <p>VER TODOS</p>
                     </button>
-                    <button type="button" class="border-navy-100 hover:bg-sky-400 border rounded-full py-1 px-4 lg:py-2 lg:px-8">
-                        <h2>COMBOS</h2>
+                    <button class="border-navy-100 focus:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300  transition-shadow hover:shadow-[#3B37BC] hover:shadow-lg border rounded-full py-1 px-4 lg:py-2 lg:px-8">
+                        <p>COMBOS</p>
                     </button>
-                    <button type="button" class="border-navy-100 hover:bg-sky-400 border rounded-full py-1 px-4 lg:py-2 lg:px-8">
-                        <h2>BEBIDAS</h2>
+                    <button class="border-navy-100 focus:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300  transition-shadow hover:shadow-[#3B37BC] hover:shadow-lg border rounded-full py-1 px-4 lg:py-2 lg:px-8">
+                        <p>BEBIDAS</p>
                     </button>
-                    <button type="button" class="border-navy-100 hover:bg-sky-400 border rounded-full py-1 px-4 lg:py-2 lg:px-8">
-                        <h2>CINEMAFAN</h2>
+                    <button class="border-navy-100 focus:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300  transition-shadow hover:shadow-[#3B37BC] hover:shadow-lg border rounded-full py-1 px-4 lg:py-2 lg:px-8">
+                        <p>CINEMAFAN</p>
                     </button>
-                </article>
+                </article> -->
                 <!-- PRODUCTS CARDS -->
                 <article id="productos" class="flex flex-row flex-wrap gap-5 justify-center">                    
                     
-                </article>
+                </article>                  
             </section>
 
 
             <!-- MOBILE CART -->          
             
             <section class="lg:hidden flex justify-center">
-                <article class="fixed bottom-0 w-full bg-navy-300">
+                <article id="elementToObserve" class="fixed bottom-0 w-full bg-navy-300 hidden">
                     <div class="container flex flex-col">
                         <!-- ASIDE SUBTOTAL RESUMEN CART -->
                         

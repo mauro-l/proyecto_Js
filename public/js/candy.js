@@ -1,11 +1,11 @@
-const PRODUCTOS = [
+const PRODUCTO = [
     {
         id: "1",
         img: "../asset/candy/balde-cine.png",
         nombre: "Combo balde",
         descripcion: "1 balde grande de palomitas de maiz + bebida grande",
         precio: 4.00,
-        
+        categoria: "bebidas",
         promoSocios: true,
         descuento: true,
         porcentajeDescuento: 50,
@@ -17,7 +17,7 @@ const PRODUCTOS = [
         nombre: "Combo Mex",
         descripcion: "2 tacos + 1 burrito + 2 bebidas medianas",
         precio: 8.00,
-        
+        categoria: "comidas",
         promoSocios: true,
         descuento: true,
         porcentajeDescuento: 50,
@@ -29,7 +29,7 @@ const PRODUCTOS = [
         nombre: "Combo Familia",
         descripcion: "3 tacos + 2 bebidas medianas",
         precio: 6.00,
-        
+        categoria: "bebidas",
         promoSocios: false,
         descuento: true,
         porcentajeDescuento: 60,
@@ -41,7 +41,7 @@ const PRODUCTOS = [
         nombre: "Combo Nachos",
         descripcion: "1 taco + nachos + 1 bebida grande",
         precio: 5.00,
-        
+        categoria: "comidas",
         promoSocios: false,
         descuento: false,
         porcentajeDescuento: null,
@@ -53,7 +53,7 @@ const PRODUCTOS = [
         nombre: "Combo balde",
         descripcion: "1 balde mediano de palomitas de maiz + bebida mediana",
         precio: 4.00,
-        
+        categoria: "bebidas",
         promoSocios: false,
         descuento: false,
         porcentajeDescuento: null,
@@ -65,7 +65,7 @@ const PRODUCTOS = [
         nombre: "Combo Nachos XL",
         descripcion: "2 taco + nachos + 2 bebida grande",
         precio: 6.00,
-                
+        categoria: "comidas",
         promoSocios: true,
         descuento: true,
         porcentajeDescuento: 50,
@@ -84,25 +84,123 @@ const CONTENEDOR_PRECIO_DESKTOP = document.getElementById('contenedor-precios-de
 const CONTENEDOR_TOTAL_DESKTOP = document.getElementById('contenedor-total-desktop');
 const BOTON_PRECIOS_MOBILE = document.getElementById('boton-precios-mobile');
 const BOTON_ASIDE_DESKTOP = document.getElementById('aside-carrito-desktop');
+const FILTRO_DESKTOP = document.getElementById('filtroAside');
+
+/* filtros */
+const BOTON_VERTODO = document.getElementById('botonReset');
+const CATEGORIAS = document.getElementById('categorias');
+const ORDENAR = document.getElementById('ordenar');
+
+const productoDescendente = (a, b) => a.precioFinal - b.precioFinal;
+const productoAscendente = (a, b) => b.precioFinal - a.precioFinal;
 
 
+BOTON_VERTODO.addEventListener('click', ()=>{
+    CATEGORIAS.selectedIndex = 0;
+    cargarProductos(PRODUCTOS);
+
+    if(!BOTON_VERTODO.classList.contains('boton-active')){
+        BOTON_VERTODO.classList.add('boton-active');
+        CATEGORIAS.classList.remove('bg-violet-700');
+        CATEGORIAS.classList.remove('ring-4');
+        ORDENAR.classList.remove('bg-violet-700');
+        ORDENAR.classList.remove('ring-4');
+    }
+})
+document.addEventListener('DOMContentLoaded', () => {
+    
+    cargarProductos(PRODUCTOS);
+           
+    CATEGORIAS.addEventListener('change',()=>{
+
+        if(ORDENAR.classList.contains('ring-4')){
+            ORDENAR.selectedIndex = 0;
+            ORDENAR.classList.remove('bg-violet-700');
+            ORDENAR.classList.remove('ring-4');
+        }
+                
+        const productosCategoria = PRODUCTOS.filter(productos => productos.categoria === CATEGORIAS.value);
+        cargarProductos(productosCategoria);
+        
+        BOTON_VERTODO.classList.remove('boton-active');
+        CATEGORIAS.classList.add('bg-violet-700');
+        CATEGORIAS.classList.add('ring-4');
+    })
+
+    ORDENAR.addEventListener('change',()=>{
+        
+        if(CATEGORIAS.classList.contains('ring-4')){
+            CATEGORIAS.selectedIndex = 0;
+            CATEGORIAS.classList.remove('bg-violet-700');
+            CATEGORIAS.classList.remove('ring-4');
+        }
+
+        if(ORDENAR.value === 'mayor'){
+
+            const ordenAscendente = PRODUCTOS.slice().sort(productoAscendente);
+            console.log('orden de mayor a menor' ,ordenAscendente);
+            cargarProductos(ordenAscendente);
+
+            BOTON_VERTODO.classList.remove('boton-active');
+            ORDENAR.classList.add('bg-violet-700');
+            ORDENAR.classList.add('ring-4');
+
+        }else if(ORDENAR.value === 'menor'){
+
+            const ordenDescendente = PRODUCTOS.slice().sort(productoDescendente);
+            console.log('orden de menor a mayor', ordenDescendente);
+            cargarProductos(ordenDescendente);
+
+            BOTON_VERTODO.classList.remove('boton-active');
+            ORDENAR.classList.add('bg-violet-700');
+            ORDENAR.classList.add('ring-4');
+
+        }else{
+            cargarProductos(PRODUCTOS);
+
+            BOTON_VERTODO.classList.remove('boton-active');
+            ORDENAR.classList.add('bg-violet-700');
+            ORDENAR.classList.add('ring-4');
+        }
+
+    })
+
+})
+
+//calcula el precio final de los productos que contienen descuentos.
+function calcularPrecioFinal(param){
+
+    let precioSinDescuento = param.precio;
+    if (param.descuento) 
+    {
+        let descuentos = (100 - param.porcentajeDescuento) / 100;
+        const precioFinal = precioSinDescuento * descuentos;
+
+        return parseFloat(precioFinal.toFixed(2));
+    }else
+    {        
+        const precioFinal = param.precio
+        return precioFinal;
+    }
+}
+
+/* crea una nueva lista de productos incluyendo los precios con descuentos calculados  */
+const PRODUCTOS = PRODUCTO.map(producto =>{
+    const precioFinal = calcularPrecioFinal(producto);
+    return { ...producto, precioFinal };
+});
 
 /* funcion para mostrar todos los productos en la pantalla */
 
-function cargarProductos() {
+function cargarProductos(product) {
 
-    PRODUCTOS.forEach(producto =>{
+    CONTENEDOR_PRODUCTOS.innerHTML = ``;
 
-        let precioConDescuento = producto.precio;
-
-        if (producto.descuento) 
-        {
-            let descuentos = (100 - producto.porcentajeDescuento) / 100; 
-            precioConDescuento = producto.precio * descuentos;
-        }
+    product.forEach(producto =>{
 
         let div = document.createElement("div");
-        div.className = `max-w-[320px] w-[250px] lg:basis-1/3 grow relative ${producto.promoSocios ? `order-first` : 'order-last'}`;
+        div.className = `max-w-[320px] w-[250px] lg:basis-1/3 grow relative`;
+        // div.className = `max-w-[320px] w-[250px] lg:basis-1/3 grow relative ${producto.promoSocios ? `order-first` : 'order-last'}`; esta linea ordenaba los productos dependiendo si contienen promo para socios colocandolo primeros pero trae error al momento de utilizar los filtros.
 
         div.innerHTML = `
         <h4 class="grad rounded-b-lg p-3 w-20 text-center text-white font-bold ml-4 ${producto.descuento ? 'absolute' : 'hidden'} ">${producto.promo}</h4>
@@ -115,8 +213,8 @@ function cargarProductos() {
                 <p>${producto.descripcion}</p>
             </div>
             <div class="h1/3 w-full flex justify-around items-center mt-1 border-dashed border-navy-150/50 border-t-2 pt-3">
-                ${producto.descuento ? `<del class="text-base text-white/70">${producto.precio} US$</del> <h3 class="text-xl">${precioConDescuento.toFixed(2)} US$</h3> ` : `<h3 class="text-xl">${producto.precio.toFixed(2)} US$</h3>`}
-                <button onclick="agregarAlCarrito('${producto.id}', '${producto.nombre}', ${producto.descuento? precioConDescuento.toFixed(2) : producto.precio})" id="boton${producto.id}" class="boton boton-grad AGREGAR-PRODUCTO">Add</button>
+                ${producto.descuento ? `<del class="text-base text-white/70">${producto.precio.toFixed(2)} US$</del> <h3 class="text-xl">${producto.precioFinal.toFixed(2)} US$</h3> ` : `<h3 class="text-xl">${producto.precio.toFixed(2)} US$</h3>`}
+                <button onclick="agregarAlCarrito('${producto.id}', '${producto.nombre}', ${producto.descuento? producto.precioFinal : producto.precio})" id="boton${producto.id}" class="boton boton-grad AGREGAR-PRODUCTO">Add</button>
             </div>
         </div>`;
 
@@ -389,8 +487,29 @@ function desplegarCarrito(){
     }
 }
 
+const elementToObserve = document.getElementById('elementToObserve');
+
+function handleScroll() {
+    const scrollPosition = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const triggerPoint = windowHeight * 0.25;
+
+    if (scrollPosition > triggerPoint) {
+        // Si el usuario ha scrollado más del 25%, haz el elemento visible
+        elementToObserve.classList.remove('hidden');
+    } else {
+        // Si no, mantiene la opacidad en 0
+        elementToObserve.classList.add('hidden');
+    }
+}
+
+// Agrega un listener para el evento de scroll
+window.addEventListener('scroll', handleScroll);
+
+// Llama a handleScroll al cargar la página para manejar la posición inicial
+handleScroll();
+
 actualizarCantidadProductos();
-cargarProductos();
 mostrarCarrito();
 botonPrecioMobile();
 

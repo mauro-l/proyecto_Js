@@ -1,97 +1,119 @@
 
 import { decodificadorMensaje } from '../src/codificador.js';
 
-const USUARIOS = [
+const USUARIOS_REGISTRADOS = [
     {
     nombre: 'pepe',
-    email: 'pepe-elcapo@gmail.com',
-    contraseña: 'Pepe1234'
+    email: 'pepe@gmail.com',
+    clave: 'Pepe1234'
 },
 {
     nombre:'mauro',
     email: 'mauro@gmail.com',
-    contraseña:'Mauro123'
+    clave:'Mauro123'
 }];
+
+let USUARIOS_ACTIVOS = [...USUARIOS_REGISTRADOS];
 
 /* -v-v-v-v- INICIO DE SESION -v-v-v-v- */
 
 const DATOS = document.getElementById('signIn');
 const ERROR = document.getElementById('msgError');
-let nombreLS = '';
-let emailLS = '';
-let passLS = '';
-let nombre2LS = '';
-let email2LS = '';
-let pass2LS = '';
+const ERROR_PASS = document.getElementById('msgPass');
+const HELP_MSG = document.getElementById('msgHelp');
 
 //escucha de evento de formulario
 DATOS.addEventListener('submit', (e)=>{
     
     e.preventDefault();
 
-    //busca si existen usuarios creados en el local storage
-    const datosLocalStorage = localStorage.getItem("usuariosCreados");
-    const usuario = JSON.parse(datosLocalStorage);
-
-
-    if(datosLocalStorage.length === 1){
-        Object.entries(usuario).forEach(() =>{                        
-            nombreLS = usuario.nombre;
-            emailLS = usuario.email;
-            passLS = usuario.clave;
-        })
-    }
-    if(datosLocalStorage.length === 2){
-        Object.entries(usuario).forEach(() =>{                        
-            nombreLS = usuario[0].nombre;
-            emailLS = usuario[0].email;
-            passLS = usuario[0].clave;
-            nombre2LS = usuario[1].nombre;
-            email2LS = usuario[1].email;
-            pass2LS = usuario[1].clave;
-        })
-    }
-
-    console.log('CLAVELS: ', passLS);
-    const claveDecodificada = decodificadorMensaje(passLS);
+    //busca si existen usuarios creados en el local storage para guardarlo en un arreglo para su futura verificacion.
+    const datosLocalStorage = JSON.parse(localStorage.getItem("usuariosCreados"));
     
-    console.log('NOMBRE:', nombreLS);
-    console.log('EMAIL: ', emailLS);
-    console.log('CLAVE: ', claveDecodificada );
-
-
-    const user = document.getElementById('username');
-    const pass = document.getElementById('password');
-
-   
-    if (user.value === 'pepe' && pass.value === 'pepe123')
-    {
-        user.classList.add('text-green-800');
-        pass.classList.add('text-green-900');
-
-        setTimeout(() => {
-            user.classList.remove('text-green-800');
-            pass.classList.remove('text-green-900');
-        }, 2000);  
-
-        localStorage.setItem('sesionIniciada', 'true');
-
-        console.log('datos correctos');
+    //si hay usuarios creados en el localStorage se decodifica la clave antes de agregarlos en el arrays de usuarios activos.
+    if(datosLocalStorage){
+        const usuariosLS = datosLocalStorage.map(user=>{
+            return{
+                ...user,
+                clave: decodificadorMensaje(user.clave)
+            }
+        });
+        USUARIOS_ACTIVOS = [...USUARIOS_REGISTRADOS, ...usuariosLS];
     }
-    else{
-        
+    console.log('USUARIOS ACTIVOS', USUARIOS_ACTIVOS);
+
+    //se capturan los datos ingresados por el usuario 
+    const EMAIL_FORMULARIO = document.getElementById('username');
+    const PASS_FORMULARIO = document.getElementById('password');
+
+    //se busca si hay coincidencias
+    const usuarioEncontrado = USUARIOS_ACTIVOS.find(user => user.email == EMAIL_FORMULARIO.value);
+
+    console.log('USUARIO ENCONTRADO', usuarioEncontrado);
+    if(usuarioEncontrado){
+        //encuentra coincidencias en los mail ingresado procede a verificar si las contraseñas coinciden
+
+        if(PASS_FORMULARIO.value == usuarioEncontrado.clave){
+
+            //si coinciden contraseña envia mensaje de bienvenida y redirecciona al inicio de pagina
+            EMAIL_FORMULARIO.classList.add('text-green-800');
+            PASS_FORMULARIO.classList.add('text-green-900');
+
+            setTimeout(() => {
+                EMAIL_FORMULARIO.classList.remove('text-green-800');
+                PASS_FORMULARIO.classList.remove('text-green-900');
+            }, 2000);  
+
+            localStorage.setItem('sesionIniciada', usuarioEncontrado);
+
+            Swal.fire({
+                title: `Bienvenido ${usuarioEncontrado.nombre}`,
+                icon: "success",
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true
+            });
+
+            setTimeout(() => {
+                window.location.href = "/index.html";
+            }, 2000);
+
+        }else{
+            //Si las contraseñas no coinciden envia mensaje de error de contraseña
+            ERROR_PASS.classList.remove('hidden');
+            ERROR_PASS.classList.add('block');
+            EMAIL_FORMULARIO.classList.add('border-b-red-900');
+            PASS_FORMULARIO.classList.add('border-b-red-900');
+
+            setTimeout(() => {
+                ERROR_PASS.classList.remove('block');
+                ERROR_PASS.classList.add('hidden');
+                EMAIL_FORMULARIO.classList.remove('border-b-red-900');
+                PASS_FORMULARIO.classList.remove('border-b-red-900');
+            }, 2000);
+        }
+    }else{
+        //En caso de que no coincidan los mail ingresados envia mensaje de error de datos incorrectos
         ERROR.classList.remove('hidden');
         ERROR.classList.add('block');
-        user.classList.add('border-b-red-900');
-        pass.classList.add('border-b-red-900');
+        EMAIL_FORMULARIO.classList.add('border-b-red-900');
+        PASS_FORMULARIO.classList.add('border-b-red-900');
 
         setTimeout(() => {
             ERROR.classList.remove('block');
             ERROR.classList.add('hidden');
-            user.classList.remove('border-b-red-900');
-            pass.classList.remove('border-b-red-900');
-        }, 2000);        
-        console.log('error');
+            EMAIL_FORMULARIO.classList.remove('border-b-red-900');
+            PASS_FORMULARIO.classList.remove('border-b-red-900');
+        }, 2000);
+
     }
     
+})
+
+HELP_MSG.addEventListener('click', ()=>{
+    Swal.fire({
+        title: "No recuerdas el usuario?",
+        text: `email: pepe@gmail.com, clave: Pepe1234 `,
+        icon: "question"
+      });
 })

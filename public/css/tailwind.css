@@ -18,6 +18,9 @@
     .boton-grad{
         @apply bg-gradient-to-r from-[#5560ff] from-15% via-[#aa52a1] via-65% to-[#ff4343] to-100% transition-shadow hover:shadow-[#3B37BC] hover:shadow-lg;
     }
+    .boton-active{
+        @apply bg-violet-700 ring ring-violet-300;
+    }
     .grad{
         @apply bg-gradient-to-r from-[#5560ff] from-15% via-[#aa52a1] via-65% to-[#ff4343] to-100%;
     }

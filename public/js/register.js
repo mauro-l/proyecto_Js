@@ -13,7 +13,7 @@ class User {
         this.newslestter = socio;
     }    
 }
-const usuariosCreados = [];
+
 
 const Toast = Swal.mixin({
     toast: true,
@@ -109,6 +109,7 @@ function verificarRequisitosPass(){
             { clase: 'passNum', emoji: '❌', color: 'red' },
         ];
         mostrarRequisitosPass(datos);
+        imprimirMensajeError()
         return false;
     }
     
@@ -121,6 +122,7 @@ function verificarRequisitosPass(){
             { clase: 'passNum', emoji: '✅', color: 'green' },
         ];
         mostrarRequisitosPass(datos);
+        imprimirMensajeError()
         return false;
     }
     
@@ -133,6 +135,7 @@ function verificarRequisitosPass(){
             { clase: 'passNum', emoji: '✅', color: 'green' },
         ];
         mostrarRequisitosPass(datos);
+        imprimirMensajeError()
         return false;
     }
     
@@ -145,6 +148,7 @@ function verificarRequisitosPass(){
             { clase: 'passNum', emoji: '❌', color: 'red' },
         ];
         mostrarRequisitosPass(datos);
+        imprimirMensajeError()
         return false;
     }
     
@@ -157,6 +161,7 @@ function verificarRequisitosPass(){
             { clase: 'passNum', emoji: '❌', color: 'red' },
         ];
         mostrarRequisitosPass(datos);
+        imprimirMensajeError()
         return false;
     }
     
@@ -169,6 +174,7 @@ function verificarRequisitosPass(){
             { clase: 'passNum', emoji: '✅', color: 'green' },
         ];
         mostrarRequisitosPass(datos);
+        imprimirMensajeError()
         return false;            
     }
     
@@ -181,6 +187,7 @@ function verificarRequisitosPass(){
             { clase: 'passNum', emoji: '❌', color: 'red' },
         ];
         mostrarRequisitosPass(datos);
+        imprimirMensajeError()
         return false;
     }
     
@@ -200,6 +207,7 @@ function verificarRequisitosPass(){
             CONFIRM_PASS.classList.remove('border-b-red-900');
         }, 3000);        
         
+        imprimirMensajeError()
         return false;
     }       
     
@@ -238,7 +246,8 @@ function verificarRequisitosPass(){
             CONFIRM_PASS.classList.remove('border-b-red-900');
             PASS_SIMBOLS.classList.remove('text-red-900');
         }, 3000);        
-        
+
+        imprimirMensajeError()
         return false;
     }
     
@@ -264,8 +273,9 @@ CREATE.addEventListener('submit', (e)=>{
         
         const claveCodificada = superCodificadorSecreto(PASS.value);
         const usuario = new User (NAME.value, LASTNAME.value, MAIL.value, DATE.value, claveCodificada, NEWSLESTTER.checked);
-                
-        
+
+        let usuariosCreados = JSON.parse(localStorage.getItem('usuariosCreados') || []);
+
         if(usuariosCreados.length < 2){
             usuariosCreados.push(usuario);
             localStorage.setItem('usuariosCreados', JSON.stringify(usuariosCreados));
