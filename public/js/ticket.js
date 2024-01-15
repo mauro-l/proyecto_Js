@@ -8,7 +8,7 @@ const seccionPrecio = document.getElementById('seccionPrecio');
 //Si el usuario a iniciado sesion muestra la info del usuario sino le indica que inicie sesion.
 function sesionInfo(){
 
-    const datosLocalStorage = JSON.parse(localStorage.getItem('sessionIniciada'));
+    const datosLocalStorage = JSON.parse(localStorage.getItem('sesionIniciada'));
     
     let div = document.createElement('div');
     

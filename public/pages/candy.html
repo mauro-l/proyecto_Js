@@ -23,11 +23,10 @@
                     <li><a href="#">Contacto</a></li>
                 </ul>
             </div>
-            <div class="lg:flex gap-3 hidden">
-                <h2><a href="./login.html">Login</a></h2>
-                <span class="material-symbols-outlined">
-                    account_circle
-                </span>
+            <div id="inicioSesionDinamico" class="md:flex hidden relative">
+                <div id="btn-dropdown" class="hidden absolute right-0 top-full px-3 py-2 my-1 mr-2 bg-navy-300 border-navy-100 border">
+                    <button onclick="cerrarSesion()"><p class="whitespace-nowrap">Cerrar Sesion</p></button>
+                </div>
             </div>
             <button onclick="menuHamburguesas()" class="flex lg:hidden">
                 <span class="material-symbols-outlined">
@@ -37,12 +36,11 @@
         </nav>
         <div id="mobileMenu" class="md:hidden fixed top-0 right-0 w-4/5 h-full z-30 text-navy-50 bg-navy-300 hidden">
             <button onclick="menuHamburguesas()" class="flex justify-center w-full p-5 md:hidden"><span class="material-symbols-outlined">close</span></button>
-            <ul class="flex flex-col items-center mt-12">
+            <ul id="listaMenu" class="flex flex-col items-center mt-12">
                 <li><a href="../index.html">Inicio</a></li>
                 <li><a href="./tickets.html">Entradas</a></li>
                 <li><a href="./candy.html">Candy</a></li>
-                <li><a href="#">Contacto</a></li>
-                <li><a href="./login.html">Login</a></li>
+                <li><a href="#">Contacto</a></li>                                
             </ul>
         </div>
     </header>
@@ -93,7 +91,7 @@
     <main class="w-11/12 mx-auto container p-4 lg:p-8">
         <div class="grid gap-4 grid-cols-1 grid-rows-4 lg:grid-rows-3 lg:grid-cols-5 mx-auto">
             <!-- ASIDE RESUMEN CART -->
-            <section class="lg:col-[4/6] lg:flex lg:flex-col lg:grow hidden lg:sticky lg:top-0 lg:w-[350px] mx-auto">
+            <section id="asideCarrito" class="lg:col-[4/6] lg:flex lg:flex-col lg:grow hidden lg:sticky lg:top-0 lg:w-[350px] mx-auto">
                 <!-- ASIDE TITLE RESUMEN CART -->
                 <article class=" p-4 bg-navy-300 border-x border-t border-navy-100">
                     <h1 class="text-white text-center font-semibold text-3xl border-b border-dashed border-navy-100 pb-4">CANDY CART</h1>
@@ -227,12 +225,53 @@
                 <!-- PRODUCTS CARDS -->
                 <article id="productos" class="flex flex-row flex-wrap gap-5 justify-center">                    
                     
-                </article>                  
+                </article>
+                
+                <div id="paginacion" class="flex items-center justify-between border-t border-navy-700 bg-navy-900 text-navy-150 my-8 px-4 py-3 sm:px-6">
+                    <!-- <div class="flex flex-1 justify-between sm:hidden">
+                      <a href="#" class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
+                      <a href="#" class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
+                    </div> -->
+                    <div class="flex flex-1 items-center justify-between">
+                      <div id="textoPag" class="hidden sm:flex">
+                        <!-- <p class="text-sm text-gray-700">
+                          Showing
+                          <span class="font-medium">1</span>
+                          to
+                          <span class="font-medium">10</span>
+                          of
+                          <span class="font-medium">97</span>
+                          results
+                        </p> -->
+                      </div>
+                      <div>
+                        <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+                          <button id="prevBoton" class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                            <span class="sr-only">Previous</span>
+                            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                              <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
+                          <div id="contenedorPaginacion" class="inline-flex">
+                              <!-- Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-navy-150 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" -->
+                              <!-- <button value="1" class="pg-active">1</button>
+                              <button value="2" aria-current="page" class="pg-default">2</button>
+                              <button value="3" class="pg-default sm:hidden">3</button>
+                              <button value="4" class="pg-default sm:hidden">4</button> -->
+                          </div>
+                          <button id="nextBoton" class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                            <span class="sr-only">Next</span>
+                            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                              <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
+                        </nav>
+                      </div>
+                    </div>
+                </div>                  
             </section>
 
-
-            <!-- MOBILE CART -->          
-            
+            <!-- MOBILE CART -->            
             <section class="lg:hidden flex justify-center">
                 <article id="elementToObserve" class="fixed bottom-0 w-full bg-navy-300 hidden">
                     <div class="container flex flex-col">
@@ -255,6 +294,8 @@
                 </article>
             </section>
         </div>
+    
+        
     </main>
     <footer class="bg-black text-white">
         <section class="p-16 mx-16 flex flex-col items-center border-b-[0.5px] border-white/20">
@@ -264,11 +305,10 @@
         <section class="flex justify-around items-center w-full p-16">
             <article>
                 <ul class="text-lg">
-                    <li><a href="#">Cartelera</a></li>
-                    <li><a href="#">Entradas</a></li>
+                    <li><a href="../index.html#inicioCartelera">Cartelera</a></li>
+                    <li><a href="./tickets.html">Entradas</a></li>
                     <li><a href="#">Contacto</a></li>
-                    <li><a href="./login.html">Login</a></li>
-                    <li><a href="./register.html">Registrarse</a></li>
+                    <li><a href="./candy.html">Candy</a></li>
                 </ul>
             </article>
             <article class="flex flex-col items-center">

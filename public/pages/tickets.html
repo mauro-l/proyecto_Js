@@ -23,11 +23,10 @@
                     <li><a href="#">Contacto</a></li>
                 </ul>
             </div>
-            <div class="lg:flex gap-3 hidden">
-                <h2><a href="./login.html">Login</a></h2>
-                <span class="material-symbols-outlined">
-                    account_circle
-                </span>
+            <div id="inicioSesionDinamico" class="md:flex hidden relative">
+                <div id="btn-dropdown" class="hidden absolute right-0 top-full px-3 py-2 my-1 mr-2 bg-navy-300 border-navy-100 border">
+                    <button onclick="cerrarSesion()"><p class="whitespace-nowrap">Cerrar Sesion</p></button>
+                </div>
             </div>
             <button onclick="menuHamburguesas()" class="flex lg:hidden">
                 <span class="material-symbols-outlined">
@@ -37,12 +36,11 @@
         </nav>
             <div id="mobileMenu" class="md:hidden fixed top-0 right-0 w-4/5 h-full z-30 text-navy-50 bg-navy-300 hidden">
                 <button onclick="menuHamburguesas()" class="flex justify-center w-full p-5 md:hidden"><span class="material-symbols-outlined">close</span></button>
-                <ul class="flex flex-col items-center mt-12">
+                <ul id="listaMenu" class="flex flex-col items-center mt-12">
                     <li><a href="../index.html">Inicio</a></li>
                     <li><a href="./tickets.html">Entradas</a></li>
                     <li><a href="./candy.html">Candy</a></li>
                     <li><a href="#">Contacto</a></li>
-                    <li><a href="./login.html">Login</a></li>
                 </ul>
             </div>
     </header>
@@ -158,6 +156,7 @@
                                 <option value="">20:00</option>
                             </select>
                         </div>
+                        <button class="boton boton-grad m-4">SIGUIENTE</button>
                     </div>
                 </article>
                 <!-- PESTAÑA SELECCION LUGAR -->
@@ -167,16 +166,9 @@
                         <button onclick="mostrarContenido(seccionLugar)"><span class="material-symbols-outlined">add_circle</span></button>
                     </div>
                     <div id="seccionLugar" class="text-navy-50 w-full bg-navy-300 p-4 hidden BOTONES-MOSTRAR">
-                        <h3 class="my-4"><strong>¿Qué zona u opción quieres?</strong></h3>
                         <div class="flex justify-between">
-                            <div>
-                                <select name="fecha" id="fecha" class="bg-navy-300 border-navy-100">
-                                    <option disabled selected>Ordenar por..</option>
-                                    <option value="">Zona</option>
-                                <option value="">Precio</option>
-                                </select>
-                            </div>
-                            <button class="boton grad">Mapa</button>
+                            <h3 class="my-4"><strong>¿Qué zona u opción quieres?</strong></h3>
+                            <button class="boton boton-grad">Mapa</button>
                         </div>
                         <div class="p-4">
                             <div class="flex items-center justify-between my-4">
@@ -302,7 +294,7 @@
                         <p class="text-navy-150"><strong>EL PARKING PREMIUM ASEGURA UBICACIÓN CON LA MEJOR VISIBILIDAD (COCHES SUV EN ADELANTE SE COLOCARÁN CENTRADOS ENTRE LAS FILAS 5, 6 Y 7).</strong></p>
                     </div>
                 </article>
-                <article class="text-white bg-navy-500 flex flex-col p-4 gap-2 mt-2">
+                <article class="text-white bg-navy-500 flex flex-col p-4 gap-2 mt-2 md:hidden">
                     <div class="flex items-center text-white w-full">
                         <div class="text-xl font-semibold flex flex-wrap justify-around w-full">
                             <h3>TOTAL</h3>
@@ -356,11 +348,10 @@
         <section class="flex justify-around items-center w-full p-16">
             <article>
                 <ul class="text-lg">
-                    <li><a href="#">Cartelera</a></li>
-                    <li><a href="#">Entradas</a></li>
+                    <li><a href="../index.html#inicioCartelera">Cartelera</a></li>
+                    <li><a href="./tickets.html">Entradas</a></li>
                     <li><a href="#">Contacto</a></li>
-                    <li><a href="./login.html">Login</a></li>
-                    <li><a href="./register.html">Registrarse</a></li>
+                    <li><a href="./candy.html">Candy</a></li>
                 </ul>
             </article>
             <article class="flex flex-col items-center">

@@ -64,7 +64,7 @@ DATOS.addEventListener('submit', (e)=>{
                 PASS_FORMULARIO.classList.remove('text-green-900');
             }, 2000);  
 
-            localStorage.setItem('sesionIniciada', usuarioEncontrado);
+            localStorage.setItem('sesionIniciada', JSON.stringify(usuarioEncontrado));
 
             Swal.fire({
                 title: `Bienvenido ${usuarioEncontrado.nombre}`,

@@ -21,32 +21,27 @@
             </div>
             <div class="md:flex hidden justify-evenly items-center">
                 <ul class="flex gap-6">
-                    <li><a href="#">Inicio</a></li>
+                    <li><a href="./index.html">Inicio</a></li>
                     <li><a href="./pages/tickets.html">Entradas</a></li>
                     <li><a href="./pages/candy.html">Candy</a></li>
                     <li><a href="#">Contacto</a></li>
                 </ul>
             </div>
-            <div class="md:flex gap-3 hidden">
-                <h2><a href="./pages/login.html">Login</a></h2>
-                <span class="material-symbols-outlined">
-                    account_circle
-                </span>
+            <div id="inicioSesionDinamico" class="md:flex hidden">
+                <!-- <h2><a href="./pages/login.html">Login</a></h2>
+                <span class="material-symbols-outlined">account_circle</span> -->
             </div>
             <button onclick="menuHamburguesas()" class="flex md:hidden">
-                <span class="material-symbols-outlined">
-                    menu
-                </span>
+                <span class="material-symbols-outlined">menu</span>
             </button>
         </nav>
         <div id="mobileMenu" class="md:hidden fixed top-0 right-0 w-4/5 h-full z-30 text-navy-50 bg-navy-300 hidden">
             <button onclick="menuHamburguesas()" class="flex justify-center w-full p-5 md:hidden"><span class="material-symbols-outlined">close</span></button>
-            <ul class="flex flex-col items-center mt-12">
-                <li><a href="#">Inicio</a></li>
+            <ul id="listaMenu" class="flex flex-col items-center mt-12">
+                <li><a href="./index.html">Inicio</a></li>
                 <li><a href="./pages/tickets.html">Entradas</a></li>
                 <li><a href="./pages/candy.html">Candy</a></li>
                 <li><a href="#">Contacto</a></li>
-                <li><a href="./pages/login.html">Login</a></li>
             </ul>
         </div>
     </header>
@@ -188,11 +183,10 @@
         <section class="flex justify-around items-center w-full p-16">
             <article>
                 <ul class="text-lg">
-                    <li><a href="#">Cartelera</a></li>
-                    <li><a href="#">Entradas</a></li>
+                    <li><a href="#inicioCartelera">Cartelera</a></li>
+                    <li><a href="./pages/tickets.html">Entradas</a></li>
                     <li><a href="#">Contacto</a></li>
-                    <li><a href="./pages/login.html">Login</a></li>
-                    <li><a href="./pages/register.html">Registrarse</a></li>
+                    <li><a href="./pages/candy.html">Candy</a></li>
                 </ul>
             </article>
             <article class="flex flex-col items-center">

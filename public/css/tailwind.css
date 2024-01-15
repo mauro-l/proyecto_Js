@@ -43,4 +43,10 @@
         background: url('../asset/bg-img/transparentNav.png'),linear-gradient(270deg, #10069f 0, #9b26b6 100%); 
         box-shadow: 0 5px 2px 0 rgb(0 0 0 / 30%);
     }
+    .pg-active{
+        @apply relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600;
+    }
+    .pg-default{
+        @apply relative inline-flex items-center px-4 py-2 text-sm font-semibold text-navy-150 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0;
+    }
 }  

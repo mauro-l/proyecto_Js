@@ -285,11 +285,11 @@ CREATE.addEventListener('submit', (e)=>{
             localStorage.setItem('usuariosCreados', JSON.stringify(usuariosCreados));
         }
         
-        if(localStorage.getItem('sessionIniciada') !== null){
-            localStorage.removeItem('sessionIniciada');
+        if(localStorage.getItem('sesionIniciada') !== null){
+            localStorage.removeItem('sesionIniciada');
         }
         
-        localStorage.setItem('sessionIniciada', JSON.stringify(usuario));
+        localStorage.setItem('sesionIniciada', JSON.stringify(usuario));
         
         setTimeout(() => {
             Toast.fire({

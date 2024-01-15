@@ -1,8 +1,8 @@
-const PRODUCTO = [
+/* const PRODUCTO = [
     {
         id: "1",
         img: "../asset/candy/balde-cine.png",
-        nombre: "Combo balde",
+        nombre: "Combo balde 1",
         descripcion: "1 balde grande de palomitas de maiz + bebida grande",
         precio: 4.00,
         categoria: "bebidas",
@@ -14,7 +14,7 @@ const PRODUCTO = [
     {
         id: "2",
         img: "../asset/candy/combo-1.png",
-        nombre: "Combo Mex",
+        nombre: "Combo Mex 2",
         descripcion: "2 tacos + 1 burrito + 2 bebidas medianas",
         precio: 8.00,
         categoria: "comidas",
@@ -26,7 +26,7 @@ const PRODUCTO = [
     {
         id: "3",
         img: "../asset/candy/combo-2.png",
-        nombre: "Combo Familia",
+        nombre: "Combo Familia 3",
         descripcion: "3 tacos + 2 bebidas medianas",
         precio: 6.00,
         categoria: "bebidas",
@@ -38,7 +38,7 @@ const PRODUCTO = [
     {
         id: "4",
         img: "../asset/candy/combo-3.png",
-        nombre: "Combo Nachos",
+        nombre: "Combo Nachos 4",
         descripcion: "1 taco + nachos + 1 bebida grande",
         precio: 5.00,
         categoria: "comidas",
@@ -62,7 +62,7 @@ const PRODUCTO = [
     {
         id: "6",
         img: "../asset/candy/combo-3.png",
-        nombre: "Combo Nachos XL",
+        nombre: "Combo Nachos XL 6",
         descripcion: "2 taco + nachos + 2 bebida grande",
         precio: 6.00,
         categoria: "comidas",
@@ -71,7 +71,30 @@ const PRODUCTO = [
         porcentajeDescuento: 50,
         promo: "Promo <br> Socios "
     }
-];
+]; */
+
+let PRODUCTOS = '';
+const URL_PRODUCTOS = '../js/productos.json';
+
+fetch(URL_PRODUCTOS)
+    .then(res => res.json())
+    .then(data =>{
+        console.log('dentro del then', data);
+        PRODUCTOS = data.map(producto =>{
+            const precioFinal = calcularPrecioFinal(producto);
+            return { ...producto, precioFinal };
+        });
+        
+        /* cargarProductos(PRODUCTOS); */
+        iniciarCandy();
+    })
+.catch(error => console.log('error al cargar los productos', error));
+
+/* crea una nueva lista de productos incluyendo los precios con descuentos calculados  */
+/* const PRODUCTOS = PRODUCTO.map(producto =>{
+    const precioFinal = calcularPrecioFinal(producto);
+    return { ...producto, precioFinal };
+}); */
 
 const CONTENEDOR_PRODUCTOS = document.getElementById('productos');
 const CONTENEDOR_CARRITO_MOBILE = document.getElementById('contenedor-productos-mobile');
@@ -86,49 +109,55 @@ const BOTON_PRECIOS_MOBILE = document.getElementById('boton-precios-mobile');
 const BOTON_ASIDE_DESKTOP = document.getElementById('aside-carrito-desktop');
 const FILTRO_DESKTOP = document.getElementById('filtroAside');
 
-/* filtros */
 const BOTON_VERTODO = document.getElementById('botonReset');
 const CATEGORIAS = document.getElementById('categorias');
 const ORDENAR = document.getElementById('ordenar');
 
-const productoDescendente = (a, b) => a.precioFinal - b.precioFinal;
-const productoAscendente = (a, b) => b.precioFinal - a.precioFinal;
+function iniciarCandy(){
+        
 
+    const productoDescendente = (a, b) => a.precioFinal - b.precioFinal;
+    const productoAscendente = (a, b) => b.precioFinal - a.precioFinal;
 
-BOTON_VERTODO.addEventListener('click', ()=>{
-    CATEGORIAS.selectedIndex = 0;
+    /* resetea los filtros y muestra todos los productos */ 
+    BOTON_VERTODO.addEventListener('click', ()=>{
+        CATEGORIAS.selectedIndex = 0;
+        cargarProductos(PRODUCTOS);
+
+        if(!BOTON_VERTODO.classList.contains('boton-active')){
+            BOTON_VERTODO.classList.add('boton-active');
+            CATEGORIAS.classList.remove('bg-violet-700');
+            CATEGORIAS.classList.remove('ring-4');
+            ORDENAR.classList.remove('bg-violet-700');
+            ORDENAR.classList.remove('ring-4');
+        }
+    })
+
+    /* evento de escucha para los filtros */
     cargarProductos(PRODUCTOS);
 
-    if(!BOTON_VERTODO.classList.contains('boton-active')){
-        BOTON_VERTODO.classList.add('boton-active');
-        CATEGORIAS.classList.remove('bg-violet-700');
-        CATEGORIAS.classList.remove('ring-4');
-        ORDENAR.classList.remove('bg-violet-700');
-        ORDENAR.classList.remove('ring-4');
-    }
-})
-document.addEventListener('DOMContentLoaded', () => {
-    
-    cargarProductos(PRODUCTOS);
-           
+    // evento de escucha para los filtros CATEGORIRIAS
     CATEGORIAS.addEventListener('change',()=>{
 
+        // indicadores visuales
         if(ORDENAR.classList.contains('ring-4')){
             ORDENAR.selectedIndex = 0;
             ORDENAR.classList.remove('bg-violet-700');
             ORDENAR.classList.remove('ring-4');
         }
-                
+
         const productosCategoria = PRODUCTOS.filter(productos => productos.categoria === CATEGORIAS.value);
         cargarProductos(productosCategoria);
-        
+
+        // indicadores visuales
         BOTON_VERTODO.classList.remove('boton-active');
         CATEGORIAS.classList.add('bg-violet-700');
         CATEGORIAS.classList.add('ring-4');
     })
 
+    // evento de escucha para los filtros ORDENAR
     ORDENAR.addEventListener('change',()=>{
-        
+
         if(CATEGORIAS.classList.contains('ring-4')){
             CATEGORIAS.selectedIndex = 0;
             CATEGORIAS.classList.remove('bg-violet-700');
@@ -165,7 +194,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     })
 
-})
+}
+
 
 //calcula el precio final de los productos que contienen descuentos.
 function calcularPrecioFinal(param){
@@ -184,19 +214,97 @@ function calcularPrecioFinal(param){
     }
 }
 
-/* crea una nueva lista de productos incluyendo los precios con descuentos calculados  */
-const PRODUCTOS = PRODUCTO.map(producto =>{
-    const precioFinal = calcularPrecioFinal(producto);
-    return { ...producto, precioFinal };
-});
-
 /* funcion para mostrar todos los productos en la pantalla */
-
 function cargarProductos(product) {
+
+    /* CONTENEDOR_PRODUCTOS.innerHTML = ``; */
+    console.log('cantidad productos', product.length);
+
+    const productosDesktop = 10;
+    const productosMobile = 5;
+
+    const productosPorPagina = window.innerWidth < 640 ? productosMobile : productosDesktop;
+
+    let paginaActual = 1;
+
+    let totalPaginas = Math.ceil(product.length / productosPorPagina);
+    console.log('math', totalPaginas);
+
+    const CONTENEDOR_PAGINACION = document.getElementById('contenedorPaginacion')
+    const PREV_BOTON = document.getElementById('prevBoton');
+    const NEXT_BOTON = document.getElementById('nextBoton');
+    
+    /* se agregan los botones de la paginacion de forma dinamica */
+    CONTENEDOR_PAGINACION.innerHTML = '';
+    
+    for (let i = 1; i <= totalPaginas; i++){
+        const button = document.createElement('button');
+        button.value = i;
+        button.textContent = i;
+        button.classList.add('pg-default');
+
+        if(i===1){
+            button.classList.remove('pg-default');
+            button.classList.add('pg-active');
+        }
+
+        CONTENEDOR_PAGINACION.appendChild(button);
+    }
+    
+    const PAGINACION = CONTENEDOR_PAGINACION.querySelectorAll('button');
+    
+    /* se agrega un evento de escucha a cada boton para obtener el valor del boton seleccionado y con eso se cambia de pagina y se coloca un indicador visual al boton seleccionado */
+    PAGINACION.forEach(btn =>{
+        
+        btn.addEventListener('click', (e)=>{
+            
+            PAGINACION.forEach(boton => {
+                if(boton.classList.contains('pg-active')){
+                    boton.classList.remove('pg-active');
+                    boton.classList.add('pg-default');
+                }
+            });
+            
+            btn.classList.remove('pg-default');
+            btn.classList.add('pg-active');
+
+            
+            paginaActual = parseInt(btn.value);
+            
+            mostrarProductos(product, productosPorPagina, paginaActual);
+        })
+
+    });
+
+    PREV_BOTON.addEventListener('click', () => {
+        if (paginaActual > 1) {
+            paginaActual = paginaActual - 1;
+            const botonAnterior = PAGINACION[paginaActual - 1];
+            botonAnterior.click();
+        }
+    });
+      
+    NEXT_BOTON.addEventListener('click', () => {
+        if (paginaActual < PAGINACION.length) {
+            PAGINACION[paginaActual].click();
+        }        
+    });
+        
+
+    mostrarProductos(product, productosPorPagina, paginaActual);      
+}
+
+
+function mostrarProductos(product, productosPorPagina, paginaActual){
 
     CONTENEDOR_PRODUCTOS.innerHTML = ``;
 
-    product.forEach(producto =>{
+    const inicio = (paginaActual - 1) * productosPorPagina;
+    const fin = inicio + productosPorPagina;
+
+    const PRODUCTOS_EN_PAGINA = product.slice(inicio, fin);
+
+    PRODUCTOS_EN_PAGINA.forEach(producto =>{
 
         let div = document.createElement("div");
         div.className = `max-w-[320px] w-[250px] lg:basis-1/3 grow relative`;
@@ -219,12 +327,29 @@ function cargarProductos(product) {
         </div>`;
 
         CONTENEDOR_PRODUCTOS.appendChild(div);
-
         
     })
-    
-}
 
+    /* muestra en pantalla el texto de paginacion */
+    const TEXTO_PAG = document.getElementById('textoPag');
+    const divPag = document.createElement('div');
+
+    let final = Math.min(fin, product.length);
+
+    TEXTO_PAG.innerHTML = "";
+    divPag.innerHTML = `
+    <p class="text-sm text-gray-700">
+    Mostrando
+    <span class="font-medium">${inicio + 1}</span>
+    a
+    <span class="font-medium">${final}</span>
+    de
+    <span class="font-medium">${product.length}</span>
+    resultados
+    </p>
+    `
+    TEXTO_PAG.appendChild(divPag);
+}
 
 // agregar productos al localStorage
 function agregarAlCarrito (id , nombre, precio) {
@@ -487,8 +612,10 @@ function desplegarCarrito(){
     }
 }
 
-const elementToObserve = document.getElementById('elementToObserve');
 
+
+/* solucion parcial a la superposicion entre el carrito mobile y el carrito de precio final */
+const elementToObserve = document.getElementById('elementToObserve');
 function handleScroll() {
     const scrollPosition = window.scrollY;
     const windowHeight = window.innerHeight;
@@ -502,10 +629,8 @@ function handleScroll() {
         elementToObserve.classList.add('hidden');
     }
 }
-
 // Agrega un listener para el evento de scroll
 window.addEventListener('scroll', handleScroll);
-
 // Llama a handleScroll al cargar la página para manejar la posición inicial
 handleScroll();
 
