@@ -1,77 +1,3 @@
-/* const PRODUCTO = [
-    {
-        id: "1",
-        img: "../asset/candy/balde-cine.png",
-        nombre: "Combo balde 1",
-        descripcion: "1 balde grande de palomitas de maiz + bebida grande",
-        precio: 4.00,
-        categoria: "bebidas",
-        promoSocios: true,
-        descuento: true,
-        porcentajeDescuento: 50,
-        promo: "Promo <br> Socios"
-    },
-    {
-        id: "2",
-        img: "../asset/candy/combo-1.png",
-        nombre: "Combo Mex 2",
-        descripcion: "2 tacos + 1 burrito + 2 bebidas medianas",
-        precio: 8.00,
-        categoria: "comidas",
-        promoSocios: true,
-        descuento: true,
-        porcentajeDescuento: 50,
-        promo: "Promo <br> Socios"
-    },
-    {
-        id: "3",
-        img: "../asset/candy/combo-2.png",
-        nombre: "Combo Familia 3",
-        descripcion: "3 tacos + 2 bebidas medianas",
-        precio: 6.00,
-        categoria: "bebidas",
-        promoSocios: false,
-        descuento: true,
-        porcentajeDescuento: 60,
-        promo: "60 % <br> OFF "
-    },
-    {
-        id: "4",
-        img: "../asset/candy/combo-3.png",
-        nombre: "Combo Nachos 4",
-        descripcion: "1 taco + nachos + 1 bebida grande",
-        precio: 5.00,
-        categoria: "comidas",
-        promoSocios: false,
-        descuento: false,
-        porcentajeDescuento: null,
-        promo: " "
-    },
-    {
-        id: "5",
-        img: "../asset/candy/balde-cine.png",
-        nombre: "Combo balde",
-        descripcion: "1 balde mediano de palomitas de maiz + bebida mediana",
-        precio: 4.00,
-        categoria: "bebidas",
-        promoSocios: false,
-        descuento: false,
-        porcentajeDescuento: null,
-        promo: " "
-    },
-    {
-        id: "6",
-        img: "../asset/candy/combo-3.png",
-        nombre: "Combo Nachos XL 6",
-        descripcion: "2 taco + nachos + 2 bebida grande",
-        precio: 6.00,
-        categoria: "comidas",
-        promoSocios: true,
-        descuento: true,
-        porcentajeDescuento: 50,
-        promo: "Promo <br> Socios "
-    }
-]; */
 
 let PRODUCTOS = '';
 const URL_PRODUCTOS = '../js/productos.json';
@@ -85,27 +11,22 @@ fetch(URL_PRODUCTOS)
             return { ...producto, precioFinal };
         });
         
-        /* cargarProductos(PRODUCTOS); */
         iniciarCandy();
     })
 .catch(error => console.log('error al cargar los productos', error));
 
-/* crea una nueva lista de productos incluyendo los precios con descuentos calculados  */
-/* const PRODUCTOS = PRODUCTO.map(producto =>{
-    const precioFinal = calcularPrecioFinal(producto);
-    return { ...producto, precioFinal };
-}); */
-
+/* mobile */
 const CONTENEDOR_PRODUCTOS = document.getElementById('productos');
 const CONTENEDOR_CARRITO_MOBILE = document.getElementById('contenedor-productos-mobile');
 const CANTIDAD_PRODUCTO_MOBILE = document.getElementById('cantidad-producto-mobile');
 const MOSTRAR_CARRITO_MOBILE = document.getElementById('mostrar-carrito-mobile');
-const CONTENEDOR_CARRITO_DESKTOP = document.getElementById('contenedor-productos-desktop');
 const CONTENEDOR_PRECIO_MOBILE = document.getElementById('contenedor-precios-mobile');
 const CONTENEDOR_TOTAL_MOBILE = document.getElementById('contenedor-total-mobile');
+const BOTON_PRECIOS_MOBILE = document.getElementById('boton-precios-mobile');
+/* desktop */
+const CONTENEDOR_CARRITO_DESKTOP = document.getElementById('contenedor-productos-desktop');
 const CONTENEDOR_PRECIO_DESKTOP = document.getElementById('contenedor-precios-desktop');
 const CONTENEDOR_TOTAL_DESKTOP = document.getElementById('contenedor-total-desktop');
-const BOTON_PRECIOS_MOBILE = document.getElementById('boton-precios-mobile');
 const BOTON_ASIDE_DESKTOP = document.getElementById('aside-carrito-desktop');
 const FILTRO_DESKTOP = document.getElementById('filtroAside');
 
@@ -114,8 +35,7 @@ const CATEGORIAS = document.getElementById('categorias');
 const ORDENAR = document.getElementById('ordenar');
 
 function iniciarCandy(){
-        
-
+    
     const productoDescendente = (a, b) => a.precioFinal - b.precioFinal;
     const productoAscendente = (a, b) => b.precioFinal - a.precioFinal;
 
@@ -191,11 +111,8 @@ function iniciarCandy(){
             ORDENAR.classList.add('bg-violet-700');
             ORDENAR.classList.add('ring-4');
         }
-
     })
-
 }
-
 
 //calcula el precio final de los productos que contienen descuentos.
 function calcularPrecioFinal(param){
@@ -218,8 +135,7 @@ function calcularPrecioFinal(param){
 function cargarProductos(product) {
 
     /* CONTENEDOR_PRODUCTOS.innerHTML = ``; */
-    console.log('cantidad productos', product.length);
-
+   
     const productosDesktop = 10;
     const productosMobile = 5;
 
@@ -228,8 +144,7 @@ function cargarProductos(product) {
     let paginaActual = 1;
 
     let totalPaginas = Math.ceil(product.length / productosPorPagina);
-    console.log('math', totalPaginas);
-
+    
     const CONTENEDOR_PAGINACION = document.getElementById('contenedorPaginacion')
     const PREV_BOTON = document.getElementById('prevBoton');
     const NEXT_BOTON = document.getElementById('nextBoton');
@@ -247,7 +162,6 @@ function cargarProductos(product) {
             button.classList.remove('pg-default');
             button.classList.add('pg-active');
         }
-
         CONTENEDOR_PAGINACION.appendChild(button);
     }
     
@@ -267,13 +181,11 @@ function cargarProductos(product) {
             
             btn.classList.remove('pg-default');
             btn.classList.add('pg-active');
-
             
             paginaActual = parseInt(btn.value);
             
             mostrarProductos(product, productosPorPagina, paginaActual);
         })
-
     });
 
     PREV_BOTON.addEventListener('click', () => {
@@ -288,12 +200,10 @@ function cargarProductos(product) {
         if (paginaActual < PAGINACION.length) {
             PAGINACION[paginaActual].click();
         }        
-    });
-        
+    });        
 
     mostrarProductos(product, productosPorPagina, paginaActual);      
 }
-
 
 function mostrarProductos(product, productosPorPagina, paginaActual){
 
@@ -489,10 +399,8 @@ function actualizarCantidadProductos() {
     CANTIDAD_PRODUCTO_MOBILE.innerHTML = '';
     let div = document.createElement("div");
     div.innerHTML =` <h2> ${carrito.length} </h2> `
-    CANTIDAD_PRODUCTO_MOBILE.appendChild(div);        
-    
+    CANTIDAD_PRODUCTO_MOBILE.appendChild(div);    
 }
-
 
 function eliminarProducto(id){
     let carrito = JSON.parse(localStorage.getItem('carrito'));
@@ -539,9 +447,9 @@ function mostrarPreciosMobile(){
         <button class="boton boton-grad">COMPRAR</button>
     </div>
     `
-    CONTENEDOR_TOTAL_MOBILE.appendChild(total);
-
+    CONTENEDOR_TOTAL_MOBILE.appendChild(total);   
 }
+
 function mostrarPreciosDesktop(){
     const carrito = JSON.parse(localStorage.getItem('carrito'));
     const totalCarrito = carrito.reduce((acu, producto)=> acu + (producto.precio * producto.cantidad), 0);
@@ -612,8 +520,6 @@ function desplegarCarrito(){
     }
 }
 
-
-
 /* solucion parcial a la superposicion entre el carrito mobile y el carrito de precio final */
 const elementToObserve = document.getElementById('elementToObserve');
 function handleScroll() {
@@ -637,4 +543,3 @@ handleScroll();
 actualizarCantidadProductos();
 mostrarCarrito();
 botonPrecioMobile();
-

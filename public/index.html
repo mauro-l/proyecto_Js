@@ -13,9 +13,12 @@
     <link rel="stylesheet" href="./css/output.css">
     <link rel="stylesheet" href="./css/swipes.css">
 </head>
-<body class="">
+<body class="bg-navy-700">
+<!-- <body class="bg-[#4011a7] bg-gradient-to-t from-[#163161] to-[#4469ac]"> -->
+<!-- <body class="!bg-[#4011a7]" style="background-image: linear-gradient(0deg, #163161, #4469ac) !important;"> -->
     <header class="flex justify-center relative">
-        <nav class="nav-grad md:bg-none md:shadow-none top-0 z-10 md:absolute h-30 w-full p-5 flex justify-around md:justify-evenly items-center text-white">
+        <!-- <nav class="nav-grad md:bg-none md:shadow-none top-0 z-10 md:absolute h-30 w-full p-5 flex justify-around md:justify-evenly items-center text-white"> -->
+        <nav class="nav-grad top-0 z-10 h-30 w-full p-5 flex justify-around items-center text-white">
             <div class="flex">
                 <img src="./asset/icon/imagotipo.svg" alt="logo empresa">
             </div>
@@ -27,9 +30,10 @@
                     <li><a href="#">Contacto</a></li>
                 </ul>
             </div>
-            <div id="inicioSesionDinamico" class="md:flex hidden">
-                <!-- <h2><a href="./pages/login.html">Login</a></h2>
-                <span class="material-symbols-outlined">account_circle</span> -->
+            <div id="inicioSesionDinamico" class="md:flex hidden relative">
+                <div id="btn-dropdown" class="hidden absolute right-0 top-full px-3 py-2 my-1 mr-2 bg-navy-300 border-navy-100 border">
+                    <button onclick="cerrarSesion()"><p class="whitespace-nowrap">Cerrar Sesion</p></button>
+                </div>
             </div>
             <button onclick="menuHamburguesas()" class="flex md:hidden">
                 <span class="material-symbols-outlined">menu</span>
@@ -45,54 +49,11 @@
             </ul>
         </div>
     </header>
-
-    <section class="hidden lg:block relative">
-        <div class="swiper mySwiper1" style="max-height: 100vh;">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide" style="background-image: url('./asset/img/napoleon-poster.jpg'); background-size: cover; cursor: pointer;">                    
-                    <div class="absolute text-start flex flex-col gap-3 p-6 text-white/80 top-1/3 left-28 w-4/5 bg-[#1702026b]">
-                        <h5 class="text-white/50 text-sm font-bold ">AVENTURA, ACCIÓN</h5>
-                        <h2 class="text-6xl font-semibold">LOS JUEGOS DEL HAMBRE: BALADA DE PAJAROS CANTORES Y SERPIENTES</h2>
-                        <div class="text-sm border w-max inline-flex"><p class="inline w-max px-3">CALIFICACION</p> <p class=" inline w-max bg-white text-black font-bold px-3">SAM 13</p></div>
-                        <p class="text-base">THE HUNGER GAMES: THE BALLAD OF SONGBIRDS AND SNAKES</p>
-                        <div>
-                            <a href="#inicioCartelera" class="boton">VER MAS</a>                            
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                  <img src="./asset/img/digimon-poster.jpg" alt="poster promocional">
-                </div>
-                <div class="swiper-slide">
-                  <img src="./asset/img/muchachos-poster.jpg" alt="poster-promocional">
-                </div>
-                <div class="swiper-slide">
-                  <img src="./asset/img/movie_poster.jpg" alt="poster-promocional">
-                </div>
-                <div class="swiper-slide">
-                  <img src="./asset/img/spider-poster.jpg" alt="poster-promocional">
-                </div>
-                <div class="swiper-slide">
-                  <img src="./asset/img/navidad-poster.jpg" alt="poster-promocional">
-                </div>
-                <div class="swiper-slide">
-                  <img src="./asset/img/vuelven-los-autocines.jpg" alt="poster-promocional">
-                </div>
-              </div>
-            <div class="swiper-pagination"></div>
-            <div class="autoplay-progress">
-                <svg viewBox="0 0 48 48">
-                  <circle cx="24" cy="24" r="20"></circle>
-                </svg>
-                <span></span>
-              </div>
-          </div>
-    </section>
-
-    <section class="lg:hidden">
-        <div class="swiper mySwiper2">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">
+    
+    <section class="">
+        <div class="swiper mySwiper2" style="max-height: 75vh;">
+            <div id="contenedorSlider" class="swiper-wrapper">
+              <!-- <div class="swiper-slide">
                 <img src="./asset/img/napoleon-poster.jpg" alt="poster-promocional">
               </div>
               <div class="swiper-slide">
@@ -112,12 +73,12 @@
               </div>
               <div class="swiper-slide">
                 <img src="./asset/img/vuelven-los-autocines.jpg" alt="poster-promocional">
-              </div>
+              </div> -->
             </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
             <div class="swiper-pagination"></div>
-            <div id="autoplay-progress-2" class="autoplay-progress">
+            <div id="autoplay-progress" class="autoplay-progress">
                 <svg viewBox="0 0 48 48">
                   <circle cx="24" cy="24" r="20"></circle>
                 </svg>
@@ -126,53 +87,49 @@
           </div>
     </section>
 
-    <main class="bg-slate-800">
+    <main>
+        <section class="text-center m-6 text-white">
+            <h1 class="text-xl sm:text-3xl font-serif sm:tracking-wider font-bold">DESCUBRE  TU  CINE  AL  AIRE  LIBRE <br> DESCUBRE CINEMACAR</h1>
+            <h2 class="sm:text-xl m-4">Disfruta de una propuesta cultural diferente y emocionante, el mejor cine en la comodidad de tu auto.</h2>
+        </section>
+        <section class="flex flex-col lg:flex-row gap-2 justify-between m-5">
+            <article class="flex items-center justify-between rounded-lg bg-navy-100 text-navy-50 p-4 border-2 border-navy-150">
+                <div>
+                    <h2 class="font-bold text-xl mb-1">Sonido de cine</h2>
+                    <p>Sintoniza nuestra emisora en tu radio del coche y disfruta del mejor sonido.</p>
+                    <p class="font-semibold text-lg my-1">SINTONIZA 107.5 FM</p>
+                </div>
+                <picture class="flex flex-shrink max-w-[130px] min-w-[100px]">
+                    <img class="w-32 mx-2" src="./asset/img/radio.webp" alt="imagen de una radio">
+                </picture>
+            </article>
+            <article class="flex items-center justify-between rounded-lg bg-navy-100 text-navy-50 p-4 border-2 border-navy-150">
+                <div>
+                    <h2 class="font-bold text-xl mb-1">Te llevamos la cena!!</h2>
+                    <p>Realiza tu pedido por la pagina web y te lo acercamos a dónde estés.</p>
+                    <a class="font-semibold text-lg my-1" href="./pages/candy.html">REALIZAR PEDIDO</a>
+                </div>
+                <picture class="flex flex-shrink max-w-[130px] min-w-[100px]">
+                    <img class="mx-2" src="./asset/img/comida.webp" alt="imagen de una comida">
+                </picture>
+            </article>
+            <article class="flex items-center justify-between rounded-lg bg-navy-100 text-navy-50 p-4 border-2 border-navy-150">
+                <div>
+                    <h2 class="font-bold text-xl mb-1">Somos Pet Friendly!</h2>
+                    <p>Vení a disfrutar tus pelis favoritas acompañado de tu mascota!</p>
+                    <a href="./pages/tickets.html" class="font-semibold text-lg my-1">COMPRAR BOLETOS</a>
+                </div>
+                <picture class="flex flex-shrink max-w-[130px] min-w-[100px]">
+                    <img class="w-32 rounded-lg" src="./asset/img/cat.gif" alt="imagen de una comida">
+                </picture>
+            </article>
+        </section>
         <section class="w-[80%] mx-auto container p-8">
             <h2 id="inicioCartelera" class="text-white text-3xl font-bold text-center pb-10">Cartelera</h2>
-            <article class= "grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                <div class="w-60 relative mx-auto">
-                    <img src="./asset/img/walle.jpg" class="object-cover w-full h-full " alt="">
-                    <p class="text-white text-xl p-3 font-bold absolute inset-0 flex justify-start items-end bg-gradient-to-b from-gray-700/10 via-gray-900/40 to-black">
-                        <span class="material-symbols-outlined px-3">
-                        play_circle
-                        </span>WALL- E
-                    </p>
-                </div>
-                <div class="w-60 relative mx-auto">
-                    <img src="./asset/img/walle.jpg" class="object-cover w-full h-full " alt="">
-                    <p class="text-white text-xl p-3 font-bold absolute inset-0 flex justify-start items-end bg-gradient-to-b from-gray-700/10 via-gray-900/40 to-black">
-                        <span class="material-symbols-outlined px-3">
-                        play_circle
-                        </span>WALL- E
-                    </p>
-                </div>
-                <div class="w-60 relative mx-auto">
-                    <img src="./asset/img/walle.jpg" class="object-cover w-full h-full " alt="">
-                    <p class="text-white text-xl p-3 font-bold absolute inset-0 flex justify-start items-end bg-gradient-to-b from-gray-700/10 via-gray-900/40 to-black">
-                        <span class="material-symbols-outlined px-3">
-                        play_circle
-                        </span>WALL- E
-                    </p>
-                </div>
-                <div class="w-60 relative mx-auto">
-                    <img src="./asset/img/walle.jpg" class="object-cover w-full h-full " alt="">
-                    <p class="text-white text-xl p-3 font-bold absolute inset-0 flex justify-start items-end bg-gradient-to-b from-gray-700/10 via-gray-900/40 to-black">
-                        <span class="material-symbols-outlined px-3">
-                        play_circle
-                        </span>WALL- E
-                    </p>
-                </div>
-                <div class="w-60 relative mx-auto">
-                    <img src="./asset/img/walle.jpg" class="object-cover w-full h-full " alt="">
-                    <p class="text-white text-xl p-3 font-bold absolute inset-0 flex justify-start items-end bg-gradient-to-b from-gray-700/10 via-gray-900/40 to-black">
-                        <span class="material-symbols-outlined px-3">
-                        play_circle
-                        </span>WALL- E
-                    </p>
-                </div>
-                
-                
+            <article id="contenedorCartelera" class= "grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <!-- se completa mediante js -->
             </article>
+            <div id="infoDetalles" class="fixed top-0 right-0 md:w-1/3 w-4/5 h-full z-30 text-navy-50 bg-navy-500 hidden p-8"></div>
         </section>
     </main>
     <footer class="bg-black text-white">
@@ -213,6 +170,7 @@
     <!-- <script src="../src/js/index.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11.0.5/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="./js/home.js"></script>
     <script src="./src/navbar.js"></script>
     <script type="module" src="./src/sliders.js"></script>    
 </body>

@@ -1,199 +1,263 @@
-let e = false;
-const sesionActiva = {
-    estado: false,
-    indiceUsuario: null,
-    
-    login: function(indice){
-        this.estado = true;
-        this.indiceUsuario = indice;
-    },
 
-    logout: function(){
-        this.estado = false; 
-        this.indiceUsuario= null;
+let apiMovie = [];
+
+const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MmI3YjMxNTBkNWNiYWYwZTMyYWQ2MGQyN2FhYzVlZSIsInN1YiI6IjY1ODM3Mzk4ODU4Njc4NTU4M2Y2ODg3MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RlQWrjAw6VX4e-NHaFohLD4CpaLFCj23so2ksR42_i4'
     }
+  };
+
+fetch('https://api.themoviedb.org/3/movie/now_playing?language=es-ES&page=1&region=AR', options)
+  .then(response => response.json())
+  .then(data =>{
+    apiMovie = data.results.slice(0, 9);
+    mostrarPeliculaEnCartelera(apiMovie);
+    slider();
+  } )
+  .catch(err => console.error(err));
+
+const MENU_INFO = document.getElementById('infoDetalles');
+const CONTENEDOR_CARTELERA = document.getElementById('contenedorCartelera');
+const CONTENEDOR_SLIDER = document.getElementById('contenedorSlider');
+
+const listaGeneros = [
+    {"id": 28, name: "Acción"},
+    {"id": 12, name: "Aventura"},
+    {"id": 16, name: "Animación"},
+    {"id": 35, name: "Comedia"},
+    {"id": 80, name: "Crimen"},
+    {"id": 99, name: "Documental"},
+    {"id": 18, name: "Drama"},
+    {"id": 10751, name: "Familia"},
+    {"id": 14, name: "Fantasía"},
+    {"id": 36, name: "Historia"},
+    {"id": 27, name: "Terror"},
+    {"id": 10402, name: "Música"},
+    {"id": 9648, name: "Misterio"},
+    {"id": 10749, name: "Romance"},
+    {"id": 878, name: "Ciencia ficción"},
+    {"id": 10770, name: "Película de TV"},
+    {"id": 53, name: "Suspense"},
+    {"id": 10752, name: "Bélica"},
+    {"id": 37, name: "Western"}
+];
+
+function mostrarPeliculaEnCartelera(movies){
+
+    CONTENEDOR_CARTELERA.innerHTML = '';
+
+    movies.forEach(movie =>{
+        const MOVIE_ID = movie.id;
+        const TITULO = movie.title;
+        const POSTER_CARD = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
+
+        const div = document.createElement('div');
+        div.className= "w-60 relative mx-auto cursor-pointer";
+
+        div.innerHTML= `
+                    <div onclick="infoPelicula('${MOVIE_ID}')">
+                        <img src='${POSTER_CARD}' class="object-cover w-full h-full " alt="${'caratula de la pelicula ' + TITULO}">
+                        <p class="text-card"><span class="material-symbols-outlined px-3">play_circle</span>${TITULO}</p>
+                    </div>
+                    `
+
+        CONTENEDOR_CARTELERA.appendChild(div);
+
+        sliderPosterPromocional(movie);
+    })
 }
 
-// Constantes declaradas con peliculas y horarios.
+function sliderPosterPromocional(param){
 
-// !! CREAR ARREGLO DE PELICULAS Y HORARIOS !!
-const CHUCK = 'Chucky';
-const SIREN = 'La sirenita';
-const SOMBR = '50 Sombras de Gray'; 
-const HMANANA= '15:00hs';
-const HTARDE= '18:00hs';
-const HNOCHE= '22.30hs';
+    let generos = [];
 
-// Objetos
-
-class Ticket {
-    constructor(pelicula, horario){
-        //this.usuario = usuario;
-        this.pelicula = pelicula;
-        this.horario = horario;
-        this.descuento = false;
-    }    
-}
-const ticket = new Ticket();
-
-class Usuario {
-    constructor(nombre, clave, rol){
-        this.nombre = nombre.toLowerCase();
-        this.clave = clave.toLowerCase();
-        this.rol = rol.toLowerCase();
-        this.inicioSesion = false;
-    }
-
-    iniciarSesion(){
-        this.inicioSesion = true;
-    }
-    
-}
-
-const usuario1 = new Usuario ('Mauro', 'Admin', 'Admin');
-const usuario2 = new Usuario ('Nicolas', 'Nicolas', 'Usuario');
-const usuario3 = new Usuario ('Maxi', 'Maxi', 'Usuario');
-
-const usuarios = [usuario1, usuario2, usuario3];
-
-//funciones 
-
-// !! MEJORAR CARTELERA AGREGANDO ARRAYS !! 
-const cartelera = (objeto) => {
-    // Esta funcion muestra las peliculas disponibles y sus horarios, 
-    let peliculaEleccion ='';
-    let horarioEleccion = '';
-    let salir = false;
-    objeto = ticket;
-
-    do{
-        //Muestra en pantalla las peliculas y recibe la eleccion del usuario la cual es guardada en una constante para luego ser utilizada.
-        alert('Las peliculas de nuestra carteleras son las siguientes');
-        const ELECCION_PELICULAS = parseInt(prompt(`Elija una pelicula para ver sus horarios o seleccione 0 para salir: 1- ${CHUCK} 2- ${SIREN} 3- ${SOMBR}`));
-        
-        switch(ELECCION_PELICULAS)
-        {
-            case 1:
-                peliculaEleccion = CHUCK;
-                break;
-            case 2:
-                peliculaEleccion = SIREN;
-                break;
-            case 3:
-                peliculaEleccion = SOMBR;
-                break;
-            case 0:
-                return;
-            default:
-                alert('Elija una opción valida');
-                continue;
-        }       
-        
-        alert('Los horarios del dia de hoy son los siguientes');
-        const ELECCION_HORARIOS = parseInt(prompt(`Si desea comprar una entrada escriba la opcion para continuar o ingrese 0 para volver al menú anterior; 1- ${HMANANA} 2- ${HTARDE} 3- ${HNOCHE}`));
-        //Muestra por pantallla los horarios y pregunta si desea comprar una entrada o si desea seguir viendo la cartelera
-
-        switch(ELECCION_HORARIOS)
-        {
-            case 1:
-                horarioEleccion = HMANANA;
-                break;
-            case 2:
-                horarioEleccion = HTARDE;
-                break;
-            case 3:
-                horarioEleccion = HNOCHE;
-                break;
-            case 0:
-                //Si desea volver al menu anterior se borra la eleccion de pelicula previamente guardada.
-                peliculaEleccion = '';
-                continue;
-            default:
-                alert('Opción no válida.');
-                continue;
-
+    param.genre_ids.forEach((generosAPI) => {
+        const generosEncontrados = listaGeneros.find((genero)=> genero.id === generosAPI);
+        if (generosEncontrados) {
+            generos.push(generosEncontrados.name);
         }
-        
-        ticket.pelicula = peliculaEleccion;
-        ticket.horario = horarioEleccion;
-                
-        salir = true;
-        
-    }while(salir != true)
-        
+    });
+
+    const div = document.createElement("div");
+    div.className = "swiper-slide relative";
+
+    const img = document.createElement("img");
+    img.className = "object-cover w-full h-full";
+    img.src = `https://image.tmdb.org/t/p/original/${param.backdrop_path}`;
+    img.alt = `poster promocional de ${param.title}`;
+
+    const innerDiv = document.createElement("div");
+    innerDiv.className = "hidden absolute text-start md:flex flex-col gap-3 p-6 text-white/80 top-1/3 left-28 w-4/5 bg-[#1702026b]";
+
+    const genre = document.createElement("h5");
+    genre.className = "text-white/50 text-sm font-bold";
+    genre.textContent = `${generos}`;
+
+    const title = document.createElement("h2");
+    title.className = "text-6xl font-semibold";
+    title.textContent = `${param.title}`;
+
+    const subtitle = document.createElement("p");
+    subtitle.className = "text-base mb-2";
+    subtitle.textContent = `${param.original_title}`;
+
+    const link = document.createElement("div");
+    const linkButton = document.createElement("a");
+    linkButton.href = "#inicioCartelera";
+    linkButton.className = "boton";
+    linkButton.textContent = "VER MAS";
+    link.appendChild(linkButton);
+
+    innerDiv.appendChild(genre);
+    innerDiv.appendChild(title);
+    innerDiv.appendChild(subtitle);
+    innerDiv.appendChild(link);
+
+    div.appendChild(img);
+    div.appendChild(innerDiv);
+
+    const contenedorSlider = document.getElementById("contenedorSlider");
+    contenedorSlider.appendChild(div); 
 }
-const verificacion = () => {
-    let indice = null;
+
+function infoPelicula(id) {
+
+    fetch(`https://api.themoviedb.org/3/movie/${id}?language=es-ES`, options)
+    .then(response => response.json())
+    .then(data =>{
+        crearContenidoModal(data);
+    } )
+    .catch(err => console.error(err));
+}
+
+function crearContenidoModal(movie){
+
+    console.log('funcion crear modal', movie);
+    POSTER_PATCH = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
     
-    for (const user of usuarios){
-        if (user.inicioSesion === true){
-            indice = usuarios.indexOf(user);
+    MENU_INFO.innerHTML = '';
+    MENU_INFO.classList.remove('hidden');
+
+    const horas = Math.floor(movie.runtime / 60);
+    const minutos = movie.runtime % 60;
+
+    let generos = "";
+    
+    movie.genres.forEach((genero, index) => {        
+        generos += genero.name;        
+        if (index < movie.genres.length - 1) {
+            generos += ", ";
         }
-    }
-    
-    if(indice !== null)
-        sesionActiva.login(indice);
+    });
+
+    console.log('generos', generos);
+
+    MENU_INFO.innerHTML = `
+                        <button onclick="cerrarModal()" class="flex justify-end w-full pb-5 px-5">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                        <picture>
+                            <img class="rounded-lg" src="${POSTER_PATCH}" alt="imagen promocional de ${movie.title}">
+                        </picture>
+                        <br>
+                        <h2 class="text-xl font-semibold">${movie.title}</h2>
+                        <br>
+                        <div id="contenedor-productos-desktop" class="max-h-[70px] overflow-hidden">
+                            <p>${movie.overview}</p>
+                        </div>
+                        <div class="flex justify-center items-center flex-wrap text-navy-50">
+                            <button onclick="desplegarCarrito()" id="aside-carrito-desktop" class="flex justify-center items-center flex-wrap"><span class="material-symbols-outlined text-navy-150">keyboard_double_arrow_down</span></button>
+                        </div>
+                        <p class="my-2"><strong>Duracion: </strong>${horas}h ${minutos}m</p>
+                        <p class="my-2"><strong>Genero: </strong>${generos}</p>
+                        <p id="direccion" class="my-2"></p>
+                        <p class="my-2"><strong>Calificacion:</strong>${movie.vote_average.toFixed(1)}</p>
+                        <button onclick="comprarEntradas('${movie.poster_path}', '${movie.title}')" class="boton my-4">COMPRAR</button>
+    `
+    buscarDirectorPeli(movie.id);
 }
 
-const iniciarSesion = () => {
-    
-    if(sesionActiva.estado === true) //Si hay una sesion activa, muestra por pantalla cual es el usuario activo.
-        alert(`Ya existe una sesion activa con el usuario ${sesionActiva.indiceUsuario}`)
-        // !! PERMITIR AL USUARIO CERRAR SESION !! (completar seccion login)
-    else{
-        let indice = null;
-        userOk = false;
-        const nombreUsuario = prompt('Nombre de usuario:').toLowerCase();
-        for (const usuarioLista of usuarios){
-            if(nombreUsuario === usuarioLista.nombre){
-                userOk = true;
-                indice = usuarios.indexOf(usuarioLista);
-            }
-        }
-    
-        if (userOk === false)
-            alert("Usuario no encontrado");
-    
-        if (userOk == true){
-            const claveUsuario = prompt('Ingrese su clave:').toLowerCase();
-            if (claveUsuario !== usuarios[indice].clave)
-                alert('Está mal la clave mi rey...');
-            else{
-                usuarios[indice].login();
-                sesionActiva.login(indice);
-            } 
-        } 
-    } 
+function retornarNombresGeneros(id){
+
 }
 
-//while para salir completamente con bandera exit
-while (e === false) 
-{
-
-    alert ('Bienvenido a Cine Fasto');
-    let opcion = parseInt(prompt('Que desea realizar? 1- Ver Cartelera. 2- Comprar. 3- Login 0- Salir'));
+function buscarDirectorPeli(id){
     
-    console.log (opcion);
+    const DIRECCION = document.getElementById('direccion');
+    const span = document.createElement('span');
+    
+    let directores = false;
+    const apiURL = `https://api.themoviedb.org/3/movie/${id}/credits?language=es-ES`;
+    fetch(apiURL, options)
+    .then(response => response.json())
+    .then(data =>{
+        data.crew.forEach((director)=>{
+            if(director.job === "Director" && !directores){
+               
+                span.innerHTML= `<strong>Director: </strong>${director.name}`
             
-    switch (opcion) 
-    {
-        case 1:
-            verificacion();
-            cartelera(ticket);            
-            break;
-        case 2:
-            verificacion();
-            // !! Si existe una sesion activa crear apartado USUARIO con menu para ver compras, cerrar sesion, salir.
-            iniciarSesion();
-            break;  
-        case 3:
-            console.log('opcion 3');
-            break;
-        case 0:
-            e = true; 
-            continue;
-        default:
-            console.log('error');
-            break;
+                DIRECCION.appendChild(span);
+                directores = true;
+            }
+        })
+    })
+    .catch(err => console.error('error al buscar director', err));
+}
+
+function cerrarModal(){
+    MENU_INFO.classList.add('hidden');
+    console.log('boton');
+}
+
+function comprarEntradas(img, title){
+    console.log(img);
+    localStorage.setItem('movie', JSON.stringify({ title: title, img: img }));
+    window.location.href = '/pages/tickets.html';
+}
+
+function desplegarCarrito(){
+
+    const CONTENEDOR_CARRITO_DESKTOP = document.getElementById('contenedor-productos-desktop');
+    const BOTON_ASIDE_DESKTOP = document.getElementById('aside-carrito-desktop');
+
+    CONTENEDOR_CARRITO_DESKTOP.classList.toggle('max-h-[70px]');
+    CONTENEDOR_CARRITO_DESKTOP.classList.toggle('overflow-hidden');
+    
+    if(CONTENEDOR_CARRITO_DESKTOP.classList.contains('max-h-[70px]' && 'overflow-hidden')){
+        BOTON_ASIDE_DESKTOP.innerHTML= `<span class="material-symbols-outlined text-navy-150">keyboard_double_arrow_down</span>`;        
+    }else{
+        BOTON_ASIDE_DESKTOP.innerHTML=`<span class="material-symbols-outlined text-navy-150">keyboard_double_arrow_up</span>`;        
     }
 }
+
+function slider(){
+
+    const swiper = new Swiper(".mySwiper2", {
+      spaceBetween: 30,
+      loop: true,
+      centeredSlides: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+      },
+      on: {
+        autoplayTimeLeft(s, time, progress) {
+          var progressCircle = document.getElementById("autoplay-progress").querySelector("circle");
+          var progressContent = document.getElementById("autoplay-progress").querySelector("span");
+          progressCircle.style.setProperty("--progress", 1 - progress);
+          progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+        }
+      }
+    });
+    console.log('dentro de slider.js');
+  }

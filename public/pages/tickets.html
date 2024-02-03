@@ -70,8 +70,25 @@
             </div>
         </article>
     </section>
+    <!-- RESUMEN COMPRA MOBILE -->
+    <section class="lg:hidden sticky top-0 flex z-20 justify-center">
+        <article class="w-full bg-navy-300 ">
+            <div class="text-navy-50 text-sm bg-navy-300 border-b border-dashed border-navy-100 p-4 flex justify-between items-center">
+                <div class="ml-1">
+                    <h3 class="flex">TUS TICKETS:  <span class="font-bold ml-2" id="cantidad-producto-mobile"></span></h3>                                
+                </div>
+                <button id="mostrar-carrito-mobile" class="mr-2 text-center cursor-pointer">
+                    <h3>VER RESUMEN<br> DE COMPRA</h3>
+                </button>
+            </div>
+            <!-- CONTENEDOR PRECIO MOBILE -->
+            <div id="contenedor-productos-mobile" class="text-white bg-navy-300 border-y border-dashed border-navy-100 p-4 hidden">
+                <!-- se completa mediante js -->
+            </div>
+        </article>
+    </section>
     <main class="w-11/12 mx-auto container p-4 lg:p-8">
-        <div class="grid gap-4 grid-cols-1 grid-rows-3 lg:grid-rows-2 lg:grid-cols-5 mx-auto">
+        <div class="grid gap-4 grid-cols-1 grid-rows-2 lg:grid-rows-2 lg:grid-cols-5 mx-auto">
             <!-- ASIDE GRID TICKET -->
             <section class="lg:col-[4/6] lg:flex lg:flex-col lg:grow hidden lg:sticky lg:top-0 lg:w-[350px] mx-auto">
                 <!-- ASIDE RESUME -->
@@ -80,27 +97,26 @@
                 </article>
                 <!-- ASIDE FILM RESUME -->
                 <article class="text-white bg-navy-300 border-x border-navy-100 flex p-4 pb-10 gap-4">
-                    <div class="flex">
-                        <img src="../asset/img/walle.jpg" alt="pelicula seleccionada" class="w-40">
-                    </div>
-                    <div>
-                        <h3>Pelicula seleccionada</h3>
+                    <a href="../index.html" id="textoAdvertencia" class="flex-0">SELECCIONE <br> UNA <br> PELICULA</a>
+                    <div id="contenedorImg" class="flex flex-1 hidden"></div>
+                    <div id="contenedorInfo" class="flex flex-col flex-1">
+                        <div id="contenedorNombre" class="font-semibold"></div>
+                        <div id="contenedorHorario" class="mt-1 text-navy-50/70"></div>
+                        <div id="contenedorLugar" class="mt-1 text-navy-50/70"></div>
+                        <div id="contenedorBoleto" class="mt-2"></div>
                     </div>
                 </article>
                 <!-- ASIDE BODY RESUMEN CART -->
                 <article class="border-solid border-x border-navy-100">
-                    <div class="text-white bg-navy-300 border-y border-dashed border-navy-100 py-10 px-4 relative z-">
+                    <div class="text-white bg-navy-300 border-y border-dashed border-navy-100 pt-10 pb-5 px-4 relative">
                         <span class="before:block before:absolute before:-inset-8 before:rounded-full before:bg-navy-900 absolute top-0 left-0 inline-block"></span>
                         <h2 class="text-lg font-semibold">TICKETS</h2>
-                            <div class="flex items-center m-1 justify-between gap-4">
-                                <div class="flex gap-8">
-                                    <button>X</button>
-                                </div>
-                                <div class="flex justify-between w-full">
-                                    <h2>Entrada General x2</h2>   
-                                    <h3>US$ 6.00</h3>                            
-                                </div>
-                            </div>
+                        <div id="contenedor-productos-desktop" class="max-h-[70px] overflow-hidden">
+                            <!-- se agregan productos mediante js -->
+                        </div>
+                        <div class="flex justify-center items-center flex-wrap text-navy-50">
+                            <button onclick="desplegarCarrito()" id="aside-carrito-desktop" class="flex justify-center items-center flex-wrap"><span class="material-symbols-outlined text-navy-150">keyboard_double_arrow_down</span></button>
+                        </div>
                         <span class="after:block after:absolute after:-inset-8 after:rounded-full after:bg-navy-900 absolute top-0 right-0 inline-block"></span>
                     </div>
                 </article>
@@ -108,12 +124,12 @@
                 <article class="border-solid border-x border-navy-100">
                     <div class="text-white bg-navy-300 border-y border-dashed border-navy-100 p-4 ">
                         <div class="text-white font-semibold p-1 flex justify-between">
-                            <h3>SUBTOTAL</h3>
-                            <h4>US$ 7.00</h4>
+                            <h3>PARKING</h3>
+                            <h4 id="parkingSubtotal"></h4>
                         </div>
                         <div class="text-white font-semibold p-1 flex justify-between">
-                            <h3>CARGO POR SERVICIO</h3>
-                            <h4>US$ 1.00</h4>
+                            <h3>BOLETOS</h3>
+                            <h4 id="boletoSubtotal">0</h4>
                         </div>
                     </div>
                 </article>
@@ -121,10 +137,11 @@
                 <article class="text-white p-4 flex flex-col gap-3 bg-navy-500 border-solid border-b border-x border-navy-100">
                     <div class="text-3xl font-semibold flex justify-around">
                         <h3>TOTAL</h3>
-                        <h4>US$ 8.00</h4>
+                        <h4 id="totalFinal"></h4>
                     </div>
                     <div class="text-center my-2">
-                        <a href="./candy.html" class="boton boton-grad">SIGUIENTE</a>
+                        <!-- <a href="./candy.html" class="boton boton-grad">SIGUIENTE</a> -->
+                        <button onclick="agregarAlLocalStorage()" class="boton boton-grad">SIGUIENTE</button>
                     </div>
                 </article>
             </section>
@@ -138,61 +155,61 @@
                 <article class="text-navy-50 bg-navy-500 flex flex-col justify-between items-center my-2">
                     <div class="flex justify-between w-full p-4">
                         <h3 class="font-semibold">Seleccion horarios</h3>
-                        <button onclick="mostrarContenido(seccionHorario)"><span class="material-symbols-outlined">add_circle</span></button>
+                        <button id="horariosBtn" onclick="mostrarContenido(seccionHorario)"><span class="material-symbols-outlined">add_circle</span></button>
                     </div>
-                    <div id="seccionHorario" class="text-navy-50 w-full bg-navy-300 p-4 hidden BOTONES-MOSTRAR">
+                    <div id="seccionHorario" class="text-navy-50 w-full bg-navy-300 p-4 BOTONES-MOSTRAR">
                         <h3 class="my-4"><strong>¿Cuándo quieres ir?</strong></h3>
                         <div class="flex flex-col w-2/3 gap-4">
-                            <select name="fecha" id="fecha" class="bg-navy-300 border-navy-100">
+                            <select name="fecha" id="fechasFunciones" class="bg-navy-300 border-navy-100">
                                 <option disabled selected>Seleccione Día...</option>
-                                <option value="">Viernes</option>
-                                <option value="">Sabado</option>
-                                <option value="">Domingo</option>
+                                <option value="Viernes">Viernes</option>
+                                <option value="Sabado">Sabado</option>
+                                <option value="Domingo">Domingo</option>
                             </select>
-                            <select name="horarios" id="horarios" class="bg-navy-300 border-navy-100">
+                            <select name="horarios" id="horariosFunciones" class="bg-navy-300 border-navy-100">
                                 <option disabled selected>Seleccione Función...</option>
-                                <option value="">15:00</option>
-                                <option value="">17:00</option>
-                                <option value="">20:00</option>
+                                <option value="15:00">15:00</option>
+                                <option value="17:00">17:00</option>
+                                <option value="20:00">20:00</option>
                             </select>
                         </div>
-                        <button class="boton boton-grad m-4">SIGUIENTE</button>
+                        <button onclick="guardarDatos()" class="boton boton-grad m-4">SIGUIENTE</button>
                     </div>
                 </article>
                 <!-- PESTAÑA SELECCION LUGAR -->
                 <article class="text-navy-50 bg-navy-500 flex flex-col justify-between items-center my-2">
                     <div class="flex justify-between w-full p-4">
                         <h3 class="font-semibold">Seleccion lugar</h3>
-                        <button onclick="mostrarContenido(seccionLugar)"><span class="material-symbols-outlined">add_circle</span></button>
+                        <button id="lugarBtn" onclick="mostrarContenido(seccionLugar)"><span class="material-symbols-outlined">add_circle</span></button>
                     </div>
                     <div id="seccionLugar" class="text-navy-50 w-full bg-navy-300 p-4 hidden BOTONES-MOSTRAR">
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center">
                             <h3 class="my-4"><strong>¿Qué zona u opción quieres?</strong></h3>
-                            <button class="boton boton-grad">Mapa</button>
+                            <button onclick="mapa()" class="boton boton-grad my-1">Mapa</button>
                         </div>
                         <div class="p-4">
                             <div class="flex items-center justify-between my-4">
-                                <p>Parking general <span></span></p> 
-                                <button class="boton">Seleccionar</button>                           
+                                <p>Parking general <br><span><strong>3.00 US$</strong></span></p> 
+                                <button onclick="guardarLugar('Parking General', 3, 'parking')" id="parking" class="boton">Seleccionar</button>                           
                             </div>
                             <div class="flex items-center justify-between my-4">
-                                <p class="flex flex-wrap">Parking VIP Estándar <span><strong>5.00 US$</strong></span></p> 
-                                <button class="boton">Seleccionar</button>                           
+                                <p>Parking VIP Estándar <br><span><strong>5.00 US$</strong></span></p>
+                                <button onclick="guardarLugar('Parking VIP Estándar', 5, 'vip')" id="vip" class="boton">Seleccionar</button>                           
                             </div>
                             <div class="flex items-center justify-between my-4">
-                                <p>Parking VIP SUV <span></span></p> 
-                                <button class="boton">Seleccionar</button>                           
+                                <p>Parking VIP SUV <br><span><strong>8.00 US$</strong></span></p> 
+                                <button onclick="guardarLugar('Parking VIP SUV', 8, 'suv')" id="suv" class="boton">Seleccionar</button>                           
                             </div>
-                        </div>                       
+                        </div>
                     </div>
                 </article>
                 <!-- PESTAÑA SELECCION PRECIOS -->
                 <article class="text-navy-50 bg-navy-500 flex flex-col justify-between items-center my-2">
                     <div class="flex justify-between w-full p-4">
                         <h3 class="font-semibold">Seleccion precios</h3>
-                        <button onclick="mostrarContenido(seccionPrecio)"><span class="material-symbols-outlined">add_circle</span></button>
+                        <button id="ticketBtn" onclick="mostrarContenido(seccionPrecio)"><span class="material-symbols-outlined">add_circle</span></button>
                     </div>
-                    <div id="seccionPrecio" class="text-navy-50 w-full bg-navy-300 p-4 BOTONES-MOSTRAR">
+                    <div id="seccionPrecio" class="text-navy-50 w-full bg-navy-300 p-4 hidden BOTONES-MOSTRAR">
                         <h3 class="my-4"><strong>¿Cuántas entradas quieres?</strong></h3>
                         <div class="flex items-center gap-4 justify-between border my-2 p-2 border-navy-100 rounded-md">
                             <div>
@@ -201,13 +218,12 @@
                             </div>
                             <div class="flex gap-2 items-center">                                  
                                 <p class="font-bold">3.00US$</p>
-                                <select name="fecha" id="fecha" class="bg-navy-300 border-navy-100">
+                                <select name="general" id="general" class="bg-navy-300 border-navy-100">
                                     <option disabled selected>0</option>
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
-                                    <option value="">4</option>
-                                    <option value="">5</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
                                 </select>
                             </div>
                         </div>
@@ -218,12 +234,12 @@
                             </div>
                             <div class="flex gap-2 items-center">                                  
                                 <p class="font-bold">1.00US$</p>
-                                <select name="fecha" id="fecha" class="bg-navy-300 border-navy-100">
+                                <select name="chicos" id="chicos" class="bg-navy-300 border-navy-100">
                                     <option disabled selected>0</option>
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
-                                    <option value="">4</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
                                 </select>
                             </div>
                         </div>
@@ -234,105 +250,75 @@
                             </div>
                             <div class="flex gap-2 items-center">                                  
                                 <p class="font-bold">8.00US$</p>
-                                <select name="fecha" id="fecha" class="bg-navy-300 border-navy-100">
+                                <select name="familia" id="familia" class="bg-navy-300 border-navy-100">
                                     <option disabled selected>0</option>
-                                    <option value="">1</option>
-                                    <option value="">2</option>
+                                    <option value="1">1</option>
                                 </select>
                             </div>
                         </div>
                         <div class="flex items-center gap-4 justify-between border my-2 p-2 border-navy-100 rounded-md">
                             <div>
-                                <p class="font-semibold">Pack Familia I</p>
-                                <p class="text-navy-150 text-sm">Incluye 1 entrada para adultos y 2 para niños de 4 a 12 años.</p>
+                                <p class="font-semibold">Jubilados</p>
+                                <p class="text-navy-150 text-sm">Tarifa aplicable a partir de 60 años.</p>
                             </div>
                             <div class="flex gap-2 items-center">                                  
-                                <p class="font-bold">5.00US$</p>
-                                <select name="fecha" id="fecha" class="bg-navy-300 border-navy-100">
+                                <p class="font-bold">2.00US$</p>
+                                <select name="viejos" id="viejos" class="bg-navy-300 border-navy-100">
                                     <option disabled selected>0</option>
-                                    <option value="">1</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="flex items-center gap-4 justify-between border my-2 p-2 border-navy-100 rounded-md">
-                            <div>
-                                <p class="font-semibold">Pack Familia II</p>
-                                <p class="text-navy-150 text-sm">Incluye 2 entrada para adultos y 2 para niños de 4 a 12 años.</p>
-                            </div>
-                            <div class="flex gap-2 items-center">                                  
-                                <p class="font-bold">7.00US$</p>
-                                <select name="fecha" id="fecha" class="bg-navy-300 border-navy-100">
-                                    <option disabled selected>0</option>
-                                    <option value="">1</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-4 justify-between border my-2 p-2 border-navy-100 rounded-md">
-                            <div>
-                                <p class="font-semibold">Pack Familia III</p>
-                                <p class="text-navy-150 text-sm">Incluye 3 entrada para adultos y 1 para niños de 4 a 12 años.</p>
-                            </div>
-                            <div class="flex gap-2 items-center">                                  
-                                <p class="font-bold">9.00US$</p>
-                                <select name="fecha" id="fecha" class="bg-navy-300 border-navy-100">
-                                    <option disabled selected>0</option>
-                                    <option value="">1</option>
-                                </select>
-                            </div>
-                        </div>
+                        <button onclick="guardarTickets()" class="boton boton-grad m-4">SIGUIENTE</button>
                     </div>
                 </article>
                 <!-- INFORMACION LUGARES -->
-                <article class="text-white bg-navy-500 flex flex-col p-8 gap-2">
-                    <h3 class="flex gap-4"><span class="material-symbols-outlined">info</span>Información sobre el evento</h3>
-                    <div class="hidden">
-                        <p class="text-navy-50 text-sm">
-                            SE PAGA POR PERSONA. POR CADA COMPRA SE ADJUDICA UNA SOLA ENTRADA DE COCHE.
-                            LA ACOMODACIÓN DE COCHES ES POR ORDEN DE LLEGADA Y TAMAÑO DEL COCHE.
-                            NO ESTÁ PERMITIDO INTRODUCIR ALIMENTOS AJENOS AL RECINTO.
-                        </p>
-                        <p class="text-navy-150"><strong>EL PARKING PREMIUM ASEGURA UBICACIÓN CON LA MEJOR VISIBILIDAD (COCHES SUV EN ADELANTE SE COLOCARÁN CENTRADOS ENTRE LAS FILAS 5, 6 Y 7).</strong></p>
+                <article class="text-navy-50 bg-navy-500 flex flex-col justify-between items-center my-2">
+                    <div class="flex justify-between w-full p-4">
+                        <h3 class="font-semibold">Información sobre el evento</h3>
+                        <button id="infoBtn" onclick="mostrarContenido(seccionInfo)"><span class="material-symbols-outlined">info</span></button>
                     </div>
-                </article>
-                <article class="text-white bg-navy-500 flex flex-col p-4 gap-2 mt-2 md:hidden">
-                    <div class="flex items-center text-white w-full">
-                        <div class="text-xl font-semibold flex flex-wrap justify-around w-full">
-                            <h3>TOTAL</h3>
-                            <h4>US$ 8.00</h4>
+                    <div id="seccionInfo" class="text-navy-50 w-full bg-navy-300 p-4 hidden BOTONES-MOSTRAR">
+                        <div>
+                            <p class="text-navy-50 text-sm">
+                                SE PAGA POR PERSONA. POR CADA COMPRA SE ADJUDICA UNA SOLA ENTRADA DE COCHE.
+                                LA ACOMODACIÓN DE COCHES ES POR ORDEN DE LLEGADA Y TAMAÑO DEL COCHE.
+                                NO ESTÁ PERMITIDO INTRODUCIR ALIMENTOS AJENOS AL RECINTO.
+                            </p>
+                            <p class="text-navy-150">EL PARKING PREMIUM ASEGURA UBICACIÓN CON LA MEJOR VISIBILIDAD (COCHES SUV EN ADELANTE SE COLOCARÁN CENTRADOS ENTRE LAS FILAS 5, 6 Y 7).</p>
                         </div>
-                    </div>
-                    <div class="text-center">
-                        <button class="boton boton-grad">SIGUIENTE</button>
                     </div>
                 </article>
             </section>
             <!-- MOBILE CART -->
             <section class="lg:hidden flex justify-center">
-                <article class="fixed bottom-0 w-full bg-navy-300 ">
+                <article id="elementToObserve" class="fixed bottom-0 w-full bg-navy-300 hidden">
                     <div class="container flex flex-col">
                         <!-- ASIDE SUBTOTAL RESUMEN CART -->
                         
-                        <!-- <div class="text-white bg-navy-300 border-y border-dashed border-navy-100 p-4 ">
-                            <div class="text-white font-semibold p-1 flex justify-between">
-                                <h3>SUBTOTAL</h3>
-                                <h4>US$ 7.00</h4>
-                            </div>
-                            <div class="text-white font-semibold p-1 flex justify-between">
-                                <h3>CARGO POR SERVICIO</h3>
-                                <h4>US$ 1.00</h4>
-                            </div>
-                        </div> -->
+                        <div id="contenedor-precios-mobile" class="text-white bg-navy-300 border-y border-dashed border-navy-100 px-4 p-2 hidden">
+                            <!-- Carga de precios dinamico -->
+                            <article class="text-white bg-navy-300 flex p-4 gap-4">
+                                <div id="contenedorImgMobile" class="flex"></div>
+                                <div id="contenedorInfoMobile">
+                                    <div id="contenedorNombreMobile" class="font-semibold"></div>
+                                    <div id="contenedorHorarioMobile" class="mt-1"></div>
+                                    <div id="contenedorLugarMobile" class="mt-1"></div>
+                                    <div id="contenedorBoletoMobile" class="mt-1"></div>
+                                </div>
+                            </article>
+                        </div>                        
                         
                         <!-- ASIDE TOTAL RESUMEN CART TICKET -->
                     
-                        <div class="flex justify-between items-center text-white w-full p-4">
-                            <div class="text-xl w-1/2 font-semibold flex flex-wrap justify-around">
-                                <h3>TOTAL</h3>
-                                <h4>US$ 8.00</h4>
-                            </div>
-                            <div class="text-center w-1/2">
-                                <button class="boton boton-grad">COMPRAR</button>
-                            </div>
+                        <div class="flex justify-center items-center flex-wrap text-navy-50">
+                            <button id="boton-precios-mobile" class="flex justify-center items-center flex-wrap"></button>
+                        </div>
+                        <div id="contenedor-total-mobile" class="">
+                            <!-- carga de precio total js -->
                         </div>
                     
                     </div>
@@ -375,6 +361,7 @@
             <p class="border-t-[0.5px] border-stone-50/20 mx-16 w-full text-center p-3 text-xs">&copy Copyright &copy 2023 Mauro Laime.</p>
         </section>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/ticket.js"></script>
     <script src="../src/navbar.js"></script>
 </body>
