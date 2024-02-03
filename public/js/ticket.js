@@ -85,27 +85,17 @@ function mostrarNombreyPeliSeleccionada (){
     const CONTENEDOR_IMG = document.getElementById('contenedorImg');
     const CONTENEDOR_NOMBRE = document.getElementById('contenedorNombre');
     const CONTENEDOR_ADVERTENCIA = document.getElementById('textoAdvertencia');
-    const CONTENEDOR_IMG_MOBILE = document.getElementById('contenedorImgMobile');
-    const CONTENEDOR_NOMBRE_MOBILE = document.getElementById('contenedorNombreMobile');
-    /*const CONTENEDOR_ADVERTENCIA_MOBILE = document.getElementById('textoAdvertenciaMobile'); */
 
     let localStorag = JSON.parse(localStorage.getItem('movie'));
     if (!localStorag) {
         localStorag = []; // Si localStorag es null, asignar un array vacío
     }
-    console.log (typeof localStorag)
-    console.log(localStorag.length);
     if(Object.keys(localStorag).length > 0){
 
         CONTENEDOR_ADVERTENCIA.classList.add('hidden');
         CONTENEDOR_IMG.classList.remove('hidden');
         CONTENEDOR_IMG.innerHTML = '';
         CONTENEDOR_NOMBRE.innerHTML = '';
- 
-        CONTENEDOR_IMG_MOBILE.innerHTML = '';
-        CONTENEDOR_NOMBRE_MOBILE.innerHTML = '';
-        /*CONTENEDOR_ADVERTENCIA_MOBILE.classList.add('hidden');
-        CONTENEDOR_IMG_MOBILE.classList.remove('hidden');*/
     
         const img = document.createElement("img");
         img.className = "w-40";
@@ -113,12 +103,37 @@ function mostrarNombreyPeliSeleccionada (){
         img.alt = `poster promocional de ${localStorag.title}`;
     
         CONTENEDOR_IMG.appendChild(img);
-        CONTENEDOR_IMG_MOBILE.appendChild(img);
     
         const p = document.createElement('h1');
         p.textContent = `${localStorag.title}`
     
         CONTENEDOR_NOMBRE.appendChild(p);
+    }
+}
+function mostrarNombreyPeliSeleccionadaMobile (){
+    
+    const CONTENEDOR_IMG_MOBILE = document.getElementById('contenedorImgMobile');
+    const CONTENEDOR_NOMBRE_MOBILE = document.getElementById('contenedorNombreMobile');
+
+    let localStorag = JSON.parse(localStorage.getItem('movie'));
+    if (!localStorag) {
+        localStorag = []; // Si localStorag es null, asignar un array vacío
+    }
+    if(Object.keys(localStorag).length > 0){
+
+        CONTENEDOR_IMG_MOBILE.innerHTML = '';
+        CONTENEDOR_NOMBRE_MOBILE.innerHTML = '';
+    
+        const img = document.createElement("img");
+        img.className = "w-40";
+        img.src = `https://image.tmdb.org/t/p/w500/${localStorag.img}`;
+        img.alt = `poster promocional de ${localStorag.title}`;
+    
+        CONTENEDOR_IMG_MOBILE.appendChild(img);
+    
+        const p = document.createElement('h1');
+        p.textContent = `${localStorag.title}`
+    
         CONTENEDOR_NOMBRE_MOBILE.appendChild(p);
     }else{
         CONTENEDOR_IMG_MOBILE.innerHTML='';
@@ -556,6 +571,7 @@ window.addEventListener('scroll', handleScroll);
 handleScroll();
 
 mostrarNombreyPeliSeleccionada();
+mostrarNombreyPeliSeleccionadaMobile();
 actualizarCantidadProductos();
 mostrarLeyendaTickets();
 sesionInfo();
