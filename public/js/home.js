@@ -179,10 +179,6 @@ function crearContenidoModal(movie){
     buscarDirectorPeli(movie.id);
 }
 
-function retornarNombresGeneros(id){
-
-}
-
 function buscarDirectorPeli(id){
     
     const DIRECCION = document.getElementById('direccion');

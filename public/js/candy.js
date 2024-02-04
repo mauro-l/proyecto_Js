@@ -34,6 +34,82 @@ const BOTON_VERTODO = document.getElementById('botonReset');
 const CATEGORIAS = document.getElementById('categorias');
 const ORDENAR = document.getElementById('ordenar');
 
+function mostrarNombreyPeliSeleccionada (){
+
+    const CONTENEDOR_IMG = document.getElementById('contenedorImg');
+    const CONTENEDOR_NOMBRE = document.getElementById('contenedorNombre');
+    const CONTENEDOR_ADVERTENCIA = document.getElementById('textoAdvertencia');
+
+    let localStorag = JSON.parse(localStorage.getItem('movie'));
+    console.log(localStorag)
+    /* if (!localStorag) {
+        localStorag = [];
+    } */
+    if(localStorag){
+
+        CONTENEDOR_ADVERTENCIA.classList.add('hidden');
+        CONTENEDOR_IMG.classList.remove('hidden');
+        CONTENEDOR_IMG.innerHTML = '';
+        CONTENEDOR_NOMBRE.innerHTML = '';
+    
+        const img = document.createElement("img");
+        img.className = "w-40";
+        img.src = `https://image.tmdb.org/t/p/w500/${localStorag.img}`;
+        img.alt = `poster promocional de ${localStorag.title}`;
+    
+        CONTENEDOR_IMG.appendChild(img);
+    
+        const p = document.createElement('h1');
+        p.textContent = `${localStorag.title}`
+    
+        CONTENEDOR_NOMBRE.appendChild(p);
+
+        /* horario y fecha de la funcion */
+
+        const { funcion } = localStorag;
+
+        const CONTENEDOR_HORARIO_DESKTOP = document.getElementById('contenedorHorario');
+        
+        CONTENEDOR_HORARIO_DESKTOP.innerHTML = '';
+        
+        let horario = document.createElement("p");
+        horario.textContent = `${funcion.dia} ${funcion.horario} hs`;
+        CONTENEDOR_HORARIO_DESKTOP.appendChild(horario);
+
+        /* parking */
+
+        const parking = localStorag.boletos.find ((ticket) => ticket.nombre.includes("Parking"))
+
+        const CONTENEDOR_LUGAR_DESKTOP = document.getElementById('contenedorLugar');
+        CONTENEDOR_LUGAR_DESKTOP.innerHTML = '';
+    
+        let parkings = document.createElement("p");
+        parkings.textContent = parking.nombre;
+        CONTENEDOR_LUGAR_DESKTOP.appendChild(parkings);
+        
+        /*cantidad boletos */
+
+        const CONTENEDOR_BOLETOS = document.getElementById('contenedorBoleto');
+        const BOLETOS = localStorag.boletos.filter(boleto => !boleto.nombre.includes("Parking"));
+
+        CONTENEDOR_BOLETOS.innerHTML = '';
+
+        BOLETOS.forEach(producto =>{
+            
+            if(producto.tickets > 0){
+
+                let boletosDiv = document.createElement("div");
+                boletosDiv.className = "flex items-center justify-between gap-4 text-navy-50/50"
+            
+                boletosDiv.innerHTML = `                
+                <h2>${producto.nombre} ${producto.tickets > 1 ? `x ${producto.tickets}`: ''}</h2>
+                `    
+                CONTENEDOR_BOLETOS.appendChild(boletosDiv);
+            }
+        })
+    }
+}
+
 function iniciarCandy(){
     
     const productoDescendente = (a, b) => a.precioFinal - b.precioFinal;
@@ -540,6 +616,7 @@ window.addEventListener('scroll', handleScroll);
 // Llama a handleScroll al cargar la página para manejar la posición inicial
 handleScroll();
 
+mostrarNombreyPeliSeleccionada();
 actualizarCantidadProductos();
 mostrarCarrito();
 botonPrecioMobile();

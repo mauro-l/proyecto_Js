@@ -143,8 +143,6 @@ function mostrarNombreyPeliSeleccionadaMobile (){
 
         CONTENEDOR_IMG_MOBILE.appendChild(div);
     }
-    
-
 }
 
 function guardarDatos (){
@@ -295,7 +293,7 @@ function mostrarResumenCompraMobile (){
                 <button onclick="eliminarTicket(${producto.id})"><span class="material-symbols-outlined">delete</span></button>
             </div>
     
-            <div id="listaProductos" class="flex justify-between w-full">
+            <div class="flex justify-between w-full">
                 <h2>${producto.nombre} ${producto.tickets > 1 ? `x ${producto.tickets}`: ''}</h2>
                 <h3>US$ ${(producto.precio * producto.tickets).toFixed(2)}</h3>
             </div>
@@ -303,15 +301,7 @@ function mostrarResumenCompraMobile (){
             CONTENEDOR_CARRITO_MOBILE.appendChild(div);
         }
     })
-
-    let sumaTickets = ENTRADAS.reduce((total, entrada) => total + entrada.tickets, 0);
-    if(sumaTickets === 0){
-        CONTENEDOR_CARRITO_MOBILE.innerHTML = '';
-        let div = document.createElement("div");
-        div.innerHTML = '<h2 class="text-center">¡Oops! Parece que tu carrito está vacio</h2>';
-        CONTENEDOR_CARRITO_MOBILE.appendChild(div);
-    }
-
+    
     mostrarPreciosMobile();
     mostrarPreciosDesktop();
 }
@@ -361,7 +351,6 @@ function mostarListadoLugar(){
     if(datosLugar){
         let p = document.createElement("p");
         p.textContent = datosLugar.nombre;
-        p.id = `listado${datosLugar.id}`;
         CONTENEDOR_LUGAR_MOBILE.appendChild(p);
     }
     
@@ -372,7 +361,6 @@ function mostarListadoLugar(){
     if(datosLugar){
         let p = document.createElement("p");
         p.textContent = datosLugar.nombre;
-        p.id = `listado${datosLugar.id}`;
         CONTENEDOR_LUGAR_DESKTOP.appendChild(p);
     }
 }
@@ -498,32 +486,6 @@ function flechaBtnMobile(){
     })
 }
 
-// agregar productos al localStorage
-function agregarAlCarrito (id , nombre, precio) {
-    
-    let boletos = JSON.parse(localStorage.getItem('carrito')) || [];
-    const productoEnCarrito = carrito.find(producto => producto.id === id);
-    
-    // Filtra los elementos de ENTRADAS que tienen más de un ticket
-    const BOLETOS = ENTRADAS.slice(0, 4);
-    const entradasConMasDeUnTicket = BOLETOS.filter(entrada => entrada.tickets > 1);
-
-    // Guarda los elementos filtrados en el localStorage
-    localStorage.setItem('entradasConMasDeUnTicket', JSON.stringify(entradasConMasDeUnTicket));
-
-    if (productoEnCarrito)
-    {
-        productoEnCarrito.cantidad++;
-    }else
-    {
-        carrito.push({id, nombre, precio, cantidad: 1});
-    }
-
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-    console.log('carrito' + carrito);
-    mostrarCarrito();
-}
-
 function agregarAlLocalStorage(){
 
     if(datosFuncion.dia && datosFuncion.horario){
@@ -531,9 +493,16 @@ function agregarAlLocalStorage(){
             const BOLETOS = ENTRADAS.slice(0, 4);
             console.log('boletos datos lugar: ', BOLETOS)
             const entradasConMasDeUnTicket = BOLETOS.some(entrada => entrada.tickets > 0);
-            if(entradasConMasDeUnTicket){
-                const hayMasDeUnTicket = ENTRADAS.filter(entrada => entrada.tickets > 0);
-                console.log('es true!! 3', hayMasDeUnTicket)
+            if(entradasConMasDeUnTicket)
+            {
+                const boletosFinal = ENTRADAS.filter(entrada => entrada.tickets > 0);
+
+                let datosAnteriores = JSON.parse(localStorage.getItem('movie'));
+                datosAnteriores = { ...datosAnteriores, funcion: datosFuncion, boletos: boletosFinal };
+
+                localStorage.setItem('movie', JSON.stringify(datosAnteriores));
+                console.log(datosAnteriores);
+                window.location.href = '/pages/tickets.html';
             }else{
                 toasty("Seleccione las entradas!!");
                 mostrarContenido(seccionPrecio);
@@ -548,15 +517,13 @@ function agregarAlLocalStorage(){
     }
 }
 
-
-
 /* solucion parcial a la superposicion entre el carrito mobile y el carrito de precio final */
 const elementToObserve = document.getElementById('elementToObserve');
 function handleScroll() {
     const scrollPosition = window.scrollY;
     const windowHeight = window.innerHeight;
     const triggerPoint = windowHeight * 0.25;
-
+    
     if (scrollPosition > triggerPoint) {
         // Si el usuario ha scrollado más del 25%, haz el elemento visible
         elementToObserve.classList.remove('hidden');

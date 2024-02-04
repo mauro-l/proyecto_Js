@@ -18,7 +18,7 @@
             <div class="lg:flex hidden justify-evenly items-center">
                 <ul class="flex gap-6">
                     <li><a href="../index.html">Inicio</a></li>
-                    <li><a href="#">Entradas</a></li>
+                    <li><a href="./tickets.html">Entradas</a></li>
                     <li><a href="./candy.html">Candy</a></li>
                     <li><a href="#">Contacto</a></li>
                 </ul>
@@ -70,6 +70,23 @@
             </div>
         </article>
     </section>
+    <!-- RESUMEN CANDY MOBILE -->
+    <section class="lg:hidden flex justify-center">
+        <article class="w-full bg-navy-300 ">
+            <div class="text-navy-50 text-sm bg-navy-300 border-b border-dashed border-navy-100 p-4 flex justify-between items-center">
+                <div class="ml-1">
+                    <h3 class="flex">PRODUCTOS CANDY:  <span class="font-bold ml-2" id="cantidad-producto-mobile"></span></h3>                                
+                </div>
+                <button id="mostrar-candy-mobile" class="mr-2 text-center cursor-pointer">
+                    <h3>VER RESUMEN<br> DEL CANDY</h3>
+                </button>
+            </div>
+            <!-- CONTENEDOR PRECIO MOBILE -->
+            <div id="contenedor-candy-mobile" class="text-white bg-navy-300 border-y border-dashed border-navy-100 p-4 hidden">
+                <!-- se completa mediante js -->
+            </div>
+        </article>
+    </section>
     <main class="w-11/12 mx-auto container p-4 lg:p-8">
         <div class="grid gap-4 grid-cols-1 grid-rows-3 lg:grid-rows-2 lg:grid-cols-5 mx-auto">
             <!-- ASIDE GRID TICKET -->
@@ -79,11 +96,8 @@
                     <h1 class="text-white text-center font-semibold text-3xl border-b border-dashed border-navy-100 pb-4">RESUME CART</h1>
                 </article>
                 <!-- ASIDE FILM RESUME -->
-                <article class="text-white bg-navy-300 border-x border-navy-100 flex p-4 pb-10 gap-4">                    
-                    <div id="contenedorInfo">
-                        <h3>Pelicula seleccionada</h3>
-                    </div>
-                    <div id="contenedorLugar"></div>
+                <article class="text-white bg-navy-300 border-x border-navy-100 flex px-4 pb-10 gap-4 CONTENEDOR_RESUMEN">
+                    <!-- Se completa mediante js -->
                 </article>
                 <!-- ASIDE BODY RESUMEN CART -->
                 <article class="border-solid border-x border-navy-100">
@@ -101,74 +115,162 @@
                 </article>
                 <!-- ASIDE SUBTOTAL RESUMEN CART -->
                 <article class="border-solid border-x border-navy-100">
-                    <div class="text-white bg-navy-300 border-y border-dashed border-navy-100 p-4 ">
-                        <div class="text-white font-semibold p-1 flex justify-between">
+                    <div id="contenedorSubtotal" class="text-white bg-navy-300 border-y border-dashed border-navy-100 p-4 flex flex-col gap-1 font-semibold">
+                        <div class="px-1 flex justify-between">
                             <h3>SUBTOTAL</h3>
-                            <h4>US$ 7.00</h4>
+                            <h4 id="subtotalFinal">0</h4>
                         </div>
-                        <div class="text-white font-semibold p-1 flex justify-between">
-                            <h3>CARGO POR SERVICIO</h3>
-                            <h4>US$ 1.00</h4>
+                        <div id="descSocios" class="px-1 hidden">
+                            <div class="flex justify-between text-green-400 ">
+                                <h3>DESCUENTOS SOCIOS</h3>
+                                <h4>20%</h4>
+                            </div>
+                        </div>
+                        <div id="codPromo" class="px-1 hidden">
+                            <div class="flex justify-between text-green-400 ">
+                                <h3>CODIGO PROMOCIONAL</h3>
+                                <h4>80%</h4>
+                            </div>
                         </div>
                     </div>
                 </article>
                 <!-- ASIDE TOTAL RESUMEN CART TICKET -->
-                <article class="text-white p-4 flex flex-col gap-3 bg-navy-500 border-solid border-b border-x border-navy-100">
+                <article class="text-white p-4 flex flex-col bg-navy-500 border-solid border-b border-x border-navy-100">
                     <div class="text-3xl font-semibold flex justify-around">
                         <h3>TOTAL</h3>
-                        <h4>US$ 8.00</h4>
-                    </div>
-                    <div class="text-center my-2">
-                        <a href="./candy.html" class="boton boton-grad">SIGUIENTE</a>
+                        <h4 id="totalFinal"></h4>
                     </div>
                 </article>
             </section>
             <!-- BODY GRID SHOP -->
             <section class="lg:col-span-3 lg:row-start-1 row-span-full lg:relative lg:z-20 xl:static">
+                <!-- RESUME MOBILE SECCION -->
+                <article class="text-white bg-navy-500 flex md:hidden items-center p-4 gap-3 CONTENEDOR_RESUMEN">
+                    <!-- Se completa dinamicamente mediante js -->
+                </article>
                 <!-- LOGIN SECCION -->
                 <article id="seccionLogin" class="text-white bg-navy-500 flex flex-wrap md:flex-nowrap justify-between items-center my-2 p-8 gap-6">
                     <!-- Se completa dinamicamente mediante js -->
                 </article>
-                <!-- INFORMACION LUGARES -->
-                <article class="text-white bg-navy-500 flex flex-col p-8 gap-2">
-                    <h3 class="flex gap-4"><span class="material-symbols-outlined">info</span>Información sobre el evento</h3>
-                    <div class="hidden">
-                        <p class="text-navy-50 text-sm">
-                            SE PAGA POR PERSONA. POR CADA COMPRA SE ADJUDICA UNA SOLA ENTRADA DE COCHE.
-                            LA ACOMODACIÓN DE COCHES ES POR ORDEN DE LLEGADA Y TAMAÑO DEL COCHE.
-                            NO ESTÁ PERMITIDO INTRODUCIR ALIMENTOS AJENOS AL RECINTO.
-                        </p>
-                        <p class="text-navy-150"><strong>EL PARKING PREMIUM ASEGURA UBICACIÓN CON LA MEJOR VISIBILIDAD (COCHES SUV EN ADELANTE SE COLOCARÁN CENTRADOS ENTRE LAS FILAS 5, 6 Y 7).</strong></p>
+                <article id="seccionDatosUsuario" class="text-white bg-navy-500 my-2 p-6 gap-6 hidden">
+                    <div class="w-full">
+                        <h3 class="md:text-3xl text-xl pr-4 pb-5 font-semibold border-b border-dashed border-navy-100">Compra sin registrarse</h3>
+                        <form class="flex flex-col w-full justify-between mt-3">
+                            <!-- FORMULARIO NOMBRE USUARIO -->
+                            <div class="flex flex-1 flex-wrap lg:flex-nowrap">
+                                <div class="flex flex-col pr-4 text-white/70 w-full">
+                                    <label for="name"></label>
+                                    <input class="bg-transparent border-t-transparent border-x-transparent border-b-navy-100 border-b-solid mb-3" id="name" name="name" placeholder="Nombre completo..." autocomplete="off" required>
+                                </div>
+                                <div class="flex flex-col pr-4 text-white/70 w-full">
+                                    <label for="username"></label>
+                                    <input type="email" class="bg-transparent border-t-transparent border-x-transparent border-b-navy-100 border-b-solid mb-3" id="username" name="username" placeholder="Email..." autocomplete="off" required>
+                                </div>
+                            </div>
+                            <div class="flex flex-1 flex-wrap lg:flex-nowrap">
+                                <div class="flex flex-col pr-4 text-white/70 w-full">
+                                    <label for="phone"></label>
+                                    <input class="bg-transparent border-t-transparent border-x-transparent border-b-navy-100 border-b-solid mb-3" id="phone" name="phone" placeholder="Celular..." autocomplete="off" required>
+                                </div>
+                                <div class="text-center w-full">
+                                    <button type="submit" class="m-2 mb-2 boton boton-grad">SIGUIENTE</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </article>
-                <article class="text-white bg-navy-500 flex flex-col p-4 gap-2 mt-2 md:hidden">
-                    <div class="flex items-center text-white w-full">
-                        <div class="text-xl font-semibold flex flex-wrap justify-around w-full">
-                            <h3>TOTAL</h3>
-                            <h4>US$ 8.00</h4>
+                <!-- PROMO CODE -->
+                <article id="seccionLogin" class="text-white bg-navy-500 my-2 p-6 gap-6">
+                    <div class="w-full">
+                        <div class="border-b border-dashed border-navy-100 flex flex-wrap items-center pr-4 pb-5 ">
+                            <h3 class="md:text-3xl text-xl font-semibold">Codigo de Descuento</h3>
+                            <p class="text-navy-50/50 text-xs md:text-base mx-3">("GO TO SHOP")</p>
+                        </div>
+                        <div class="flex flex-col w-full justify-between pt-3 md:pt-5">
+                            <div class="flex flex-1 flex-wrap lg:flex-nowrap">
+                                <div class="flex flex-col pr-4 text-white/70 w-full">
+                                    <label for="code"></label>
+                                    <input class="bg-transparent border-t-transparent border-x-transparent border-b-navy-100 border-b-solid mb-3" id="code" name="code" placeholder="Ingrese codigo de descuento..." autocomplete="off" required>
+                                </div>
+                                <div class="text-center w-full">
+                                    <button onclick="aplicarDescuento()" class="m-2 mb-2 boton boton-grad">SIGUIENTE</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="text-center">
-                        <button class="boton boton-grad">SIGUIENTE</button>
+                </article>
+                <!-- PASARELA DE PAGO -->
+                <article id="seccionDatosUsuario" class="text-white bg-navy-500 my-2 p-6 gap-6">
+                    <div class="flex flex-col mb-2">
+                        <h3 class="md:text-3xl text-xl pr-4 pb-3 font-semibold">Opciones de pago</h3>
+                        <div class="flex items-center align-middle flex-wrap gap-3">
+                            <div class="cursor-pointer rounded-md border-[#4441e7] border-solid border-2 w-[90px] h-[100px] flex items-center justify-center">
+                                <div>
+                                    <img src="../asset/icon/card.png" alt="">
+                                    <p class="text-center">Debito</p>
+                                </div>                        
+                            </div>
+                            <div class="cursor-pointer rounded-md border-navy-100 border-solid border-2 w-[90px] h-[100px] flex items-center justify-center">
+                                <div>
+                                    <img src="../asset/icon/card.png" alt="">
+                                    <p class="text-center">Credito</p>
+                                </div>                        
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full">
+                        <h3 class="md:text-2xl text-xl pr-4 py-2 font-semibold">Datos de la tarjeta</h3>
+                        <form class="flex flex-col w-full justify-between mt-3">
+                            <!-- FORMULARIO NOMBRE USUARIO -->
+                            <div class="flex flex-1 flex-wrap lg:flex-nowrap">
+                                <div class="flex flex-col pr-4 text-white/70 w-full">
+                                    <label for="tarjeta">Numero de la tarjeta</label>
+                                    <input class="bg-transparent rounded-md border-navy-100 border-solid mb-3" id="tarjeta" name="tarjeta" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="flex flex-1 flex-wrap lg:flex-nowrap">
+                                <div class="flex flex-col pr-4 text-white/70 w-full">
+                                    <label for="titular">Titular de la tarjeta</label>
+                                    <input class="bg-transparent rounded-md border-navy-100 border-solid mb-3" id="titular" name="titular" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="flex flex-1 flex-wrap lg:flex-nowrap">
+                                <div class="flex flex-col pr-4 text-white/70 w-full">
+                                    <label for="expiracion">Fecha de vencimiento</label>
+                                    <input class="bg-transparent rounded-md border-navy-100 border-solid mb-3" id="expiracion" name="expiracion" placeholder="MM/YY" autocomplete="off">
+                                </div>
+                                <div class="flex flex-col pr-4 text-white/70 w-full">
+                                    <label for="cvv">Codigo de seguridad</label>
+                                    <input class="bg-transparent rounded-md border-navy-100 border-solid mb-3" id="cvv" name="cvv" placeholder="CVV" autocomplete="off">
+                                </div>
+                            </div>
+                        </form>
+                        <div class="flex flex-col flex-1">
+                            <div class="my-2">
+                                <input type="checkbox" class="bg-navy-150/20 mr-2 rounded-md" name="terms1" id="terms" required>Acepto los <span class="text-green-400 font-semibold cursor-pointer">Términos, la Política de Privacidad </span> y <span class="text-green-400 font-semibold cursor-pointer">condiciones</span> 
+                            </div>
+                            <div class="text-center mt-4">
+                                <button id="finalizarCompra" onclick="finalizarCompra()" class="boton boton-grad">COMPRAR</button>
+                            </div>
+                        </div>
                     </div>
                 </article>
             </section>
             <!-- MOBILE CART -->
             <section class="lg:hidden flex justify-center">
-                <article class="fixed bottom-0 w-full bg-navy-300 ">
+                <article id="elementToObserve" class="fixed bottom-0 w-full bg-navy-300 hidden">
                     <div class="container flex flex-col">
-
-                        <!-- ASIDE TOTAL RESUMEN CART TICKET -->                    
-                        <div class="flex justify-between items-center text-white w-full p-4">
-                            <div class="text-xl w-1/2 font-semibold flex flex-wrap justify-around">
-                                <h3>TOTAL</h3>
-                                <h4>US$ 8.00</h4>
-                            </div>
-                            <div class="text-center w-1/2">
-                                <button class="boton boton-grad">COMPRAR</button>
-                            </div>
+                        <!-- MOBILE SUBTOTAL RESUMEN CART -->
+                        <div id="contenedor-precios-mobile" class="text-white bg-navy-300 border-y border-dashed border-navy-100 px-4 p-2 hidden">
+                            <!-- Carga de precios dinamico -->                            
+                        </div>                        
+                        <!-- MOBILE TOTAL RESUMEN CART TICKET -->                    
+                        <div class="flex justify-center items-center flex-wrap text-navy-50">
+                            <button id="boton-precios-mobile" class="flex justify-center items-center flex-wrap"></button>
                         </div>
-                    
+                        <div id="contenedor-total-mobile" class="">
+                            <!-- carga de precio total js -->
+                        </div>
                     </div>
                 </article>
             </section>
@@ -209,8 +311,8 @@
             <p class="border-t-[0.5px] border-stone-50/20 mx-16 w-full text-center p-3 text-xs">&copy Copyright &copy 2023 Mauro Laime.</p>
         </section>
     </footer>
-    <script src="../js/ticket.js"></script>
-    <script src="../src/navbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../src/navbar.js"></script>
+    <script src="../js/checkout.js"></script>
 </body>
 </html>

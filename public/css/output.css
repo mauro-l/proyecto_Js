@@ -1141,6 +1141,16 @@ html {
   margin-bottom: 2rem;
 }
 
+.my-auto{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.my-3{
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
 .mb-1{
   margin-bottom: 0.25rem;
 }
@@ -1201,6 +1211,18 @@ html {
   margin-top: 1.5rem;
 }
 
+.mt-5{
+  margin-top: 1.25rem;
+}
+
+.mt-4{
+  margin-top: 1rem;
+}
+
+.mt-7{
+  margin-top: 1.75rem;
+}
+
 .block{
   display: block;
 }
@@ -1253,6 +1275,14 @@ html {
   height: 100vh;
 }
 
+.h-28{
+  height: 7rem;
+}
+
+.h-\[100px\]{
+  height: 100px;
+}
+
 .max-h-\[100px\]{
   max-height: 100px;
 }
@@ -1263,6 +1293,18 @@ html {
 
 .max-h-screen{
   max-height: 100vh;
+}
+
+.max-h-\[48px\]{
+  max-height: 48px;
+}
+
+.max-h-\[28px\]{
+  max-height: 28px;
+}
+
+.max-h-\[58px\]{
+  max-height: 58px;
 }
 
 .w-1\/2{
@@ -1324,6 +1366,14 @@ html {
 .w-max{
   width: -moz-max-content;
   width: max-content;
+}
+
+.w-24{
+  width: 6rem;
+}
+
+.w-\[90px\]{
+  width: 90px;
 }
 
 .min-w-\[100px\]{
@@ -1454,10 +1504,6 @@ html {
   gap: 1.5rem;
 }
 
-.gap-8{
-  gap: 2rem;
-}
-
 .-space-x-px > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
   margin-right: calc(-1px * var(--tw-space-x-reverse));
@@ -1561,6 +1607,10 @@ html {
   border-top-width: 0.5px;
 }
 
+.border-b-2{
+  border-bottom-width: 2px;
+}
+
 .border-solid{
   border-style: solid;
 }
@@ -1608,6 +1658,19 @@ html {
 
 .border-white\/20{
   border-color: rgb(255 255 255 / 0.2);
+}
+
+.border-\[\#4441e7\]{
+  --tw-border-opacity: 1;
+  border-color: rgb(68 65 231 / var(--tw-border-opacity));
+}
+
+.border-navy-100\/50{
+  border-color: rgb(17 50 111 / 0.5);
+}
+
+.border-navy-100\/70{
+  border-color: rgb(17 50 111 / 0.7);
 }
 
 .border-x-transparent{
@@ -1828,6 +1891,10 @@ html {
   padding: 2rem;
 }
 
+.p-7{
+  padding: 1.75rem;
+}
+
 .px-2{
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -1873,6 +1940,11 @@ html {
   padding-bottom: 1.25rem;
 }
 
+.px-1{
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
 .pb-10{
   padding-bottom: 2.5rem;
 }
@@ -1889,12 +1961,8 @@ html {
   padding-bottom: 1.25rem;
 }
 
-.pb-8{
-  padding-bottom: 2rem;
-}
-
-.pr-5{
-  padding-right: 1.25rem;
+.pr-4{
+  padding-right: 1rem;
 }
 
 .pt-10{
@@ -1909,12 +1977,28 @@ html {
   padding-top: 13rem;
 }
 
+.pt-5{
+  padding-top: 1.25rem;
+}
+
+.pb-3{
+  padding-bottom: 0.75rem;
+}
+
+.pl-6{
+  padding-left: 1.5rem;
+}
+
 .text-center{
   text-align: center;
 }
 
 .text-start{
   text-align: start;
+}
+
+.align-middle{
+  vertical-align: middle;
 }
 
 .font-serif{
@@ -1971,6 +2055,10 @@ html {
 
 .font-semibold{
   font-weight: 600;
+}
+
+.uppercase{
+  text-transform: uppercase;
 }
 
 .leading-3{
@@ -2039,11 +2127,6 @@ html {
   color: rgb(127 29 29 / var(--tw-text-opacity));
 }
 
-.text-sky-700{
-  --tw-text-opacity: 1;
-  color: rgb(3 105 161 / var(--tw-text-opacity));
-}
-
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -2059,6 +2142,26 @@ html {
 
 .text-white\/80{
   color: rgb(255 255 255 / 0.8);
+}
+
+.underline{
+  text-decoration-line: underline;
+}
+
+.decoration-white{
+  text-decoration-color: #fff;
+}
+
+.decoration-pink-500{
+  text-decoration-color: #ec4899;
+}
+
+.decoration-solid{
+  text-decoration-style: solid;
+}
+
+.opacity-0{
+  opacity: 0;
 }
 
 .shadow-sm{
@@ -2409,6 +2512,10 @@ html {
     position: absolute;
   }
 
+  .md\:block{
+    display: block;
+  }
+
   .md\:flex{
     display: flex;
   }
@@ -2419,6 +2526,10 @@ html {
 
   .md\:h-screen{
     height: 100vh;
+  }
+
+  .md\:max-h-full{
+    max-height: 100%;
   }
 
   .md\:w-1\/3{
@@ -2464,6 +2575,25 @@ html {
   .md\:py-40{
     padding-top: 10rem;
     padding-bottom: 10rem;
+  }
+
+  .md\:pt-5{
+    padding-top: 1.25rem;
+  }
+
+  .md\:text-3xl{
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  .md\:text-2xl{
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .md\:text-base{
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 
   .md\:shadow-none{
@@ -2558,6 +2688,10 @@ html {
 
   .lg\:flex-col{
     flex-direction: column;
+  }
+
+  .lg\:flex-nowrap{
+    flex-wrap: nowrap;
   }
 
   .lg\:justify-center{
