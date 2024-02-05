@@ -520,7 +520,7 @@ function mostrarPreciosMobile(){
         <h4>US$ ${totalCarrito > 1 ? (totalCarrito + 1).toFixed(2) : totalCarrito.toFixed(2)}</h4>
     </div>
     <div class="text-center w-1/2">
-        <button class="boton boton-grad">COMPRAR</button>
+        <a href="./checkout.html" class="boton boton-grad">COMPRAR</a>
     </div>
     `
     CONTENEDOR_TOTAL_MOBILE.appendChild(total);   
