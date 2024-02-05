@@ -502,7 +502,7 @@ function agregarAlLocalStorage(){
 
                 localStorage.setItem('movie', JSON.stringify(datosAnteriores));
                 console.log(datosAnteriores);
-                window.location.href = '/pages/tickets.html';
+                window.location.href = '/pages/candy.html';
             }else{
                 toasty("Seleccione las entradas!!");
                 mostrarContenido(seccionPrecio);
