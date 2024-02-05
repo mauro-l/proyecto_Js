@@ -98,7 +98,7 @@ function mostrarNombreyPeliSeleccionada (){
         CONTENEDOR_NOMBRE.innerHTML = '';
     
         const img = document.createElement("img");
-        img.className = "w-40";
+        img.className = "w-40 h-52";
         img.src = `https://image.tmdb.org/t/p/w500/${localStorag.img}`;
         img.alt = `poster promocional de ${localStorag.title}`;
     
@@ -318,7 +318,7 @@ function listadoBoletos (){
         if(producto.tickets > 0){
 
             let div = document.createElement("div");
-            div.className = "flex items-center justify-between gap-4 text-navy-50/50"
+            div.className = "flex items-center justify-between gap-4 text-navy-50/70 text-sm"
     
             div.innerHTML = `                
             <h2>${producto.nombre} ${producto.tickets > 1 ? `x ${producto.tickets}`: ''}</h2>

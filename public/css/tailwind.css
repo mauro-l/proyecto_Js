@@ -43,6 +43,15 @@
         background: url('../asset/bg-img/transparentNav.png'),linear-gradient(270deg, #10069f 0, #9b26b6 100%); 
         box-shadow: 0 5px 2px 0 rgb(0 0 0 / 30%);
     }
+    .news-grad{
+        border-radius: 1.5rem;        
+        background-image: -webkit-linear-gradient(0deg, #7400ba 0%, #0f5ae0 100%);
+        opacity: 0.8;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
     .pg-active{
         @apply relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600;
     }

@@ -80,6 +80,9 @@ function sliderPosterPromocional(param){
         }
     });
 
+    const generosRecorte = generos.slice(0, 2);
+    const generosMobile = generosRecorte.join(", ");
+
     const div = document.createElement("div");
     div.className = "swiper-slide relative";
 
@@ -89,28 +92,35 @@ function sliderPosterPromocional(param){
     img.alt = `poster promocional de ${param.title}`;
 
     const innerDiv = document.createElement("div");
-    innerDiv.className = "hidden absolute text-start md:flex flex-col gap-3 p-6 text-white/80 top-1/3 left-28 w-4/5 bg-[#1702026b]";
+    //innerDiv.className = "hidden absolute text-start md:flex flex-col gap-3 p-6 text-white/80 top-1/3 left-28 w-4/5 bg-[#1702026b]";
+    innerDiv.className = "absolute text-start flex flex-col md:gap-3 md:p-6 text-white/80 md:top-1/3 md:left-28 w-4/5 bg-[#1702026b]";
 
+    const generosSlider = generos.join(' ');
     const genre = document.createElement("h5");
-    genre.className = "text-white/50 text-sm font-bold";
-    genre.textContent = `${generos}`;
+    genre.className = "text-white/50 text-sm font-bold hidden md:block uppercase";
+    genre.textContent = `${generosSlider}`;
+    
+    const genreMobile = document.createElement("h5");
+    genreMobile.className = "text-white/50 text-xs font-bold md:hidden";
+    genreMobile.textContent = `${generosMobile}`;
 
     const title = document.createElement("h2");
-    title.className = "text-6xl font-semibold";
+    title.className = "md:text-6xl text-2xl font-semibold";
     title.textContent = `${param.title}`;
 
     const subtitle = document.createElement("p");
-    subtitle.className = "text-base mb-2";
+    subtitle.className = "text-xs md:text-base  mb-2";
     subtitle.textContent = `${param.original_title}`;
 
     const link = document.createElement("div");
-    const linkButton = document.createElement("a");
-    linkButton.href = "#inicioCartelera";
-    linkButton.className = "boton";
+    const linkButton = document.createElement("button");
+    linkButton.onclick = function(){infoPelicula(`c${param.id}`)};
+    linkButton.className = "boton hidden md:block";
     linkButton.textContent = "VER MAS";
     link.appendChild(linkButton);
 
     innerDiv.appendChild(genre);
+    innerDiv.appendChild(genreMobile);
     innerDiv.appendChild(title);
     innerDiv.appendChild(subtitle);
     innerDiv.appendChild(link);
@@ -124,7 +134,13 @@ function sliderPosterPromocional(param){
 
 function infoPelicula(id) {
 
-    fetch(`https://api.themoviedb.org/3/movie/${id}?language=es-ES`, options)
+    let verificado = id;
+
+    if(verificado.charAt(0) === "c"){
+        verificado = verificado.substring(1);
+    }
+
+    fetch(`https://api.themoviedb.org/3/movie/${verificado}?language=es-ES`, options)
     .then(response => response.json())
     .then(data =>{
         crearContenidoModal(data);
@@ -134,7 +150,6 @@ function infoPelicula(id) {
 
 function crearContenidoModal(movie){
 
-    console.log('funcion crear modal', movie);
     POSTER_PATCH = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
     
     MENU_INFO.innerHTML = '';
@@ -152,8 +167,6 @@ function crearContenidoModal(movie){
         }
     });
 
-    console.log('generos', generos);
-
     MENU_INFO.innerHTML = `
                         <button onclick="cerrarModal()" class="flex justify-end w-full pb-5 px-5">
                             <span class="material-symbols-outlined">close</span>
@@ -170,10 +183,10 @@ function crearContenidoModal(movie){
                         <div class="flex justify-center items-center flex-wrap text-navy-50">
                             <button onclick="desplegarCarrito()" id="aside-carrito-desktop" class="flex justify-center items-center flex-wrap"><span class="material-symbols-outlined text-navy-150">keyboard_double_arrow_down</span></button>
                         </div>
-                        <p class="my-2"><strong>Duracion: </strong>${horas}h ${minutos}m</p>
-                        <p class="my-2"><strong>Genero: </strong>${generos}</p>
+                        <p class="my-2"><strong>Duración: </strong>${horas}h ${minutos}m</p>
+                        <p class="my-2"><strong>Género: </strong>${generos}</p>
                         <p id="direccion" class="my-2"></p>
-                        <p class="my-2"><strong>Calificacion:</strong>${movie.vote_average.toFixed(1)}</p>
+                        <p class="my-2"><strong>Calificación:</strong>${movie.vote_average.toFixed(1)}</p>
                         <button onclick="comprarEntradas('${movie.poster_path}', '${movie.title}')" class="boton my-4">COMPRAR</button>
     `
     buscarDirectorPeli(movie.id);
@@ -204,7 +217,6 @@ function buscarDirectorPeli(id){
 
 function cerrarModal(){
     MENU_INFO.classList.add('hidden');
-    console.log('boton');
 }
 
 function comprarEntradas(img, title){
@@ -255,5 +267,4 @@ function slider(){
         }
       }
     });
-    console.log('dentro de slider.js');
   }

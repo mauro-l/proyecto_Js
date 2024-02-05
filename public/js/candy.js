@@ -5,7 +5,6 @@ const URL_PRODUCTOS = '../js/productos.json';
 fetch(URL_PRODUCTOS)
     .then(res => res.json())
     .then(data =>{
-        console.log('dentro del then', data);
         PRODUCTOS = data.map(producto =>{
             const precioFinal = calcularPrecioFinal(producto);
             return { ...producto, precioFinal };
@@ -14,6 +13,8 @@ fetch(URL_PRODUCTOS)
         iniciarCandy();
     })
 .catch(error => console.log('error al cargar los productos', error));
+
+const SESION_INICIADA = JSON.parse(localStorage.getItem('sesionIniciada'));
 
 /* mobile */
 const CONTENEDOR_PRODUCTOS = document.getElementById('productos');
@@ -41,10 +42,7 @@ function mostrarNombreyPeliSeleccionada (){
     const CONTENEDOR_ADVERTENCIA = document.getElementById('textoAdvertencia');
 
     let localStorag = JSON.parse(localStorage.getItem('movie'));
-    console.log(localStorag)
-    /* if (!localStorag) {
-        localStorag = [];
-    } */
+
     if(localStorag){
 
         CONTENEDOR_ADVERTENCIA.classList.add('hidden');
@@ -52,12 +50,21 @@ function mostrarNombreyPeliSeleccionada (){
         CONTENEDOR_IMG.innerHTML = '';
         CONTENEDOR_NOMBRE.innerHTML = '';
     
-        const img = document.createElement("img");
-        img.className = "w-40";
-        img.src = `https://image.tmdb.org/t/p/w500/${localStorag.img}`;
-        img.alt = `poster promocional de ${localStorag.title}`;
-    
-        CONTENEDOR_IMG.appendChild(img);
+        
+        if(localStorag.img){
+            const img = document.createElement("img");
+            img.className = "w-40 h-52";
+            img.src = `https://image.tmdb.org/t/p/w500/${localStorag.img}`;
+            img.alt = `poster promocional de ${localStorag.title}`;
+            
+            CONTENEDOR_IMG.appendChild(img);
+        }else{
+            
+            const div = document.createElement('div');
+            div.innerHTML = `<a href="../index.html" id="textoAdvertenciaMobile" class="underline underline-offset-2 cursor-pointer">SELECCIONE <br> UNA <br> PELICULA</a>`
+
+            CONTENEDOR_IMG.appendChild(div);
+        }       
     
         const p = document.createElement('h1');
         p.textContent = `${localStorag.title}`
@@ -299,16 +306,16 @@ function mostrarProductos(product, productosPorPagina, paginaActual){
         div.innerHTML = `
         <h4 class="grad rounded-b-lg p-3 w-20 text-center text-white font-bold ml-4 ${producto.descuento ? 'absolute' : 'hidden'} ">${producto.promo}</h4>
         <div class="h-52 bg-navy-700 border-4 border-navy-300 rounded-t-xl flex">
-            <img src=${producto.img} alt="imagen productos ${producto.nombre}" class="m-auto w-48">
+            <img src=${producto.img} alt="imagen productos ${producto.nombre}" class="mx-auto w-48">
         </div>
-        <div class="h-52 bg-navy-300 p-3 border-4 border-navy-300 rounded-b-xl text-white">
-            <div class="h-2/3 mx-auto mt-2 px-4">
+        <div class="h-52 bg-navy-300 p-2 border-4 border-navy-300 rounded-b-xl text-white">
+            <div class="h-2/3 mx-auto mt-1 px-4">
                 <h2 class="text-2xl font-bold">${producto.nombre}</h2>
                 <p>${producto.descripcion}</p>
             </div>
             <div class="h1/3 w-full flex justify-around items-center mt-1 border-dashed border-navy-150/50 border-t-2 pt-3">
                 ${producto.descuento ? `<del class="text-base text-white/70">${producto.precio.toFixed(2)} US$</del> <h3 class="text-xl">${producto.precioFinal.toFixed(2)} US$</h3> ` : `<h3 class="text-xl">${producto.precio.toFixed(2)} US$</h3>`}
-                <button onclick="agregarAlCarrito('${producto.id}', '${producto.nombre}', ${producto.descuento? producto.precioFinal : producto.precio})" id="boton${producto.id}" class="boton boton-grad AGREGAR-PRODUCTO">Add</button>
+                <button ${!SESION_INICIADA && producto.promoSocios ? 'disabled' : ''} onclick="agregarAlCarrito('${producto.id}', '${producto.nombre}', ${producto.descuento? producto.precioFinal : producto.precio})" id="boton${producto.id}" class="boton boton-grad AGREGAR-PRODUCTO">Add</button>
             </div>
         </div>`;
 

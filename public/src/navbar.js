@@ -51,3 +51,27 @@ if(datosLocalStorage){
     sesionMobile.innerHTML = `<a href="${rutaBase}login.html">Login</a>`
     LISTA_MENU.appendChild(sesionMobile);
 }
+
+function mostrarFecha(){
+    const fechaActual = new Date();
+
+    const options = {
+        weekday: 'long',
+        month: 'short',
+        day: '2-digit',
+        year: 'numeric'
+    };
+
+    const fechaFormateada = fechaActual.toLocaleDateString('en-US', options);
+
+    const FECHA_ACTUAL = document.getElementById('fecha');
+    const fecha = document.createElement('h2');
+    
+    fecha.className = "uppercase"
+    fecha.textContent = fechaFormateada;
+
+    FECHA_ACTUAL.appendChild(fecha);
+
+}
+
+mostrarFecha();

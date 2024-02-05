@@ -26,7 +26,7 @@ function sesionInfo(){
             <h3 class="text-2xl pb-4 font-bold">Ya eres miembro de CinemaFan?</h3>
             <p class="text-navy-150">Inicia sesión para reservar y acceder a nuestras exclusivas ofertas y descuentos.</p>                        
         </div>
-        <div><a href="./login.html" class="flex flex-wrap justify-center items-center gap-2"><span class="material-symbols-outlined rounded-full p-1 grad text-navy-50 text-center">person</span><p>Inicia Sesion</p></a></div>
+        <div><a href="./login.html" class="flex flex-wrap justify-center md:justify-end md:mt-4 items-center gap-2"><span class="material-symbols-outlined rounded-full p-1 grad text-navy-50 text-center">person</span><p>Inicia Sesion</p></a></div>
         `
         SECCION_INVITADO.classList.remove('hidden');
     }
@@ -43,10 +43,13 @@ let candy = JSON.parse(localStorage.getItem('carrito'));
 /*sumatorias totales de candy, tickets y final */
 const totalCarrito = localStorag.boletos.reduce((acu, producto)=> acu + (producto.precio * producto.tickets), 0);
 const productosCandy = candy.reduce((acu, producto)=> acu + (producto.precio * producto.cantidad), 1);
-const sumaPrecioFinal = (totalCarrito + productosCandy);
+const sumaPrecioFinal = productosCandy > 0 ? (totalCarrito + productosCandy) : totalCarrito;
 let descuentoPromo = undefined;
 
+console.log(localStorag.title);
+
 function mostrarResumenCompra(){
+    
     if(localStorag){
 
         CONTENEDOR_RESUMEN_LIST = document.querySelectorAll('.CONTENEDOR_RESUMEN');
@@ -56,12 +59,21 @@ function mostrarResumenCompra(){
             const divImg = document.createElement('div');
             divImg.className = "flex flex-1";
             
-            const img = document.createElement("img");
-            img.className = "w-40";
-            img.src = `https://image.tmdb.org/t/p/w500/${localStorag.img}`;
-            img.alt = `poster promocional de ${localStorag.title}`;
+            if(localStorag.img){
+                const img = document.createElement("img");
+                img.className = "w-40 h-52";
+                img.src = `https://image.tmdb.org/t/p/w500/${localStorag.img}`;
+                img.alt = `poster promocional de ${localStorag.title}`;
+                
+                divImg.appendChild(img);
+            }else{
+                
+                const div = document.createElement('div');
+                div.innerHTML = `<a href="../index.html" id="textoAdvertenciaMobile" class="underline underline-offset-2 cursor-pointer">SELECCIONE <br> UNA <br> PELICULA</a>`
+
+                divImg.appendChild(div);
+            }
         
-            divImg.appendChild(img);
 
             /* contenedor texto */
 
@@ -133,7 +145,8 @@ function mostrarResumenCompra(){
              contenedor.appendChild(innerDiv);
 
         })
-    }else{
+    }else if(localStorag.title === undefined){
+        console.log('else', localStorag.title);
         CONTENEDOR_IMG_MOBILE.innerHTML='';
 
         const div = document.createElement('div');
@@ -395,6 +408,10 @@ function agregarEvento(){
 }
 
 function finalizarCompra(){
+
+    localStorage.removeItem('movie');
+    localStorage.removeItem('carrito');
+    localStorage.removeItem('')
     Swal.fire({
         title: "Compra exitosa!",
         icon: "success",
