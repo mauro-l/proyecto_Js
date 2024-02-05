@@ -301,7 +301,7 @@ function mostrarResumenCompraMobile (){
             CONTENEDOR_CARRITO_MOBILE.appendChild(div);
         }
     })
-    
+
     mostrarPreciosMobile();
     mostrarPreciosDesktop();
 }
@@ -438,7 +438,7 @@ function mostrarPreciosMobile(){
         <h4>US$ ${totalCarrito.toFixed(2)}</h4>
     </div>
     <div class="text-center w-1/2">
-        <button class="boton boton-grad">COMPRAR</button>
+        <button onclick="agregarAlLocalStorage()" class="boton boton-grad">COMPRAR</button>
     </div>
     `
     CONTENEDOR_TOTAL_MOBILE.appendChild(total);   
