@@ -42,9 +42,9 @@ const primerElemento = LISTA_MENU.firstChild;
 if(datosLocalStorage){
     sesionMobile.className = "flex flex-col";
     sesionMobile.innerHTML = `
-    <li class="flex flex-col mb-4"><a href="./login.html"><span class="material-symbols-outlined flex justify-center">account_circle</span><h2>${datosLocalStorage.nombre}</h2></a></li>
+    <li class="flex flex-col mb-4"><span class="material-symbols-outlined flex justify-center">account_circle</span><h2>${datosLocalStorage.nombre}</h2></li>
     `
-    cerrarSesionMobile.innerHTML= `<button onclick="menuHamburguesas()" class="mt-6"><p>Cerrar Sesion</p></button>`
+    cerrarSesionMobile.innerHTML= `<button onclick="cerrarSesion()" class="mt-6"><p>Cerrar Sesion</p></button>`
     LISTA_MENU.insertBefore(sesionMobile, primerElemento);
     LISTA_MENU.appendChild(cerrarSesionMobile)
 }else{

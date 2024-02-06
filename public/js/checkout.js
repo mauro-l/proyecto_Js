@@ -258,6 +258,14 @@ function aplicarDescuento(){
         const PRECIO_TOTAL_FINAL = document.getElementById('precioTotalFinal');
 
         PRECIO_TOTAL_FINAL.textContent = `US$ ${(sumaPrecioFinal - descuentoPromo).toFixed(2)}`
+
+        Swal.fire({
+            title: "Descuento aplicado",
+            text: "80% de descuento aplicado al Candy",
+            icon: "success",
+            timer: 1500,
+            timerProgressBar: true
+        });
     }
 }
 /* SECCION MOBILE */

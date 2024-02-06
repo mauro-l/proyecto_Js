@@ -114,6 +114,17 @@ function mostrarNombreyPeliSeleccionada (){
                 CONTENEDOR_BOLETOS.appendChild(boletosDiv);
             }
         })
+    }else{
+        Swal.fire({
+            title: "Seleccione una película para continuar",
+            icon: "error",
+            timer: 2000,
+            timerProgressBar: true
+        });
+
+        setTimeout(() => {
+            window.location.href = "/index.html#inicioCartelera";
+        }, 2000);
     }
 }
 
