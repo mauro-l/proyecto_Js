@@ -413,14 +413,14 @@ function finalizarCompra(){
     localStorage.removeItem('carrito');
     localStorage.removeItem('')
     Swal.fire({
-        title: "Compra exitosa!",
+        title: "¡Gracias por tu compra!",
         icon: "success",
         timer: 1500,
         timerProgressBar: true
     });
 
     setTimeout(() => {
-        window.location.href = "/index.html";
+        window.location.href = "/pages/contacto.html";
     }, 1600);
 }
 

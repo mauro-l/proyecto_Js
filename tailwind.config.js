@@ -9,7 +9,7 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'banner-movie': "url('/asset/img/movie_poster.jpg')",
+        'banner-contact': "url('/asset/bg-img/banner07.jpg')",
         'banner-candy': "url('../asset/bg-img/banner04.jpg')",
         'nav':"url('../asset/bg-img/transparentNav.png')",
         'sign-up': "url('../asset/bg-img/banner02.jpg')",

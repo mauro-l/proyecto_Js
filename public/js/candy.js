@@ -317,7 +317,7 @@ function mostrarProductos(product, productosPorPagina, paginaActual){
                 ${producto.descuento ? `<del class="text-base text-white/70">${producto.precio.toFixed(2)} US$</del> <h3 class="text-xl">${producto.precioFinal.toFixed(2)} US$</h3> ` : `<h3 class="text-xl">${producto.precio.toFixed(2)} US$</h3>`}
                 <button ${!SESION_INICIADA && producto.promoSocios ? 'disabled' : ''} onclick="agregarAlCarrito('${producto.id}', '${producto.nombre}', ${producto.descuento? producto.precioFinal : producto.precio})" id="boton${producto.id}" class="boton boton-grad AGREGAR-PRODUCTO">Add</button>
             </div>
-        </div>`;
+        </div>`; 
 
         CONTENEDOR_PRODUCTOS.appendChild(div);
         

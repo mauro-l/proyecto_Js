@@ -4,29 +4,6 @@ const progressContent = document.querySelector(".autoplay-progress span");
   
 
   // Inicializa el carrusel
-
-/* var swiper1 = new Swiper(".mySwiper1", {
-  direction: "vertical",
-  loop: true,
-  autoplay: {
-    delay: 5000,
-    disableOnInteraction: false
-  },
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-  },
-  on: {
-    autoplayTimeLeft(s, time, progress) {
-      progressCircle.style.setProperty("--progress", 1 - progress);
-      progressContent.textContent = `${Math.ceil(time / 1000)}s`;
-    }
-  }
-}); */
-
-
-
-  // Inicializa el segundo carrusel
 function slider(){
 
   const swiper = new Swiper(".mySwiper2", {
