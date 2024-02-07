@@ -14,7 +14,6 @@ fetch(URL_PRODUCTOS)
     })
 .catch(error => console.log('error al cargar los productos', error));
 
-const SESION_INICIADA = JSON.parse(localStorage.getItem('sesionIniciada'));
 
 /* mobile */
 const CONTENEDOR_PRODUCTOS = document.getElementById('productos');
@@ -35,18 +34,17 @@ const BOTON_VERTODO = document.getElementById('botonReset');
 const CATEGORIAS = document.getElementById('categorias');
 const ORDENAR = document.getElementById('ordenar');
 
+
+const SESION_INICIADA = JSON.parse(localStorage.getItem('sesionIniciada'));
+let localStorag = JSON.parse(localStorage.getItem('movie'));
+
 function mostrarNombreyPeliSeleccionada (){
 
     const CONTENEDOR_IMG = document.getElementById('contenedorImg');
     const CONTENEDOR_NOMBRE = document.getElementById('contenedorNombre');
-    const CONTENEDOR_ADVERTENCIA = document.getElementById('textoAdvertencia');
 
-    let localStorag = JSON.parse(localStorage.getItem('movie'));
 
     if(localStorag){
-
-        CONTENEDOR_ADVERTENCIA.classList.add('hidden');
-        CONTENEDOR_IMG.classList.remove('hidden');
         CONTENEDOR_IMG.innerHTML = '';
         CONTENEDOR_NOMBRE.innerHTML = '';
     
@@ -56,75 +54,91 @@ function mostrarNombreyPeliSeleccionada (){
             img.className = "w-40 h-52";
             img.src = `https://image.tmdb.org/t/p/w500/${localStorag.img}`;
             img.alt = `poster promocional de ${localStorag.title}`;
-            
+            console.log('IF IMG')
             CONTENEDOR_IMG.appendChild(img);
-        }else{
-            
-            const div = document.createElement('div');
-            div.innerHTML = `<a href="../index.html" id="textoAdvertenciaMobile" class="underline underline-offset-2 cursor-pointer">SELECCIONE <br> UNA <br> PELICULA</a>`
-
-            CONTENEDOR_IMG.appendChild(div);
-        }       
-    
-        const p = document.createElement('h1');
-        p.textContent = `${localStorag.title}`
-    
-        CONTENEDOR_NOMBRE.appendChild(p);
+        }else{            
+            const img = document.createElement("img");
+            img.className = "w-40 h-52";
+            img.src = `../asset/img/wallex.png`;
+            img.alt = `img de relleno`;
+            console.log('ELSE IMG')
+            CONTENEDOR_IMG.appendChild(img);
+        }
+        
+        if(localStorag.title){
+            const p = document.createElement('h1');
+            p.textContent = `${localStorag.title}`
+            console.log('if title')
+            CONTENEDOR_NOMBRE.appendChild(p);
+        }else{            
+            const p = document.createElement('h1');
+            p.textContent = 'SELECCIONE UNA PELICULA'
+            console.log('else title')
+            CONTENEDOR_NOMBRE.appendChild(p);
+        }
 
         /* horario y fecha de la funcion */
 
         const { funcion } = localStorag;
 
-        const CONTENEDOR_HORARIO_DESKTOP = document.getElementById('contenedorHorario');
+        if(localStorag.funcion){
+
+            const CONTENEDOR_HORARIO_DESKTOP = document.getElementById('contenedorHorario');
         
-        CONTENEDOR_HORARIO_DESKTOP.innerHTML = '';
-        
-        let horario = document.createElement("p");
-        horario.textContent = `${funcion.dia} ${funcion.horario} hs`;
-        CONTENEDOR_HORARIO_DESKTOP.appendChild(horario);
-
-        /* parking */
-
-        const parking = localStorag.boletos.find ((ticket) => ticket.nombre.includes("Parking"))
-
-        const CONTENEDOR_LUGAR_DESKTOP = document.getElementById('contenedorLugar');
-        CONTENEDOR_LUGAR_DESKTOP.innerHTML = '';
-    
-        let parkings = document.createElement("p");
-        parkings.textContent = parking.nombre;
-        CONTENEDOR_LUGAR_DESKTOP.appendChild(parkings);
-        
-        /*cantidad boletos */
-
-        const CONTENEDOR_BOLETOS = document.getElementById('contenedorBoleto');
-        const BOLETOS = localStorag.boletos.filter(boleto => !boleto.nombre.includes("Parking"));
-
-        CONTENEDOR_BOLETOS.innerHTML = '';
-
-        BOLETOS.forEach(producto =>{
+            CONTENEDOR_HORARIO_DESKTOP.innerHTML = '';
             
-            if(producto.tickets > 0){
+            let horario = document.createElement("p");
+            horario.textContent = `${funcion.dia} ${funcion.horario} hs`;
+            CONTENEDOR_HORARIO_DESKTOP.appendChild(horario);
 
-                let boletosDiv = document.createElement("div");
-                boletosDiv.className = "flex items-center justify-between gap-4 text-navy-50/50"
+            /* parking */
+
+            const parking = localStorag.boletos.find ((ticket) => ticket.nombre.includes("Parking"))
+
+            const CONTENEDOR_LUGAR_DESKTOP = document.getElementById('contenedorLugar');
+            CONTENEDOR_LUGAR_DESKTOP.innerHTML = '';
             
-                boletosDiv.innerHTML = `                
-                <h2>${producto.nombre} ${producto.tickets > 1 ? `x ${producto.tickets}`: ''}</h2>
-                `    
-                CONTENEDOR_BOLETOS.appendChild(boletosDiv);
-            }
-        })
+            let parkings = document.createElement("p");
+            parkings.textContent = parking.nombre;
+            CONTENEDOR_LUGAR_DESKTOP.appendChild(parkings);
+            
+            /*cantidad boletos */
+
+            const CONTENEDOR_BOLETOS = document.getElementById('contenedorBoleto');
+            const BOLETOS = localStorag.boletos.filter(boleto => !boleto.nombre.includes("Parking"));
+
+            CONTENEDOR_BOLETOS.innerHTML = '';
+
+            BOLETOS.forEach(producto =>{
+
+                if(producto.tickets > 0){
+
+                    let boletosDiv = document.createElement("div");
+                    boletosDiv.className = "flex items-center justify-between gap-4 text-navy-50/50"
+                
+                    boletosDiv.innerHTML = `                
+                    <h2>${producto.nombre} ${producto.tickets > 1 ? `x ${producto.tickets}`: ''}</h2>
+                    `    
+                    CONTENEDOR_BOLETOS.appendChild(boletosDiv);
+                }
+            })
+        }
     }else{
-        Swal.fire({
-            title: "Seleccione una película para continuar",
-            icon: "error",
-            timer: 2000,
-            timerProgressBar: true
-        });
 
-        setTimeout(() => {
-            window.location.href = "/index.html#inicioCartelera";
-        }, 2000);
+        const img = document.createElement("img");
+        img.className = "w-40 h-52";
+        img.src = `../asset/img/wallex.png`;
+        img.alt = `img de relleno`;
+        console.log('ELSE IMG')
+        CONTENEDOR_IMG.appendChild(img);
+        
+        const a = document.createElement('a');
+        a.className = "underline underline-offset-2"
+        a.textContent = 'SELECCIONE UNA PELICULA'
+        a.href = "../index.html#inicioCartelera"
+
+        CONTENEDOR_NOMBRE.appendChild(a);
+        
     }
 }
 
@@ -326,7 +340,7 @@ function mostrarProductos(product, productosPorPagina, paginaActual){
             </div>
             <div class="h1/3 w-full flex justify-around items-center mt-1 border-dashed border-navy-150/50 border-t-2 pt-3">
                 ${producto.descuento ? `<del class="text-base text-white/70">${producto.precio.toFixed(2)} US$</del> <h3 class="text-xl">${producto.precioFinal.toFixed(2)} US$</h3> ` : `<h3 class="text-xl">${producto.precio.toFixed(2)} US$</h3>`}
-                <button ${!SESION_INICIADA && producto.promoSocios ? 'disabled' : ''} onclick="agregarAlCarrito('${producto.id}', '${producto.nombre}', ${producto.descuento? producto.precioFinal : producto.precio})" id="boton${producto.id}" class="boton boton-grad AGREGAR-PRODUCTO">Add</button>
+                <button ${!SESION_INICIADA && producto.promoSocios ? 'disabled' : ''} onclick="agregarAlCarrito('${producto.id}', '${producto.nombre}', ${producto.descuento? producto.precioFinal : producto.precio})" id="boton${producto.id}" class="boton boton-grad select-none AGREGAR-PRODUCTO">Add</button>
             </div>
         </div>`; 
 
@@ -508,7 +522,7 @@ function eliminarProducto(id){
 
 function mostrarPreciosMobile(){
     const carrito = JSON.parse(localStorage.getItem('carrito'));
-    const totalCarrito = carrito.reduce((acu, producto)=> acu + (producto.precio * producto.cantidad), 0);
+    const totalCarrito = carrito ? carrito.reduce((acu, producto)=> acu + (producto.precio * producto.cantidad), 0) : 0;
 
     CONTENEDOR_PRECIO_MOBILE.innerHTML = '';
 
@@ -538,15 +552,49 @@ function mostrarPreciosMobile(){
         <h4>US$ ${totalCarrito > 1 ? (totalCarrito + 1).toFixed(2) : totalCarrito.toFixed(2)}</h4>
     </div>
     <div class="text-center w-1/2">
-        <a href="./checkout.html" class="boton boton-grad">COMPRAR</a>
+        <button onclick="advertenciaElijaPeli()" class="boton boton-grad">SIGUIENTE</button>
     </div>
     `
+    //<button href="./checkout.html" class="boton boton-grad">COMPRAR</button>
     CONTENEDOR_TOTAL_MOBILE.appendChild(total);   
+}
+
+function advertenciaElijaPeli(){
+    console.log(localStorag)
+    if (localStorag && localStorag.funcion){
+        window.location.href = "/pages/checkout.html";
+    }
+    if(!localStorag.title){
+        Swal.fire({
+            title: "Oops...",
+            text: "Seleccione una película para continuar",
+            icon: "error",
+            confirmButtonColor: "#7d78ff",
+            confirmButtonText: "Ir a cartelera"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "/index.html#inicioCartelera";
+            }
+          }); 
+    }    
+    if(!localStorag.funcion){
+        Swal.fire({
+            title: "Oops...",
+            text: "Seleccione día y horario de la función para continuar",
+            icon: "error",
+            confirmButtonColor: "#7d78ff",
+            confirmButtonText: "Conseguir entradas"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "/pages/tickets.html";
+            }
+          }); 
+    }    
 }
 
 function mostrarPreciosDesktop(){
     const carrito = JSON.parse(localStorage.getItem('carrito'));
-    const totalCarrito = carrito.reduce((acu, producto)=> acu + (producto.precio * producto.cantidad), 0);
+    const totalCarrito = carrito? carrito.reduce((acu, producto)=> acu + (producto.precio * producto.cantidad), 0) : 0;
 
     CONTENEDOR_PRECIO_DESKTOP.innerHTML = '';
 

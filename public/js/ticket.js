@@ -80,34 +80,65 @@ let datosFuncion = {
     horario:''
 }
 
+let localStorag = JSON.parse(localStorage.getItem('movie'));
+
 function mostrarNombreyPeliSeleccionada (){
 
     const CONTENEDOR_IMG = document.getElementById('contenedorImg');
     const CONTENEDOR_NOMBRE = document.getElementById('contenedorNombre');
-    const CONTENEDOR_ADVERTENCIA = document.getElementById('textoAdvertencia');
 
-    let localStorag = JSON.parse(localStorage.getItem('movie'));
     if (!localStorag) {
         localStorag = []; // Si localStorag es null, asignar un array vacío
     }
     if(Object.keys(localStorag).length > 0){
 
-        CONTENEDOR_ADVERTENCIA.classList.add('hidden');
-        CONTENEDOR_IMG.classList.remove('hidden');
         CONTENEDOR_IMG.innerHTML = '';
         CONTENEDOR_NOMBRE.innerHTML = '';
     
+        if(localStorag.img){
+            const img = document.createElement("img");
+            img.className = "w-40 h-52";
+            img.src = `https://image.tmdb.org/t/p/w500/${localStorag.img}`;
+            img.alt = `poster promocional de ${localStorag.title}`;
+
+            CONTENEDOR_IMG.appendChild(img);
+        }else{            
+            const img = document.createElement("img");
+            img.className = "w-40 h-52";
+            img.src = `../asset/img/wallex.png`;
+            img.alt = `img de relleno`;
+
+            CONTENEDOR_IMG.appendChild(img);
+        }
+        
+        if(localStorag.title){
+            const p = document.createElement('h1');
+            p.textContent = `${localStorag.title}`
+
+            CONTENEDOR_NOMBRE.appendChild(p);
+        }else{            
+            const a = document.createElement('a');
+            a.className = "underline underline-offset-2"
+            a.textContent = 'SELECCIONE UNA PELICULA'
+            a.href = "../index.html#inicioCartelera"
+
+            CONTENEDOR_NOMBRE.appendChild(a);
+        }
+    }else{
+
         const img = document.createElement("img");
         img.className = "w-40 h-52";
-        img.src = `https://image.tmdb.org/t/p/w500/${localStorag.img}`;
-        img.alt = `poster promocional de ${localStorag.title}`;
-    
+        img.src = `../asset/img/wallex.png`;
+        img.alt = `img de relleno`;
+        console.log('ELSE IMG')
         CONTENEDOR_IMG.appendChild(img);
-    
-        const p = document.createElement('h1');
-        p.textContent = `${localStorag.title}`
-    
-        CONTENEDOR_NOMBRE.appendChild(p);
+        
+        const a = document.createElement('a');
+        a.className = "underline underline-offset-2"
+        a.textContent = 'SELECCIONE UNA PELICULA'
+        a.href = "../index.html#inicioCartelera"
+
+        CONTENEDOR_NOMBRE.appendChild(a);
     }
 }
 function mostrarNombreyPeliSeleccionadaMobile (){
@@ -124,24 +155,50 @@ function mostrarNombreyPeliSeleccionadaMobile (){
         CONTENEDOR_IMG_MOBILE.innerHTML = '';
         CONTENEDOR_NOMBRE_MOBILE.innerHTML = '';
     
-        const img = document.createElement("img");
-        img.className = "w-40";
-        img.src = `https://image.tmdb.org/t/p/w500/${localStorag.img}`;
-        img.alt = `poster promocional de ${localStorag.title}`;
-    
-        CONTENEDOR_IMG_MOBILE.appendChild(img);
-    
-        const p = document.createElement('h1');
-        p.textContent = `${localStorag.title}`
-    
-        CONTENEDOR_NOMBRE_MOBILE.appendChild(p);
+        if(localStorag.img){
+            const img = document.createElement("img");
+            img.className = "w-40 h-52";
+            img.src = `https://image.tmdb.org/t/p/w500/${localStorag.img}`;
+            img.alt = `poster promocional de ${localStorag.title}`;
+
+            CONTENEDOR_IMG_MOBILE.appendChild(img);
+        }else{            
+            const img = document.createElement("img");
+            img.className = "w-40 h-52";
+            img.src = `../asset/img/wallex.png`;
+            img.alt = `img de relleno`;
+
+            CONTENEDOR_IMG_MOBILE.appendChild(img);
+        }
+        
+        if(localStorag.title){
+            const p = document.createElement('h1');
+            p.textContent = `${localStorag.title}`
+
+            CONTENEDOR_NOMBRE_MOBILE.appendChild(p);
+        }else{            
+            const a = document.createElement('a');
+            a.className = "underline underline-offset-2"
+            a.textContent = 'SELECCIONE UNA PELICULA'
+            a.href = "../index.html#inicioCartelera"
+
+            CONTENEDOR_NOMBRE_MOBILE.appendChild(a);
+        }
     }else{
-        CONTENEDOR_IMG_MOBILE.innerHTML='';
 
-        const div = document.createElement('div');
-        div.innerHTML = `<a href="../index.html" id="textoAdvertenciaMobile">SELECCIONE <br> UNA <br> PELICULA</a>`
+        const img = document.createElement("img");
+        img.className = "w-40 h-52";
+        img.src = `../asset/img/wallex.png`;
+        img.alt = `img de relleno`;
+        console.log('ELSE IMG')
+        CONTENEDOR_IMG_MOBILE.appendChild(img);
+        
+        const a = document.createElement('a');
+        a.className = "underline underline-offset-2"
+        a.textContent = 'SELECCIONE UNA PELICULA'
+        a.href = "../index.html#inicioCartelera"
 
-        CONTENEDOR_IMG_MOBILE.appendChild(div);
+        CONTENEDOR_NOMBRE_MOBILE.appendChild(a);
     }
 }
 
@@ -488,33 +545,54 @@ function flechaBtnMobile(){
 
 function agregarAlLocalStorage(){
 
-    if(datosFuncion.dia && datosFuncion.horario){
-        if(datosLugar){
-            const BOLETOS = ENTRADAS.slice(0, 4);
-            console.log('boletos datos lugar: ', BOLETOS)
-            const entradasConMasDeUnTicket = BOLETOS.some(entrada => entrada.tickets > 0);
-            if(entradasConMasDeUnTicket)
-            {
-                const boletosFinal = ENTRADAS.filter(entrada => entrada.tickets > 0);
+    if (localStorag){
+        if(datosFuncion.dia && datosFuncion.horario){
+            if(datosLugar){
+                const BOLETOS = ENTRADAS.slice(0, 4);
+                console.log('boletos datos lugar: ', BOLETOS)
+                const entradasConMasDeUnTicket = BOLETOS.some(entrada => entrada.tickets > 0);
+                if(entradasConMasDeUnTicket)
+                {
+                    const boletosFinal = ENTRADAS.filter(entrada => entrada.tickets > 0);
 
-                let datosAnteriores = JSON.parse(localStorage.getItem('movie'));
-                datosAnteriores = { ...datosAnteriores, funcion: datosFuncion, boletos: boletosFinal };
+                    let datosAnteriores = JSON.parse(localStorage.getItem('movie'));
+                    datosAnteriores = { ...datosAnteriores, funcion: datosFuncion, boletos: boletosFinal };
 
-                localStorage.setItem('movie', JSON.stringify(datosAnteriores));
-                console.log(datosAnteriores);
-                window.location.href = '/pages/candy.html';
+                    localStorage.setItem('movie', JSON.stringify(datosAnteriores));
+                    console.log(datosAnteriores);
+                    window.location.href = '/pages/candy.html';
+                }else{
+                    toasty("Seleccione las entradas!!");
+                    mostrarContenido(seccionPrecio);
+                }
             }else{
-                toasty("Seleccione las entradas!!");
-                mostrarContenido(seccionPrecio);
+                toasty("Seleccione el lugar para continuar");
+                mostrarContenido(seccionLugar);
             }
         }else{
-            toasty("Seleccione el lugar para continuar");
-            mostrarContenido(seccionLugar);
+            toasty("Seleccione el dia y la Funcion para continuar");
+            mostrarContenido(seccionHorario);
         }
     }else{
-        toasty("Seleccione el dia y la Funcion para continuar");
-        mostrarContenido(seccionHorario);
+        advertenciaElijaPeli();
     }
+}
+
+function advertenciaElijaPeli(){
+    
+    if (!localStorag){
+        Swal.fire({
+          title: "Oops...",
+          text: "Seleccione una película para continuar",
+          icon: "error",
+          confirmButtonColor: "#7d78ff",
+          confirmButtonText: "Ir a cartelera"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = "/index.html#inicioCartelera";
+          }
+        });
+    }    
 }
 
 /* solucion parcial a la superposicion entre el carrito mobile y el carrito de precio final */
@@ -537,6 +615,7 @@ window.addEventListener('scroll', handleScroll);
 // Llama a handleScroll al cargar la página para manejar la posición inicial
 handleScroll();
 
+advertenciaElijaPeli();
 mostrarNombreyPeliSeleccionada();
 mostrarNombreyPeliSeleccionadaMobile();
 actualizarCantidadProductos();
