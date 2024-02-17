@@ -57,7 +57,7 @@ function mostrarResumenCompra(){
         CONTENEDOR_RESUMEN_LIST.forEach(contenedor => {
 
             const divImg = document.createElement('div');
-            divImg.className = "flex flex-1";
+            divImg.className = "flex flex-1 justify-center";
             
             if(localStorag.img){
                 const img = document.createElement("img");
@@ -78,7 +78,7 @@ function mostrarResumenCompra(){
             /* contenedor texto */
 
             const innerDiv = document.createElement('div');
-            innerDiv.className = "flex flex-col flex-1"
+            innerDiv.className = "flex flex-col flex-1 md:flex-wrap md:content-center"
         
             /* nombre de la pelicula */ 
 

@@ -19,7 +19,7 @@
             <div class="flex">
                 <a href="../index.html"><img src="../asset/icon/isologo31.svg" alt="logo cinemacar"></a>
             </div>
-            <div class="lg:flex hidden justify-evenly items-center">
+            <div class="md:flex hidden justify-evenly items-center">
                 <ul class="flex gap-6">
                     <li><a href="../index.html">Inicio</a></li>
                     <li><a href="./tickets.html">Entradas</a></li>
@@ -32,7 +32,7 @@
                     <button onclick="cerrarSesion()"><p class="whitespace-nowrap">Cerrar Sesion</p></button>
                 </div>
             </div>
-            <button onclick="menuHamburguesas()" class="flex lg:hidden">
+            <button onclick="menuHamburguesas()" class="flex md:hidden">
                 <span class="material-symbols-outlined">
                     menu
                 </span>
@@ -107,9 +107,9 @@
     <!-- MOBILE DETAILS PRODUCTS -->
     <section class="lg:hidden sticky top-0 flex z-20 justify-center">
         <article class="w-full bg-navy-300 ">
-            <div class="text-navy-50 text-sm bg-navy-300 border-b border-dashed border-navy-100 p-4 flex justify-between items-center">
+            <div class="text-navy-50 text-sm bg-navy-300 border-b border-dashed border-navy-100 p-4 flex justify-around items-center">
                 <div class="flex items-center">
-                    <h3 class="ml-1 flex text-navy-50">Tus productos:</h3>                                
+                    <h3 class="ml-1 flex text-navy-50">Tus productos:</h3>
                     <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium rounded-full bg-[#ff4343] text-blue-300" id="cantidad-producto-mobile"></span>
                 </div>
                 <button id="mostrar-carrito-mobile" class="mr-2 text-center cursor-pointer underline underline-offset-2">
