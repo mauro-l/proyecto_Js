@@ -42,7 +42,7 @@ let candy = JSON.parse(localStorage.getItem('carrito'));
 
 /*sumatorias totales de candy, tickets y final */
 const totalCarrito = localStorag.boletos.reduce((acu, producto)=> acu + (producto.precio * producto.tickets), 0);
-const productosCandy = candy.reduce((acu, producto)=> acu + (producto.precio * producto.cantidad), 1);
+const productosCandy = candy ? candy.reduce((acu, producto)=> acu + (producto.precio * producto.cantidad), 1) : 0;
 const sumaPrecioFinal = productosCandy > 0 ? (totalCarrito + productosCandy) : totalCarrito;
 let descuentoPromo = undefined;
 
@@ -176,7 +176,7 @@ function mostrarListadoResumen(){
         }
     })
 
-    if(candy.length > 0){
+    if(candy && candy.length > 0){
         
         candy.forEach(producto =>{
             let div = document.createElement("div");
@@ -277,7 +277,7 @@ const CONTENEDOR_CANDY_MOBILE = document.getElementById('contenedor-candy-mobile
 /* Pestaña mobile para ver si hay productos en el carrito de candy los muestra en pantalla */
 function mostrarResumenCandy(){    
 
-    if(candy.length > 0){
+    if(candy && candy.length > 0){
         CONTENEDOR_CANDY_MOBILE.innerHTML = '';
 
         candy.forEach(producto =>{
@@ -328,7 +328,7 @@ function mostrarResumenMobile(){
         }
     })
 
-    if(candy.length > 0){
+    if(candy && candy.length > 0){
         
         let div = document.createElement("div");
             div.className = "flex items-center m-2 justify-between gap-4"
@@ -383,7 +383,7 @@ function actualizarCantidadProductos() {
     
     CANTIDAD_PRODUCTO_MOBILE.innerHTML = '';
     let div = document.createElement("div");
-    div.innerHTML =` <h2> ${candy.length} </h2> `
+    div.innerHTML =` <h2> ${candy ? candy.length: 0} </h2> `
     CANTIDAD_PRODUCTO_MOBILE.appendChild(div);    
 }
 function desplegarCarrito(){

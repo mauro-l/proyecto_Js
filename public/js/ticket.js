@@ -42,7 +42,7 @@ function sesionInfo(){
             <h3 class="text-2xl pb-4 font-bold">Ya eres miembro de CinemaFan?</h3>
             <p class="text-navy-150">Inicia sesión para reservar y acceder a nuestras exclusivas ofertas y descuentos.</p>                        
         </div>
-        <div><a href="./login.html" class="flex flex-wrap justify-center items-center gap-2"><span class="material-symbols-outlined rounded-full p-1 grad text-navy-50 text-center">person</span><p>Inicia Sesion</p></a></div>
+        <div><a href="./login.html" class="flex flex-wrap justify-center md:justify-end items-center gap-2"><span class="material-symbols-outlined rounded-full p-1 grad text-navy-50 text-center">person</span><p>Inicia Sesion</p></a></div>
         `
     }
 
